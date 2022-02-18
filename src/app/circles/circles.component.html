@@ -1,1 +1,14 @@
-<p>circles works!</p>
+<div class="add-circle">
+  <button
+    class="circle-button"
+    id="newCircle"
+    type="button"
+    [disabled]="false"
+    (click)="createNewCirlce()"
+  >
+    Crear Circulo
+  </button>
+  <div id="maxCirclesReached" style="display: none">
+    <p>Numero maximo de circulos alcanzado (6)</p>
+  </div>
+</div>

@@ -1,1 +1,154 @@
-/* You can add global styles to this file, and also import other style files */
+h1 {
+  margin: 10px auto;
+}
+
+.circle-title-container {
+  display: inline-flex;
+  width: auto;
+}
+
+.circle-title {
+  text-align: center;
+  font-size: 35px;
+  width: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  color: #45ccce;
+  position: sticky;
+  top: 0%;
+  z-index: 999;
+}
+
+.add-circle {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  align-items: center;
+}
+
+.progress-wrapper {
+  position: relative;
+  margin: 20px auto;
+  font-size: 40px;
+}
+
+.current {
+  position: absolute;
+  color: #bbb;
+  font-weight: 100;
+  line-height: 1;
+}
+
+.circle-container {
+  width: 100%;
+  max-width: 550px;
+  min-width: 450px;
+  margin: 10px 10px;
+  padding: 25px 0px;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.01);
+  border-radius: 0.25rem;
+  transition: all 0.1s ease-in;
+  -webkit-transition: all 0.1s ease-in;
+  -moz-transition: all ease-in 0.1s;
+  -o-transition: all ease-in 0.1s;
+}
+
+.circle-container:hover {
+  box-shadow: 0 0 17px 0 hsl(0deg 0% 42% / 30%);
+  transform: translateY(-2px);
+}
+
+.nav {
+  margin: 40px auto;
+  width: 100%;
+  max-width: 550px;
+  min-width: 450px;
+  padding: 25px 0px;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.21);
+  border-radius: 0.25rem;
+}
+
+round-progress {
+  margin: auto;
+}
+
+.circle-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #45ccce;
+  color: #fff;
+  font-size: px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  text-align: center;
+  margin: 0 5px 5px 0;
+}
+
+button:disabled {
+  background: #cccccc;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.closing {
+  animation: cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-name: closing;
+  animation-duration: 500ms;
+}
+
+@keyframes closing {
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 0%;
+  }
+}
+
+form {
+  text-align: left;
+  max-width: 350px;
+  margin: 30px auto;
+}
+
+form > div {
+  margin-bottom: 15px;
+}
+
+input,
+select {
+  float: right;
+  padding: 5px;
+  width: 150px;
+}
+
+input[type="checkbox"] {
+  width: auto;
+}
+
+input[type="color"] {
+  height: 30px;
+}
+
+.cf:before,
+.cf:after {
+  content: " ";
+  display: table;
+}
+
+.cf:after {
+  clear: both;
+}

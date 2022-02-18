@@ -12,6 +12,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {path: '', component: StartCirclesComponent, pathMatch: 'full'},
+  {path: 'edicion', component: CirclesComponent}
+]
 
 
 @NgModule({
@@ -27,7 +33,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     RoundProgressModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(routes)
   ],
   exports: [
     CirclesComponent,

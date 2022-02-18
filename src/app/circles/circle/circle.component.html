@@ -1,5 +1,5 @@
 <ng-container *ngIf="hasRoute('/edicion')">
-  <div class="container" [id]="circle.id">
+  <div class="circle-container" [id]="circle.id">
     <div class="circle-title-container">
       <input class="circle-title" type="text" [(ngModel)]="circle.title" />
     </div>
@@ -24,11 +24,13 @@
       ></round-progress>
     </div>
 
-    <button (click)="increment()">Incrementar</button>
-    <button (click)="decrement(1)">Reducir</button>
+    <button class="circle-button" (click)="increment()">Incrementar</button>
+    <button class="circle-button" (click)="decrement(1)">Reducir</button>
 
-    <button (click)="increment(10)">Incrementar (10)</button>
-    <button (click)="decrement(10)">Reducir (10)</button>
+    <button class="circle-button" (click)="increment(10)">
+      Incrementar (10)
+    </button>
+    <button class="circle-button" (click)="decrement(10)">Reducir (10)</button>
 
     <form #circleForm="ngForm">
       <h3>Customize!</h3>
@@ -150,6 +152,7 @@
 
       <div class="button-container">
         <button
+          class="circle-button"
           [id]="'saveButton' + circle.id"
           [disabled]="false"
           (click)="saveCircle(circle)"
@@ -157,6 +160,7 @@
           Guardar
         </button>
         <button
+          class="circle-button"
           [id]="'deleteButton' + circle.id"
           (click)="borrarCirculo(circle)"
         >
