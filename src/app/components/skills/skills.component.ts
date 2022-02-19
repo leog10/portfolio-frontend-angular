@@ -15,8 +15,8 @@ export class SkillsComponent {
         // Convert `CircleComponent and StartCirclesComponent` to a custom element.
         const CircleElement = createCustomElement(CircleComponent, {injector});
         // Register the custom element with the browser.
-        customElements.get('do-circle') ||
-      customElements.define('do-circle', CircleElement);
+        customElements.get('circle-element') ||
+      customElements.define('circle-element', CircleElement);
    }
 
   createNewCirlce() {
