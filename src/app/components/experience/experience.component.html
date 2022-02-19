@@ -1,0 +1,72 @@
+<div class="card mt-2 py-4 px-5">
+  <div id="experience">
+    <div class="d-flex">
+      <h2 class="flex-grow-1 flex-shrink-1 m-auto">Experiencia</h2>
+      <div class="d-flex align-self-center">
+        <a href="#experience" class="d-flex align-self-end a_icon"
+          ><i
+            class="fa fa-plus"
+            data-title="Agregar"
+            onclick="showNewExpModal()"
+          ></i
+        ></a>
+      </div>
+    </div>
+    <div>
+      <ul class="items-list" id="expList">
+        <li class="d-flex my-2">
+          <div class="flex-grow-1">
+            <div class="d-flex">
+              <div class="my-3">
+                <img
+                  id="exp-img"
+                  class="logo_image"
+                  src="https://google.com/dms/image/C4E0BAQFhOoraRhsOSQ/"
+                />
+              </div>
+              <div class="mx-3">
+                <div>
+                  <h3 class="mx-2 my-2" id="exp-position">
+                    FrontEnd Developer
+                  </h3>
+                  <p class="ms-2 mb-0">
+                    <span id="exp-company">Autoempleado</span><span> - </span
+                    ><span id="exp-mode">Full Time</span>
+                  </p>
+                  <h4 class="ms-2 text-secondary my-0">
+                    <span id="exp-initial">oct 2020</span><span> – </span
+                    ><span id="exp-end">actualidad</span><span> – </span
+                    ><span id="exp-time">1 años y 4 meses</span>
+                  </h4>
+                  <h4 class="ms-2 text-secondary my-0" id="exp-place">
+                    Argentina - Remoto
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="data-control">
+            <div class="">
+              <a href="#experience" class="a_icon"
+                ><i
+                  class="fa fa-pen"
+                  data-title="Editar"
+                  onclick="showEditExpModal('Pixar')"
+                ></i
+              ></a>
+            </div>
+            <div class="">
+              <a href="#experience" class="a_icon"
+                ><i
+                  class="fa fa-trash"
+                  data-title="Borrar"
+                  onclick="deleteExp('Pixar')"
+                ></i
+              ></a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

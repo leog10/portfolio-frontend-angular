@@ -1,0 +1,74 @@
+ul.items-list {
+  list-style: none;
+}
+
+.logo_image {
+  width: 60px;
+  height: 60px;
+}
+
+.fa {
+  color: black;
+  display: block;
+  height: 2.4rem;
+  width: 2.4rem;
+  line-height: 2.4rem;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.a_icon {
+  text-decoration: none;
+}
+
+.fa:hover {
+  background-color: lightgray;
+}
+
+/*
+    The following code comes from another project:
+    
+    https://github.com/leog10/google-home
+    
+    Credits to me :) and some stackoverflow code examples.
+    
+    It add a title to icons or whatever tag you want to show a title reference.
+    
+    Just add {data-title="your title here"} inside a tag element.
+    
+    e.g. <a href="google.com" class="btn" data-title="Google>
+    */
+[data-title]:after {
+  content: attr(data-title);
+  background: rgba(60, 64, 67, 0.9);
+  border-radius: 4px;
+  color: #ffffff;
+  font: 500 12px "Roboto", arial, sans-serif;
+  letter-spacing: 0.8px;
+  line-height: 16px;
+  min-height: 14px;
+  margin-top: 4px;
+  padding: 4px 8px;
+  position: absolute;
+  top: 15%;
+  right: 120%;
+  white-space: nowrap;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+[data-title] {
+  position: relative;
+}
+
+[data-title]:hover:after {
+  opacity: 1;
+  transition: all 0.1s ease 0.5s;
+  visibility: visible;
+}
+
+[data-title]:focus:after {
+  opacity: 1;
+  transition: all 0.1s ease 0.5s;
+  visibility: visible;
+}
