@@ -2,7 +2,7 @@
   <div id="education">
     <div class="d-flex">
       <h2 class="flex-grow-1 flex-shrink-1 m-auto">Educación</h2>
-      <div class="d-flex align-self-center">
+      <div *ngIf="router.url === '/edit'" class="d-flex align-self-center">
         <a href="#education" class="d-flex align-self-end a_icon"
           ><i
             class="fa fa-plus"
@@ -21,7 +21,7 @@
                 <img
                   id="edu-img"
                   class="logo_image"
-                  src="https://google.com/dms/image/C4E0BAQFhOoraRhsOSQ/"
+                  src="../../../assets/images/APLogo-20-20.png"
                 />
               </div>
               <div class="mx-3">
@@ -40,7 +40,7 @@
               </div>
             </div>
           </div>
-          <div class="data-control">
+          <div *ngIf="router.url === '/edit'" class="data-control">
             <div class="">
               <a href="#experience" class="a_icon"
                 ><i

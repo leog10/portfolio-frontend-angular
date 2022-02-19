@@ -3,7 +3,10 @@
     <div class="d-flex">
       <h2 class="flex-grow-1 flex-shrink-1 m-auto">Experiencia</h2>
       <div class="d-flex align-self-center">
-        <a href="#experience" class="d-flex align-self-end a_icon"
+        <a
+          *ngIf="router.url === '/edit'"
+          href="#experience"
+          class="d-flex align-self-end a_icon"
           ><i
             class="fa fa-plus"
             data-title="Agregar"
@@ -21,7 +24,7 @@
                 <img
                   id="exp-img"
                   class="logo_image"
-                  src="https://google.com/dms/image/C4E0BAQFhOoraRhsOSQ/"
+                  src="https://www.muycomputer.com/wp-content/uploads/2020/12/google.png"
                 />
               </div>
               <div class="mx-3">
@@ -45,7 +48,7 @@
               </div>
             </div>
           </div>
-          <div class="data-control">
+          <div *ngIf="router.url === '/edit'" class="data-control">
             <div class="">
               <a href="#experience" class="a_icon"
                 ><i

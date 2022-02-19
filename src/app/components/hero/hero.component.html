@@ -2,7 +2,7 @@
   <div class="hero_section"></div>
   <div class="d-flex profile_div ps-5">
     <img src="../../../assets/images/lion.jpg" alt="" class="profile_image" />
-    <div>
+    <div *ngIf="router.url === '/edit'">
       <a class="a_edit" href="#"
         ><i class="fas fa-pen" data-title="Editar"></i
       ></a>

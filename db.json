@@ -1,12 +1,12 @@
 {
   "circles": [
     {
-      "current": 71,
+      "current": 80,
       "max": 100,
-      "radius": 100,
-      "semicircle": true,
-      "stroke": 30,
-      "rounded": true,
+      "radius": 80,
+      "semicircle": false,
+      "stroke": 25,
+      "rounded": false,
       "responsive": false,
       "clockwise": true,
       "color": "#28b839",
@@ -18,12 +18,12 @@
       "id": 20221645051021692
     },
     {
-      "current": 70,
+      "current": 80,
       "max": 100,
-      "radius": 100,
+      "radius": 80,
       "semicircle": false,
-      "stroke": 30,
-      "rounded": true,
+      "stroke": 25,
+      "rounded": false,
       "responsive": false,
       "clockwise": true,
       "color": "#e03124",
@@ -35,12 +35,12 @@
       "id": 20221645051035336
     },
     {
-      "current": 65,
+      "current": 75,
       "max": 100,
-      "radius": 100,
-      "semicircle": true,
-      "stroke": 30,
-      "rounded": true,
+      "radius": 80,
+      "semicircle": false,
+      "stroke": 25,
+      "rounded": false,
       "responsive": false,
       "clockwise": true,
       "color": "#8e2fc1",
@@ -54,10 +54,10 @@
     {
       "current": 110,
       "max": 100,
-      "radius": 100,
+      "radius": 80,
       "semicircle": false,
-      "stroke": 30,
-      "rounded": true,
+      "stroke": 25,
+      "rounded": false,
       "responsive": false,
       "clockwise": true,
       "color": "#5846ce",
@@ -69,12 +69,12 @@
       "id": 20221645224881040
     },
     {
-      "current": 85,
+      "current": 90,
       "max": 100,
-      "radius": 100,
-      "semicircle": true,
-      "stroke": 30,
-      "rounded": true,
+      "radius": 80,
+      "semicircle": false,
+      "stroke": 25,
+      "rounded": false,
       "responsive": false,
       "clockwise": true,
       "color": "#a725a3",
@@ -84,23 +84,6 @@
       "animationDelay": 0,
       "title": "Ingles",
       "id": 20221645224971816
-    },
-    {
-      "current": 91,
-      "max": 100,
-      "radius": 80,
-      "semicircle": false,
-      "stroke": 25,
-      "rounded": true,
-      "responsive": false,
-      "clockwise": true,
-      "color": "#ecf014",
-      "background": "#eaeaea",
-      "duration": 800,
-      "animation": "easeOutBounce",
-      "animationDelay": 0,
-      "title": "Ingrese un Titulo",
-      "id": 20221645225372290
     }
   ]
 }

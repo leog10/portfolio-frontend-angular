@@ -14,6 +14,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { SkillsComponent } from './components/skills/skills.component';
 import { MyProjectsComponent } from './components/my-projects/my-projects.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {path: '', component: PortfolioComponent, pathMatch: 'full'},
+  {path: 'edit', component: EditComponent}
+]
 
 @NgModule({
   declarations: [
@@ -28,11 +34,12 @@ import { MyProjectsComponent } from './components/my-projects/my-projects.compon
     HeaderComponent,
     HeroComponent,
     SkillsComponent,
-    MyProjectsComponent
+    MyProjectsComponent,
   ],
   imports: [
     BrowserModule,
-    CirclesModule
+    CirclesModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

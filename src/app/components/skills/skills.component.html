@@ -1,1 +1,22 @@
-<p>skills works!</p>
+<div class="card mt-2 py-4 px-5">
+  <div id="skills">
+    <div class="d-flex">
+      <h2 class="flex-grow-1 flex-shrink-1 m-auto">Hard & Soft Skills</h2>
+      <div *ngIf="router.url === '/edit'" class="add-circle">
+        <button
+          class="circle-button"
+          id="newCircle"
+          type="button"
+          [disabled]="false"
+          (click)="createNewCirlce()"
+        >
+          Agregar Skill
+        </button>
+        <div id="maxCirclesReached" style="display: none">
+          <p>Numero maximo de circulos alcanzado (6)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-start-circles id="appStartCircles"></app-start-circles>
+</div>
