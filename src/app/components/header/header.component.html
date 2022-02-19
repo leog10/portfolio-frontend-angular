@@ -1,7 +1,7 @@
 <div>
   <nav class="navbar navbar-dark bg-dark py-1 fixed-top">
     <div class="container-fluid">
-      <a href="#" class="navbar-brand">LOGO</a>
+      <a routerLink="/" class="navbar-brand">LOGO</a>
       <button
         type="button"
         class="navbar-toggler"
@@ -12,15 +12,52 @@
       </button>
       <div id="MenuNavegacion" class="collapse navbar-collapse py-0">
         <ul class="navbar-nav ms-auto me-auto text-center">
-          <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Acerca</a></li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Proyectos</a>
+            <a
+              class="nav-link"
+              routerLink="/"
+              data-bs-toggle="collapse"
+              data-bs-target="#MenuNavegacion"
+              >Inicio</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/"
+              data-bs-toggle="collapse"
+              data-bs-target="#MenuNavegacion"
+              >Acerca</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/"
+              data-bs-toggle="collapse"
+              data-bs-target="#MenuNavegacion"
+              >Proyectos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/edit"
+              data-bs-toggle="collapse"
+              data-bs-target="#MenuNavegacion"
+              >Editar Portfolio</a
+            >
           </li>
         </ul>
         <ul class="navbar-nav text-center">
           <li class="nav-item">
-            <a class="nav-link" href="#">Iniciar Sesion</a>
+            <a
+              class="nav-link"
+              routerLink="/"
+              data-bs-toggle="collapse"
+              data-bs-target="#MenuNavegacion"
+              >Iniciar Sesion</a
+            >
           </li>
         </ul>
       </div>

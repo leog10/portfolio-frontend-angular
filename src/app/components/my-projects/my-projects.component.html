@@ -1,1 +1,116 @@
-<p>my-projects works!</p>
+<div class="card mt-2 py-4 px-5">
+  <div id="projects">
+    <div class="d-flex">
+      <h2 class="flex-grow-1 flex-shrink-1 m-auto">Proyectos</h2>
+      <div *ngIf="router.url === '/edit'" class="d-flex align-self-center">
+        <a routerLink="/edit" class="d-flex align-self-end a_icon"
+          ><i
+            class="fa fa-plus"
+            data-title="Agregar"
+            onclick="showNewExpModal()"
+          ></i
+        ></a>
+      </div>
+    </div>
+    <div>
+      <ul
+        class="items-list d-flex flex-wrap justify-content-around"
+        id="projectList"
+      >
+        <li class="d-flex align-items-center project_container">
+          <div class="flex-grow-1">
+            <div class="d-flex flex-column">
+              <div class="my-3 text-center">
+                <img
+                  id="projectImg"
+                  class="project_image"
+                  src="../../../assets/images/APLogo-20-20.png"
+                />
+              </div>
+              <div class="mx-3">
+                <div class="d-flex flex-column align-items-center">
+                  <h3 class="mx-2 my-2" id="edu-school">Fullstack Portfolio</h3>
+                  <p class="mb-0 projects_techs">
+                    <span id="project-techs"
+                      >Angular - Java Spring Boot - MySQL</span
+                    >
+                  </p>
+                  <p class="ms-2 text-secondary my-0">
+                    <span id="project-end">2022</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="router.url === '/edit'" class="data-control edit_icons">
+            <div class="">
+              <a href="/edit" class="a_icon"
+                ><i
+                  class="fa fa-pen"
+                  data-title="Editar"
+                  onclick="showEditExpModal('Pixar')"
+                ></i
+              ></a>
+            </div>
+            <div class="">
+              <a href="/edit" class="a_icon"
+                ><i
+                  class="fa fa-trash"
+                  data-title="Borrar"
+                  onclick="deleteExp('Pixar')"
+                ></i
+              ></a>
+            </div>
+          </div>
+        </li>
+        <li class="d-flex align-items-center project_container">
+          <div class="flex-grow-1">
+            <div class="d-flex flex-column">
+              <div class="my-3 text-center">
+                <img
+                  id="projectImg"
+                  class="project_image"
+                  src="../../../assets/images/APLogo-20-20.png"
+                />
+              </div>
+              <div class="mx-3">
+                <div class="d-flex flex-column align-items-center">
+                  <h3 class="mx-2 my-2" id="edu-school">Argentina Programa</h3>
+                  <p class="mb-0 projects_techs">
+                    <span id="project-title">Programador Web Full Stack</span
+                    ><span> - </span
+                    ><span id="project-career">Angular + Java + MySQLgit</span>
+                  </p>
+                  <p class="ms-2 text-secondary my-0">
+                    <span id="project-start">2021</span><span> – </span
+                    ><span id="project-end">2022</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="router.url === '/edit'" class="data-control edit_icons">
+            <div class="">
+              <a href="/edit" class="a_icon"
+                ><i
+                  class="fa fa-pen"
+                  data-title="Editar"
+                  onclick="showEditExpModal('Pixar')"
+                ></i
+              ></a>
+            </div>
+            <div class="">
+              <a href="/edit" class="a_icon"
+                ><i
+                  class="fa fa-trash"
+                  data-title="Borrar"
+                  onclick="deleteExp('Pixar')"
+                ></i
+              ></a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

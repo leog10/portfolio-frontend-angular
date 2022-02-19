@@ -9,6 +9,10 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
 
+  collapse() {
+    document.getElementById('MenuNavegacion')!.className = 'navbar-collapse py-0 collapsing';
+  }
+
   ngOnInit(): void {
   }
 
