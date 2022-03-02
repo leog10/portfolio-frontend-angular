@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { CirclesModule } from './circles/circles.module';
 import { EditComponent } from './routes/edit/edit.component';
 import { PortfolioComponent } from './routes/portfolio/portfolio.component';
 
@@ -20,6 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginRegisterComponent } from './auth/login/login.component';
 import { NewPersonaComponent } from './new-persona/new-persona.component';
+import { RoundProgressModule } from 'angular-svg-round-progressbar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -38,12 +39,13 @@ import { NewPersonaComponent } from './new-persona/new-persona.component';
     NewPersonaComponent    
   ],
   imports: [
-    BrowserModule,
-    CirclesModule,
+    BrowserModule,    
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RoundProgressModule,
+    BrowserAnimationsModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]

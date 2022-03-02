@@ -1,3 +1,10 @@
+#startSkills {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 ul.items-list {
   list-style: none;
   padding-left: 0rem;
