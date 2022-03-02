@@ -28,8 +28,6 @@ export class NewPersonaComponent implements OnInit {
   backImg!: string;
   profileImg!: string;
 
-  errMsg!: string;
-
   constructor(
     private personaService: PersonaService,
     private router: Router,
@@ -68,8 +66,7 @@ export class NewPersonaComponent implements OnInit {
         this.router.navigate([`/edit/${this.username}`]);
       },
       error: err => {
-        this.errMsg = err.error.mensaje;
-        alert(err.error.mensaje);
+        console.log(err);
       }
     });
   }

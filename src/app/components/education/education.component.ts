@@ -95,7 +95,7 @@ export class EducationComponent implements OnInit {
         this.ngOnInit();        
       },
       error: err => {        
-        alert(err.error);
+        alert(err);
       }
     });
   }
@@ -106,7 +106,7 @@ export class EducationComponent implements OnInit {
         this.ngOnInit();
       },
       error: err => {
-        console.log('Error on delete: ',err.error);
+        console.log('Error on delete: ',err);
       }
     });
     
