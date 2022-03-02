@@ -2,12 +2,13 @@
   <div id="projects">
     <div class="d-flex">
       <h2 class="flex-grow-1 flex-shrink-1 m-auto">Proyectos</h2>
-      <div *ngIf="router.url === '/edit'" class="d-flex align-self-center">
-        <a routerLink="/edit" class="d-flex align-self-end a_icon"
+      <div *ngIf="routeEdit" class="d-flex align-self-center">
+        <a class="d-flex align-self-end a_icon"
           ><i
             class="fa fa-plus"
             data-title="Agregar"
-            onclick="showNewExpModal()"
+            data-bs-toggle="modal"
+            data-bs-target="#newProjectModal"
           ></i
         ></a>
       </div>
@@ -17,7 +18,10 @@
         class="items-list d-flex flex-wrap justify-content-around"
         id="projectList"
       >
-        <li class="d-flex align-items-center project_container">
+        <li
+          *ngFor="let project of projects"
+          class="d-flex align-items-center project_container"
+        >
           <div class="flex-grow-1">
             <div class="d-flex flex-column">
               <div class="my-3 text-center">
@@ -29,82 +33,41 @@
               </div>
               <div class="mx-3">
                 <div class="d-flex flex-column align-items-center">
-                  <h3 class="mx-2 my-2" id="edu-school">Fullstack Portfolio</h3>
+                  <h3 class="mx-2 my-2" id="project-name">
+                    {{ project.name }}
+                  </h3>
                   <p class="mb-0 projects_techs">
-                    <span id="project-techs"
-                      >Angular - Java Spring Boot - MySQL</span
-                    >
+                    <span id="project-description">{{
+                      project.description
+                    }}</span>
                   </p>
                   <p class="ms-2 text-secondary my-0">
-                    <span id="project-end">2022</span>
+                    <span id="project-start">{{ project.startTime }}</span
+                    ><span> – </span
+                    ><span id="project-end">{{ project.endTime }}</span>
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <div *ngIf="router.url === '/edit'" class="data-control edit_icons">
+          <div *ngIf="routeEdit" class="data-control edit_icons">
             <div class="">
-              <a href="/edit" class="a_icon"
+              <a class="a_icon"
                 ><i
                   class="fa fa-pen"
                   data-title="Editar"
-                  onclick="showEditExpModal('Pixar')"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editProjectModal"
+                  (click)="editableProject(project.id!)"
                 ></i
               ></a>
             </div>
             <div class="">
-              <a href="/edit" class="a_icon"
+              <a class="a_icon"
                 ><i
                   class="fa fa-trash"
                   data-title="Borrar"
-                  onclick="deleteExp('Pixar')"
-                ></i
-              ></a>
-            </div>
-          </div>
-        </li>
-        <li class="d-flex align-items-center project_container">
-          <div class="flex-grow-1">
-            <div class="d-flex flex-column">
-              <div class="my-3 text-center">
-                <img
-                  id="projectImg"
-                  class="project_image"
-                  src="../../../assets/images/APLogo-20-20.png"
-                />
-              </div>
-              <div class="mx-3">
-                <div class="d-flex flex-column align-items-center">
-                  <h3 class="mx-2 my-2" id="edu-school">Argentina Programa</h3>
-                  <p class="mb-0 projects_techs">
-                    <span id="project-title">Programador Web Full Stack</span
-                    ><span> - </span
-                    ><span id="project-career">Angular + Java + MySQLgit</span>
-                  </p>
-                  <p class="ms-2 text-secondary my-0">
-                    <span id="project-start">2021</span><span> – </span
-                    ><span id="project-end">2022</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div *ngIf="router.url === '/edit'" class="data-control edit_icons">
-            <div class="">
-              <a href="/edit" class="a_icon"
-                ><i
-                  class="fa fa-pen"
-                  data-title="Editar"
-                  onclick="showEditExpModal('Pixar')"
-                ></i
-              ></a>
-            </div>
-            <div class="">
-              <a href="/edit" class="a_icon"
-                ><i
-                  class="fa fa-trash"
-                  data-title="Borrar"
-                  onclick="deleteExp('Pixar')"
+                  (click)="onDelete(project.id!)"
                 ></i
               ></a>
             </div>
@@ -114,3 +77,251 @@
     </div>
   </div>
 </div>
+
+<!-- New Project Modal -->
+<div
+  *ngIf="projects"
+  class="modal fade border-0"
+  id="newProjectModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="true"
+  (keydown.escape)="newProjectForm.reset()"
+  tabindex="-1"
+  aria-labelledby="newProjectModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-0">
+      <div class="modal-header">
+        <h4 class="modal-title" id="newProjectModalLabel">Nuevo Proyecto</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="newProjectForm.reset()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- New Project Form -->
+
+        <form
+          #newProjectForm="ngForm"
+          (ngSubmit)="onCreate(); newProjectForm.reset()"
+          novalidate
+        >
+          <div class="form-group col">
+            <label class="d-none" for="name"></label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="form-control"
+              placeholder="Nombre del proyecto"
+              [(ngModel)]="name"
+              required
+            />
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="description"></label>
+            <input
+              type="text"
+              name="description"
+              id="description"
+              class="form-control mt-2"
+              placeholder="Descripción"
+              [(ngModel)]="description"
+              required
+            />
+          </div>
+
+          <div class="row mt-2">
+            <div class="form-group col">
+              <label class="d-none" for="startTime"></label>
+              <input
+                type="text"
+                name="startTime"
+                id="startTime"
+                class="form-control"
+                placeholder="Fecha Inicio"
+                [(ngModel)]="startTime"
+                required
+              />
+            </div>
+            <div class="form-group col">
+              <label class="d-none" for="endTime"></label>
+              <input
+                type="text"
+                name="endTime"
+                id="endTime"
+                class="form-control"
+                placeholder="Fecha Fin/Actualidad"
+                [(ngModel)]="endTime"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="">
+            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1"
+              >Si lo desea, agregue una imagen.</label
+            >
+            <input
+              class="form-control form-control-sm"
+              id="formFileSm"
+              type="file"
+              name="img"
+              [(ngModel)]="img"
+            />
+          </div>
+
+          <div class="modal-footer border-0 mb-0">
+            <button
+              class="btn btn-primary fw-bold"
+              data-bs-dismiss="modal"
+              [disabled]="!newProjectForm.valid"
+              type="submit"
+            >
+              Guardar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              (click)="newProjectForm.reset()"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+
+        <!-- End New Form -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End New Project Modal -->
+
+<!-- Edit Project Modal -->
+<div
+  *ngIf="projects[0]"
+  class="modal fade border-0"
+  id="editProjectModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="true"
+  tabindex="-1"
+  aria-labelledby="editProjectModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-0">
+      <div class="modal-header">
+        <h4 class="modal-title" id="editProjectModalLabel">Editar Proyecto</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Edit Project Form -->
+
+        <form
+          *ngIf="editProject"
+          #editProjectForm="ngForm"
+          (ngSubmit)="onUpdate()"
+          novalidate
+        >
+          <div class="form-group col">
+            <label class="d-none" for="name"></label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="form-control"
+              placeholder="Nombre del proyecto"
+              [(ngModel)]="editProject.name"
+              required
+            />
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="description"></label>
+            <input
+              type="text"
+              name="description"
+              id="description"
+              class="form-control mt-2"
+              placeholder="Descripción"
+              [(ngModel)]="editProject.description"
+              required
+            />
+          </div>
+
+          <div class="row mt-2">
+            <div class="form-group col">
+              <label class="d-none" for="startTime"></label>
+              <input
+                type="text"
+                name="startTime"
+                id="startTime"
+                class="form-control"
+                placeholder="Fecha Inicio"
+                [(ngModel)]="editProject.startTime"
+                required
+              />
+            </div>
+            <div class="form-group col">
+              <label class="d-none" for="endTime"></label>
+              <input
+                type="text"
+                name="endTime"
+                id="endTime"
+                class="form-control"
+                placeholder="Fecha Fin/Actualidad"
+                [(ngModel)]="editProject.endTime"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="">
+            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1"
+              >Si lo desea, agregue una imagen.</label
+            >
+            <input
+              class="form-control form-control-sm"
+              id="formFileSm"
+              type="file"
+              name="img"
+              [(ngModel)]="editProject.img"
+            />
+          </div>
+
+          <div class="modal-footer border-0 mb-0">
+            <button
+              class="btn btn-primary fw-bold"
+              data-bs-dismiss="modal"
+              [disabled]="!editProjectForm.valid"
+              type="submit"
+            >
+              Guardar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+
+        <!-- End Edit Form -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Edit Project Modal -->

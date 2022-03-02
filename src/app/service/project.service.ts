@@ -21,6 +21,10 @@ export class ProjectService {
     return this.http.get<Project>(this.projectURL + `details/id/${id}`);
   }
 
+  public detailsByUsername(username: string): Observable<Project[]> {
+    return this.http.get<Project[]>(this.projectURL + `details/${username}`);
+  }
+
   public update(id: number, project: Project): Observable<Project> {
     return this.http.put<Project>(this.projectURL + `update/${id}`, project);
   }
