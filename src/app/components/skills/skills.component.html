@@ -196,7 +196,7 @@
               class="skill_button"
               [id]="'saveButton' + skill.id"
               [disabled]="false"
-              (click)="saveCircle(skill)"
+              (click)="saveCircle(skill); skillForm.form.markAsPristine()"
             >
               Guardar
             </button>
