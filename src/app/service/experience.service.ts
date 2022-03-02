@@ -21,6 +21,10 @@ export class ExperienceService {
     return this.http.get<Experience>(this.experienceURL + `details/id/${id}`);
   }
 
+  public detailsByUsername(username: string): Observable<Experience[]> {
+    return this.http.get<Experience[]>(this.experienceURL + `details/${username}`);
+  }
+
   public update(id: number, experience: Experience): Observable<Experience> {
     return this.http.put<Experience>(this.experienceURL + `update/${id}`, experience);
   }

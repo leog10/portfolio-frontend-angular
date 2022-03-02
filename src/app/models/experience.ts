@@ -1,22 +1,22 @@
 export class Experience {
     id?: number;
-    positon: string;
+    position: string;
     company: string;
     img: string;
     mode: string;
     startTime: string;
     endTime: string;
-    timeAtPositon: string;
+    timeAtPosition: string;
     location: string;
 
-    constructor(positon: string, company: string, img: string, mode: string, startTime: string, endTime: string, timeAtPositon: string, location: string) {
-        this.positon = positon;
+    constructor(position: string, company: string, img: string, mode: string, startTime: string, endTime: string, timeAtPosition: string, location: string) {
+        this.position = position;
         this.company = company;
         this.img = img;
         this.mode = mode;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.timeAtPositon = timeAtPositon;
+        this.timeAtPosition = timeAtPosition;
         this.location = location;
     }
 }

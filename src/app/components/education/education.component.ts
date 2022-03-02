@@ -94,8 +94,8 @@ export class EducationComponent implements OnInit {
       next: () => {
         this.ngOnInit();        
       },
-      error: err => {        
-        alert(err);
+      error: error => {        
+        alert(error);
       }
     });
   }
@@ -105,11 +105,10 @@ export class EducationComponent implements OnInit {
       next: () => {
         this.ngOnInit();
       },
-      error: err => {
-        console.log('Error on delete: ',err);
+      error: error => {
+        console.log('Error on delete: ',error);
       }
-    });
-    
+    });    
   }
 
   ngOnInit(): void {

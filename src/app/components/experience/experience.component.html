@@ -2,68 +2,72 @@
   <div id="experience">
     <div class="d-flex">
       <h2 class="flex-grow-1 flex-shrink-1 m-auto">Experiencia</h2>
-      <div class="d-flex align-self-center">
-        <a
-          *ngIf="router.url === '/edit'"
-          href="#experience"
-          class="d-flex align-self-end a_icon"
+      <div *ngIf="routeEdit" class="d-flex align-self-center">
+        <a class="d-flex align-self-end a_icon"
           ><i
             class="fa fa-plus"
             data-title="Agregar"
-            onclick="showNewExpModal()"
+            data-bs-toggle="modal"
+            data-bs-target="#newExpModal"
           ></i
         ></a>
       </div>
     </div>
     <div>
       <ul class="items-list" id="expList">
-        <li class="d-flex my-2">
+        <li *ngFor="let exp of experience" class="d-flex my-2">
           <div class="flex-grow-1">
             <div class="d-flex">
               <div class="my-3">
                 <img
                   id="exp-img"
                   class="logo_image"
-                  src="https://www.muycomputer.com/wp-content/uploads/2020/12/google.png"
+                  [src]="
+                    'https://www.muycomputer.com/wp-content/uploads/2020/12/google.png' ||
+                    exp.img
+                  "
                 />
               </div>
               <div class="mx-3">
                 <div>
                   <h3 class="mx-2 my-2" id="exp-position">
-                    FrontEnd Developer
+                    {{ exp.position }}
                   </h3>
                   <p class="ms-2 mb-0">
-                    <span id="exp-company">Autoempleado</span><span> - </span
-                    ><span id="exp-mode">Full Time</span>
+                    <span id="exp-company">{{ exp.company }}</span
+                    ><span> - </span><span id="exp-mode">{{ exp.mode }}</span>
                   </p>
                   <h4 class="ms-2 text-secondary my-0">
-                    <span id="exp-initial">oct 2020</span><span> – </span
-                    ><span id="exp-end">actualidad</span><span> – </span
-                    ><span id="exp-time">1 años y 4 meses</span>
+                    <span id="exp-start">{{ exp.startTime }}</span
+                    ><span> – </span><span id="exp-end">{{ exp.endTime }}</span
+                    ><span> – </span
+                    ><span id="exp-time">{{ exp.timeAtPosition }}</span>
                   </h4>
-                  <h4 class="ms-2 text-secondary my-0" id="exp-place">
-                    Argentina - Remoto
+                  <h4 class="ms-2 text-secondary my-0" id="exp-location">
+                    {{ exp.location }}
                   </h4>
                 </div>
               </div>
             </div>
           </div>
-          <div *ngIf="router.url === '/edit'" class="data-control">
+          <div *ngIf="routeEdit" class="data-control">
             <div class="">
-              <a href="#experience" class="a_icon"
+              <a class="a_icon"
                 ><i
                   class="fa fa-pen"
                   data-title="Editar"
-                  onclick="showEditExpModal('Pixar')"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editExpModal"
+                  (click)="editableExperience(exp.id!)"
                 ></i
               ></a>
             </div>
             <div class="">
-              <a href="#experience" class="a_icon"
+              <a class="a_icon"
                 ><i
                   class="fa fa-trash"
                   data-title="Borrar"
-                  onclick="deleteExp('Pixar')"
+                  (click)="onDelete(exp.id!)"
                 ></i
               ></a>
             </div>
@@ -73,3 +77,329 @@
     </div>
   </div>
 </div>
+
+<!-- New Experience Modal -->
+<div
+  *ngIf="experience"
+  class="modal fade border-0"
+  id="newExpModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="true"
+  (keydown.escape)="newExpForm.reset()"
+  tabindex="-1"
+  aria-labelledby="newExpModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-0">
+      <div class="modal-header">
+        <h4 class="modal-title" id="newExpModalLabel">Nueva Experiencia</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="newExpForm.reset()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- New Exp Form -->
+
+        <form
+          #newExpForm="ngForm"
+          (ngSubmit)="onCreate(); newExpForm.reset()"
+          novalidate
+        >
+          <div class="form-group col">
+            <label class="d-none" for="position"></label>
+            <input
+              type="text"
+              name="position"
+              id="position"
+              class="form-control"
+              placeholder="Posición"
+              [(ngModel)]="position"
+              required
+            />
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="company"></label>
+            <input
+              type="text"
+              name="company"
+              id="company"
+              class="form-control mt-2"
+              placeholder="Empresa"
+              [(ngModel)]="company"
+              required
+            />
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="mode"></label>
+            <input
+              type="text"
+              name="mode"
+              id="mode"
+              class="form-control mt-2"
+              placeholder="Modo Ej: PartTime/FullTime"
+              [(ngModel)]="mode"
+              required
+            />
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="location"></label>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              class="form-control mt-2"
+              placeholder="Ubicación"
+              [(ngModel)]="location"
+              required
+            />
+          </div>
+
+          <div class="row mt-2">
+            <div class="form-group col">
+              <label class="d-none" for="startTime"></label>
+              <input
+                type="text"
+                name="startTime"
+                id="startTime"
+                class="form-control"
+                placeholder="Fecha Inicio"
+                [(ngModel)]="startTime"
+                required
+              />
+            </div>
+            <div class="form-group col">
+              <label class="d-none" for="endTime"></label>
+              <input
+                type="text"
+                name="endTime"
+                id="endTime"
+                class="form-control"
+                placeholder="Fecha Fin/Actualidad"
+                [(ngModel)]="endTime"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="timeAtPosition"></label>
+            <input
+              type="text"
+              name="timeAtPosition"
+              id="timeAtPosition"
+              class="form-control mt-2"
+              placeholder="Duración en empleo Ej: 2 años y 1 mes"
+              [(ngModel)]="timeAtPosition"
+              required
+            />
+          </div>
+
+          <div class="">
+            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1"
+              >Si lo desea, agregue una imagen.</label
+            >
+            <input
+              class="form-control form-control-sm"
+              id="formFileSm"
+              type="file"
+              name="img"
+              [(ngModel)]="img"
+            />
+          </div>
+
+          <div class="modal-footer border-0 mb-0">
+            <button
+              class="btn btn-primary fw-bold"
+              data-bs-dismiss="modal"
+              [disabled]="!newExpForm.valid"
+              type="submit"
+            >
+              Guardar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              (click)="newExpForm.reset()"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+
+        <!-- End New Form -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End New Experience Modal -->
+
+<!-- Edit Experience Modal -->
+<div
+  *ngIf="experience[0]"
+  class="modal fade border-0"
+  id="editExpModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="true"
+  tabindex="-1"
+  aria-labelledby="editExpModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-0">
+      <div class="modal-header">
+        <h4 class="modal-title" id="editExpModalLabel">Editar Experiencia</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Edit Exp Form -->
+
+        <form
+          *ngIf="editExperience"
+          #editExpForm="ngForm"
+          (ngSubmit)="onUpdate()"
+          novalidate
+        >
+          <div class="form-group col">
+            <label class="d-none" for="position"></label>
+            <input
+              type="text"
+              name="position"
+              id="position"
+              class="form-control"
+              placeholder="Posición"
+              [(ngModel)]="editExperience.position"
+              required
+            />
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="company"></label>
+            <input
+              type="text"
+              name="company"
+              id="company"
+              class="form-control mt-2"
+              placeholder="Empresa"
+              [(ngModel)]="editExperience.company"
+              required
+            />
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="mode"></label>
+            <input
+              type="text"
+              name="mode"
+              id="mode"
+              class="form-control mt-2"
+              placeholder="Modo Ej: PartTime/FullTime"
+              [(ngModel)]="editExperience.mode"
+              required
+            />
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="location"></label>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              class="form-control mt-2"
+              placeholder="Ubicación"
+              [(ngModel)]="editExperience.location"
+              required
+            />
+          </div>
+
+          <div class="row mt-2">
+            <div class="form-group col">
+              <label class="d-none" for="startTime"></label>
+              <input
+                type="text"
+                name="startTime"
+                id="startTime"
+                class="form-control"
+                placeholder="Fecha Inicio"
+                [(ngModel)]="editExperience.startTime"
+                required
+              />
+            </div>
+            <div class="form-group col">
+              <label class="d-none" for="endTime"></label>
+              <input
+                type="text"
+                name="endTime"
+                id="endTime"
+                class="form-control"
+                placeholder="Fecha Fin/Actualidad"
+                [(ngModel)]="editExperience.endTime"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="timeAtPosition"></label>
+            <input
+              type="text"
+              name="timeAtPosition"
+              id="timeAtPosition"
+              class="form-control mt-2"
+              placeholder="Duración en empleo Ej: 2 años y 1 mes"
+              [(ngModel)]="editExperience.timeAtPosition"
+              required
+            />
+          </div>
+
+          <div class="">
+            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1"
+              >Si lo desea, agregue una imagen.</label
+            >
+            <input
+              class="form-control form-control-sm"
+              id="formFileSm"
+              type="file"
+              name="img"
+              [(ngModel)]="editExperience.img"
+            />
+          </div>
+
+          <div class="modal-footer border-0 mb-0">
+            <button
+              class="btn btn-primary fw-bold"
+              data-bs-dismiss="modal"
+              [disabled]="!editExpForm.valid"
+              type="submit"
+            >
+              Guardar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+
+        <!-- End Edit Form -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Edit Experience Modal -->
