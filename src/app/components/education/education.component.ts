@@ -17,7 +17,7 @@ export class EducationComponent implements OnInit {
   routeEdit: boolean = false;
 
   //LIST OF EDUCATIONS
-  education: Education[] = [];  
+  educations: Education[] = [];  
 
   //ATTRIBUTES FOR NEW EDUCATION
   school!: string;
@@ -39,7 +39,7 @@ export class EducationComponent implements OnInit {
     const _username = this.activatedRoute.snapshot.params['username'];
     this.educationService.detailsByUsername(_username).subscribe({
       next: education => {
-        this.education = education;
+        this.educations = education;
       },
       error: () => {
         if (!this.username) {
@@ -69,18 +69,18 @@ export class EducationComponent implements OnInit {
   indexOfEditEducation: number = 0;
 
   findIndexOfEducation(id: number): void {
-    this.indexOfEditEducation = this.education.findIndex(education => education.id === id);
+    this.indexOfEditEducation = this.educations.findIndex(education => education.id === id);
   }
 
   loadEditEducation(): void {
     this.editEducation = new Education(
-      this.education[this.indexOfEditEducation].school,
-      this.education[this.indexOfEditEducation].title,
-      this.education[this.indexOfEditEducation].img,
-      this.education[this.indexOfEditEducation].career,
-      this.education[this.indexOfEditEducation].startTime,
-      this.education[this.indexOfEditEducation].endTime,
-      this.education[this.indexOfEditEducation].location
+      this.educations[this.indexOfEditEducation].school,
+      this.educations[this.indexOfEditEducation].title,
+      this.educations[this.indexOfEditEducation].img,
+      this.educations[this.indexOfEditEducation].career,
+      this.educations[this.indexOfEditEducation].startTime,
+      this.educations[this.indexOfEditEducation].endTime,
+      this.educations[this.indexOfEditEducation].location
       );
   }
 
@@ -90,7 +90,7 @@ export class EducationComponent implements OnInit {
   }
 
   onUpdate(): void {    
-    this.educationService.update(this.education[this.indexOfEditEducation].id!,this.editEducation).subscribe({
+    this.educationService.update(this.educations[this.indexOfEditEducation].id!,this.editEducation).subscribe({
       next: () => {
         this.ngOnInit();        
       },

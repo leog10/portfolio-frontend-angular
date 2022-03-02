@@ -17,7 +17,7 @@ export class ExperienceComponent implements OnInit {
   routeEdit: boolean = false;
 
   //LIST OF EXPERIENCES
-  experience: Experience[] = [];
+  experiences: Experience[] = [];
 
   //ATTRIBUTES FOR NEW EXPERIENCE
   position!: string;
@@ -40,7 +40,7 @@ export class ExperienceComponent implements OnInit {
     const _username = this.activatedRoute.snapshot.params['username'];
     this.experienceService.detailsByUsername(_username).subscribe({
       next: experience => {
-        this.experience = experience;
+        this.experiences = experience;
       },
       error: () => {
         if (!this.username) {
@@ -90,19 +90,19 @@ export class ExperienceComponent implements OnInit {
   indexOfEditExperience: number = 0;
 
   findIndexOfExperience(id: number): void {
-    this.indexOfEditExperience = this.experience.findIndex(experience => experience.id === id);
+    this.indexOfEditExperience = this.experiences.findIndex(experience => experience.id === id);
   }
 
   loadEditExperience(): void {
     this.editExperience = new Experience(
-      this.experience[this.indexOfEditExperience].position,
-      this.experience[this.indexOfEditExperience].company,
-      this.experience[this.indexOfEditExperience].img,
-      this.experience[this.indexOfEditExperience].mode,
-      this.experience[this.indexOfEditExperience].startTime,
-      this.experience[this.indexOfEditExperience].endTime,
-      this.experience[this.indexOfEditExperience].timeAtPosition,
-      this.experience[this.indexOfEditExperience].location,
+      this.experiences[this.indexOfEditExperience].position,
+      this.experiences[this.indexOfEditExperience].company,
+      this.experiences[this.indexOfEditExperience].img,
+      this.experiences[this.indexOfEditExperience].mode,
+      this.experiences[this.indexOfEditExperience].startTime,
+      this.experiences[this.indexOfEditExperience].endTime,
+      this.experiences[this.indexOfEditExperience].timeAtPosition,
+      this.experiences[this.indexOfEditExperience].location,
       );
   }
 
@@ -112,7 +112,7 @@ export class ExperienceComponent implements OnInit {
   }
 
   onUpdate(): void {    
-    this.experienceService.update(this.experience[this.indexOfEditExperience].id!,this.editExperience).subscribe({
+    this.experienceService.update(this.experiences[this.indexOfEditExperience].id!,this.editExperience).subscribe({
       next: () => {
         this.ngOnInit();        
       },

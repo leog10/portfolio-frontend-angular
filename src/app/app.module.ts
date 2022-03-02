@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { EditComponent } from './routes/edit/edit.component';
 import { PortfolioComponent } from './routes/portfolio/portfolio.component';
 
-import { AboutMeComponent } from './components/about-me/about-me.component';
 import { EducationComponent } from './components/education/education.component';
 import { ExperienceComponent } from './components/experience/experience.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -27,8 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     EditComponent,
     PortfolioComponent,
-    LoginRegisterComponent,
-    AboutMeComponent,
+    LoginRegisterComponent,    
     EducationComponent,
     ExperienceComponent,
     FooterComponent,

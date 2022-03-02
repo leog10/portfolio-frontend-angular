@@ -15,7 +15,7 @@
     </div>
     <div>
       <ul class="items-list" id="eduList">
-        <li *ngFor="let edu of education" class="d-flex my-2" id="eduSchool">
+        <li *ngFor="let edu of educations" class="d-flex my-2" id="eduSchool">
           <div class="flex-grow-1">
             <div class="d-flex">
               <div class="my-3">
@@ -71,7 +71,7 @@
 
 <!-- New Education Modal -->
 <div
-  *ngIf="education"
+  *ngIf="educations"
   class="modal fade border-0"
   id="newEduModal"
   data-bs-backdrop="static"
@@ -222,7 +222,7 @@
 
 <!-- Edit Education Modal -->
 <div
-  *ngIf="education[0]"
+  *ngIf="educations[0]"
   class="modal fade border-0"
   id="editEduModal"
   data-bs-backdrop="static"
