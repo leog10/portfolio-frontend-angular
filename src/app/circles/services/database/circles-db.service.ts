@@ -2,12 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { ICircle } from '../../circle-object/ICircle';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':'application/json'
-  })
-}
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,24 +11,22 @@ export class CirclesDbService {
 
   constructor(private http: HttpClient) { }
 
-  private apiUrl = 'http://localhost:3000/circles';
+  private skillUrl = environment.skillURL;
 
   getData(): Observable<ICircle[]> {
-    return this.http.get<ICircle[]>(this.apiUrl);
+    return this.http.get<ICircle[]>(this.skillUrl);
   }
 
-  deleteCircle(circle: ICircle): Observable<ICircle> {
-    const url = `${this.apiUrl}/${circle.id}`;
-    return this.http.delete<ICircle>(url);
+  deleteCircle(circle: ICircle): Observable<ICircle> {    
+    return this.http.delete<ICircle>(this.skillUrl + `delete${circle.id}`);
   }
 
-  updateCircle(circle: ICircle): Observable<ICircle> {
-    const url = `${this.apiUrl}/${circle.id}`;
-    return this.http.put<ICircle>(url, circle, httpOptions);
+  updateCircle(circle: ICircle): Observable<ICircle> {    
+    return this.http.put<ICircle>(this.skillUrl + `update${circle.id}`, circle);
   }
 
   addCircle(circle: ICircle): Observable<ICircle> {
-    return this.http.post<ICircle>(this.apiUrl, circle, httpOptions);
+    return this.http.post<ICircle>(this.skillUrl + 'create', circle);
   }
 
 }

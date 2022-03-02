@@ -7,13 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(  ) { }
 
-  collapse() {
-    document.getElementById('MenuNavegacion')!.className = 'navbar-collapse py-0 collapsing';
-  }
+  ngOnInit(): void {    
+    }
 
-  ngOnInit(): void {
-  }
-
+  
 }

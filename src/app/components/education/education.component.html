@@ -2,19 +2,20 @@
   <div id="education">
     <div class="d-flex">
       <h2 class="flex-grow-1 flex-shrink-1 m-auto">Educación</h2>
-      <div *ngIf="router.url === '/edit'" class="d-flex align-self-center">
-        <a href="#education" class="d-flex align-self-end a_icon"
+      <div *ngIf="routeEdit" class="d-flex align-self-center">
+        <a class="d-flex align-self-end a_icon"
           ><i
             class="fa fa-plus"
             data-title="Agregar"
-            onclick="showNewExpModal()"
+            data-bs-toggle="modal"
+            data-bs-target="#newEduModal"
           ></i
         ></a>
       </div>
     </div>
     <div>
       <ul class="items-list" id="eduList">
-        <li class="d-flex my-2">
+        <li *ngFor="let edu of education" class="d-flex my-2" id="eduSchool">
           <div class="flex-grow-1">
             <div class="d-flex">
               <div class="my-3">
@@ -26,38 +27,38 @@
               </div>
               <div class="mx-3">
                 <div>
-                  <h3 class="mx-2 my-2" id="edu-school">Argentina Programa</h3>
+                  <h3 class="mx-2 my-2" id="edu-school">{{ edu.school }}</h3>
                   <p class="ms-2 mb-0">
-                    <span id="edu-title">Programador Web Full Stack</span
+                    <span id="edu-title">{{ edu.title }}</span
                     ><span> - </span
-                    ><span id="edu-career"
-                      >Angular + Java + MySQL + GIT + SpringBoot + JWT</span
-                    >
+                    ><span id="edu-career">{{ edu.career }}</span>
                   </p>
                   <p class="ms-2 text-secondary my-0">
-                    <span id="edu-start">2021</span><span> – </span
-                    ><span id="edu-end">2022</span>
+                    <span id="edu-start">{{ edu.startTime }}</span
+                    ><span> – </span><span id="edu-end">{{ edu.endTime }}</span>
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <div *ngIf="router.url === '/edit'" class="data-control">
+          <div *ngIf="routeEdit" class="data-control">
             <div class="">
-              <a href="/edit" class="a_icon"
+              <a class="a_icon"
                 ><i
                   class="fa fa-pen"
                   data-title="Editar"
-                  onclick="showEditExpModal('Pixar')"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editEduModal"
+                  (click)="editableEducation(edu.id!)"
                 ></i
               ></a>
             </div>
             <div class="">
-              <a href="/edit" class="a_icon"
+              <a class="a_icon"
                 ><i
                   class="fa fa-trash"
                   data-title="Borrar"
-                  onclick="deleteExp('Pixar')"
+                  (click)="onDelete(edu.id!)"
                 ></i
               ></a>
             </div>
@@ -67,3 +68,303 @@
     </div>
   </div>
 </div>
+
+<!-- New Education Modal -->
+<div
+  *ngIf="education"
+  class="modal fade border-0"
+  id="newEduModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="true"
+  (keydown.escape)="newEduForm.reset()"
+  tabindex="-1"
+  aria-labelledby="newEduModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-0">
+      <div class="modal-header">
+        <h4 class="modal-title" id="newEduModalLabel">Nueva Educación</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="newEduForm.reset()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- New Edu Form -->
+
+        <form
+          #newEduForm="ngForm"
+          (ngSubmit)="onCreate(); newEduForm.reset()"
+          novalidate
+        >
+          <div class="form-group col">
+            <label class="d-none" for="school"></label>
+            <input
+              type="text"
+              name="school"
+              id="school"
+              class="form-control"
+              placeholder="Escuela"
+              [(ngModel)]="school"
+              required
+            />
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="title"></label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              class="form-control mt-2"
+              placeholder="Título"
+              [(ngModel)]="title"
+              required
+            />
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="career"></label>
+            <input
+              type="text"
+              name="career"
+              id="career"
+              class="form-control mt-2"
+              placeholder="Carrera"
+              [(ngModel)]="career"
+              required
+            />
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="location"></label>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              class="form-control mt-2"
+              placeholder="Ubicación"
+              [(ngModel)]="location"
+              required
+            />
+          </div>
+
+          <div class="row mt-2">
+            <div class="form-group col">
+              <label class="d-none" for="startTime"></label>
+              <input
+                type="text"
+                name="startTime"
+                id="startTime"
+                class="form-control"
+                placeholder="Fecha Inicio"
+                [(ngModel)]="startTime"
+                required
+              />
+            </div>
+            <div class="form-group col">
+              <label class="d-none" for="endTime"></label>
+              <input
+                type="text"
+                name="endTime"
+                id="endTime"
+                class="form-control"
+                placeholder="Fecha Fin/Actualidad"
+                [(ngModel)]="endTime"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="">
+            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1"
+              >Si lo desea, agregue una imagen.</label
+            >
+            <input
+              class="form-control form-control-sm"
+              id="formFileSm"
+              type="file"
+              name="img"
+              [(ngModel)]="img"
+            />
+          </div>
+
+          <div class="modal-footer border-0 mb-0">
+            <button
+              class="btn btn-primary fw-bold"
+              data-bs-dismiss="modal"
+              [disabled]="!newEduForm.valid"
+              type="submit"
+            >
+              Guardar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              (click)="newEduForm.reset()"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+
+        <!-- End New Form -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End New Education Modal -->
+
+<!-- Edit Education Modal -->
+<div
+  *ngIf="education[0]"
+  class="modal fade border-0"
+  id="editEduModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="true"
+  tabindex="-1"
+  aria-labelledby="editEduModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-0">
+      <div class="modal-header">
+        <h4 class="modal-title" id="editEduModalLabel">Editar Educación</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Edit Edu Form -->
+
+        <form
+          *ngIf="editEducation"
+          #editEduForm="ngForm"
+          (ngSubmit)="onUpdate()"
+          novalidate
+        >
+          <div class="form-group col">
+            <label class="d-none" for="school"></label>
+            <input
+              type="text"
+              name="school"
+              id="school"
+              class="form-control"
+              placeholder="Escuela"
+              [(ngModel)]="editEducation.school"
+              required
+            />
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="title"></label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              class="form-control mt-2"
+              placeholder="Título"
+              [(ngModel)]="editEducation.title"
+              required
+            />
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="career"></label>
+            <input
+              type="text"
+              name="career"
+              id="career"
+              class="form-control mt-2"
+              placeholder="Carrera"
+              [(ngModel)]="editEducation.career"
+              required
+            />
+          </div>
+
+          <div class="form-group col">
+            <label class="d-none" for="location"></label>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              class="form-control mt-2"
+              placeholder="Ubicación"
+              [(ngModel)]="editEducation.location"
+              required
+            />
+          </div>
+
+          <div class="row mt-2">
+            <div class="form-group col">
+              <label class="d-none" for="startTime"></label>
+              <input
+                type="text"
+                name="startTime"
+                id="startTime"
+                class="form-control"
+                placeholder="Fecha Inicio"
+                [(ngModel)]="editEducation.startTime"
+                required
+              />
+            </div>
+            <div class="form-group col">
+              <label class="d-none" for="endTime"></label>
+              <input
+                type="text"
+                name="endTime"
+                id="endTime"
+                class="form-control"
+                placeholder="Fecha Fin/Actualidad"
+                [(ngModel)]="editEducation.endTime"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="">
+            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1"
+              >Si lo desea, agregue una imagen.</label
+            >
+            <input
+              class="form-control form-control-sm"
+              id="formFileSm"
+              type="file"
+              name="img"
+              [(ngModel)]="editEducation.img"
+            />
+          </div>
+
+          <div class="modal-footer border-0 mb-0">
+            <button
+              class="btn btn-primary fw-bold"
+              data-bs-dismiss="modal"
+              [disabled]="!editEduForm.valid"
+              type="submit"
+            >
+              Guardar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+
+        <!-- End Edit Form -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Edit Education Modal -->

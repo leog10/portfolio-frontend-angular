@@ -1,5 +1,9 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
+body {
+  background-color: #f0f2f5;
+}
+
 .circle-title-container {
   display: inline-flex;
   width: auto;
@@ -81,10 +85,6 @@ round-progress {
   margin: 0 5px 5px 0;
 }
 
-button:disabled {
-  background: #cccccc;
-}
-
 .button-container {
   display: flex;
   flex-direction: column;
@@ -105,27 +105,26 @@ button:disabled {
   }
 }
 
-form {
+.circle_form {
   text-align: left;
   max-width: 350px;
   margin: 30px auto;
 }
 
-form > div {
+.circle_form > div {
   margin-bottom: 10px;
 }
 
-input,
-select {
+.circle_input {
   float: right;
   width: 120px;
 }
 
-input[type="checkbox"] {
+.circle_input[type="checkbox"] {
   width: auto;
 }
 
-input[type="color"] {
+.circle_input[type="color"] {
   height: 30px;
 }
 
@@ -141,7 +140,7 @@ input[type="color"] {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 9px;
 }
 
 /* Track */
@@ -152,11 +151,22 @@ input[type="color"] {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #529adc;
+  background: #a0a0a0;
   border-radius: 25px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #529aff;
+  background: #9b9b9bc4;
+}
+
+.btn_success {
+  background-color: #42b72a;
+  color: white;
+  font-weight: 500;
+}
+
+.btn_success:hover {
+  color: white;
+  background-color: #36a420;
 }
