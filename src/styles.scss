@@ -4,12 +4,12 @@ body {
   background-color: #f0f2f5;
 }
 
-.circle-title-container {
+.skill_title_container {
   display: inline-flex;
   width: auto;
 }
 
-.circle-title {
+.skill_edit_title {
   text-align: center;
   font-size: 35px;
   width: auto;
@@ -27,7 +27,7 @@ body {
   z-index: 999;
 }
 
-.add-circle {
+.add_skill {
   display: flex;
   flex-direction: column;
   margin: 10px;
@@ -47,7 +47,7 @@ body {
   line-height: 1;
 }
 
-.circle-container {
+.skill_container {
   width: 100%;
   max-width: 550px;
   min-width: 360px;
@@ -63,7 +63,7 @@ body {
   -o-transition: all ease-in 0.1s;
 }
 
-.circle-container:hover {
+.skill_container:hover {
   box-shadow: 0 0 17px 0 hsl(0deg 0% 42% / 30%);
   transform: translateY(-2px);
 }
@@ -72,7 +72,7 @@ round-progress {
   margin: auto;
 }
 
-.circle-button {
+.skill_button {
   display: inline-block;
   padding: 10px 20px;
   background: #45ccce;
@@ -85,7 +85,11 @@ round-progress {
   margin: 0 5px 5px 0;
 }
 
-.button-container {
+.skill_button:disabled {
+  background: #45ccce63;
+}
+
+.button_container {
   display: flex;
   flex-direction: column;
 }
@@ -105,26 +109,26 @@ round-progress {
   }
 }
 
-.circle_form {
+.skill_form {
   text-align: left;
   max-width: 350px;
   margin: 30px auto;
 }
 
-.circle_form > div {
+.skill_form > div {
   margin-bottom: 10px;
 }
 
-.circle_input {
+.skill_input {
   float: right;
   width: 120px;
 }
 
-.circle_input[type="checkbox"] {
+.skill_input[type="checkbox"] {
   width: auto;
 }
 
-.circle_input[type="color"] {
+.skill_input[type="color"] {
   height: 30px;
 }
 

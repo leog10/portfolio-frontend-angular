@@ -2,9 +2,9 @@
   <div id="skills">
     <div class="d-flex">
       <h2 class="flex-grow-1 flex-shrink-1 m-auto">Hard & Soft Skills</h2>
-      <div *ngIf="routeEdit" class="add-circle">
+      <div *ngIf="routeEdit" class="add_skill">
         <button
-          class="circle-button"
+          class="skill_button"
           id="newSkill"
           type="button"
           [disabled]="false"
@@ -13,21 +13,21 @@
           Agregar Skill
         </button>
         <div id="maxSkillsReached" style="display: none">
-          <p>Numero maximo de skills alcanzado (6)</p>
+          <p class="text-danger">Numero maximo de skills alcanzado (6)</p>
         </div>
       </div>
     </div>
   </div>
   <div id="startSkills">
     <ng-container *ngIf="routeEdit; else inicioTemplate">
-      <div
-        class="circle-container"
-        *ngFor="let skill of skills"
-        [id]="skill.id"
-      >
+      <div class="skill_container" *ngFor="let skill of skills" [id]="skill.id">
         <p *ngIf="skillForm.dirty" class="text-danger">No olvides guardar!</p>
-        <div class="circle-title-container">
-          <input class="circle-title" type="text" [(ngModel)]="skill.title" />
+        <div class="skill_title_container">
+          <input
+            class="skill_edit_title"
+            type="text"
+            [(ngModel)]="skill.title"
+          />
         </div>
         <div class="progress-wrapper">
           <div class="current" [ngStyle]="getOverlayStyle(skill.id!)">
@@ -51,13 +51,13 @@
 
         <div>
           <button
-            class="circle-button"
+            class="skill_button"
             (click)="increment(skill); skillForm.form.markAsDirty()"
           >
             Incrementar
           </button>
           <button
-            class="circle-button"
+            class="skill_button"
             (click)="decrement(skill); skillForm.form.markAsDirty()"
           >
             Reducir
@@ -65,26 +65,26 @@
         </div>
         <div>
           <button
-            class="circle-button"
+            class="skill_button"
             (click)="increment(skill, 10); skillForm.form.markAsDirty()"
           >
             Incrementar (10)
           </button>
           <button
-            class="circle-button"
+            class="skill_button"
             (click)="decrement(skill, 10); skillForm.form.markAsDirty()"
           >
             Reducir (10)
           </button>
         </div>
 
-        <form #skillForm="ngForm" class="circle_form">
+        <form #skillForm="ngForm" class="skill_form">
           <h3>Customize!</h3>
 
           <div class="cf">
             <label for="semicircle">Semicircle:</label>
             <input
-              class="circle_input"
+              class="skill_input"
               id="semicircle"
               name="semicircle"
               type="checkbox"
@@ -95,7 +95,7 @@
           <div class="cf">
             <label for="rounded">Rounded:</label>
             <input
-              class="circle_input"
+              class="skill_input"
               id="rounded"
               name="rounded"
               type="checkbox"
@@ -106,7 +106,7 @@
           <div class="cf">
             <label for="clockwise">Clockwise:</label>
             <input
-              class="circle_input"
+              class="skill_input"
               id="clockwise"
               name="clockwise"
               type="checkbox"
@@ -117,7 +117,7 @@
           <div class="cf">
             <label for="current">Current:</label>
             <input
-              class="circle_input"
+              class="skill_input"
               id="current"
               name="current"
               type="number"
@@ -128,7 +128,7 @@
           <div class="cf">
             <label for="stroke">Stroke:</label>
             <input
-              class="circle_input"
+              class="skill_input"
               id="stroke"
               name="stroke"
               type="number"
@@ -139,7 +139,7 @@
           <div class="cf">
             <label for="radius">Radius:</label>
             <input
-              class="circle_input"
+              class="skill_input"
               id="radius"
               name="radius"
               type="number"
@@ -150,7 +150,7 @@
           <div class="cf">
             <label for="duration">Duration:</label>
             <input
-              class="circle_input"
+              class="skill_input"
               id="duration"
               name="duration"
               type="number"
@@ -161,7 +161,7 @@
           <div class="cf">
             <label for="animationDelay">Animation delay:</label>
             <input
-              class="circle_input"
+              class="skill_input"
               id="animationDelay"
               name="animationDelay"
               type="number"
@@ -172,7 +172,7 @@
           <div class="cf">
             <label for="color">Color:</label>
             <input
-              class="circle_input"
+              class="skill_input"
               id="color"
               name="color"
               type="color"
@@ -183,7 +183,7 @@
           <div class="cf">
             <label for="background">Background color:</label>
             <input
-              class="circle_input"
+              class="skill_input"
               id="background"
               name="background"
               type="color"
@@ -191,9 +191,9 @@
             />
           </div>
 
-          <div class="button-container">
+          <div class="button_container">
             <button
-              class="circle-button"
+              class="skill_button"
               [id]="'saveButton' + skill.id"
               [disabled]="false"
               (click)="saveCircle(skill)"
@@ -201,7 +201,7 @@
               Guardar
             </button>
             <button
-              class="circle-button"
+              class="skill_button"
               [id]="'deleteButton' + skill.id"
               (click)="deleteSkill(skill)"
             >
@@ -213,7 +213,7 @@
     </ng-container>
     <ng-template #inicioTemplate>
       <div
-        class="circle-container"
+        class="skill_container"
         *ngFor="let skill of skills"
         id="{{ skill.id }}"
       >

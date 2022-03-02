@@ -37,7 +37,7 @@ export class SkillsComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) { }  
 
-  createSkill() {
+  newSkill() {
     const _skill = new Skill(80,100,80,false,20,true,true,'#45ccce','#eaeaea',1500,'easeOutBounce',1,'Titulo')
     this.skillService.create(_skill).subscribe({
       next: () => {
@@ -47,6 +47,19 @@ export class SkillsComponent implements OnInit {
         console.log('Error al crear skill',error);
       }
     });    
+    }
+
+  createSkill() {
+    let newSkillButton = (<HTMLInputElement> document.getElementById('newSkill'));
+    let divMaxSkillsReached = (<HTMLInputElement> document.getElementById('maxSkillsReached'));
+    if (document.getElementById('startSkills')!.childElementCount > 5) {
+      newSkillButton.disabled = true;
+      divMaxSkillsReached.style.display = '';
+    } else {
+      this.newSkill();
+      newSkillButton.disabled = true;
+      this.countdownTimer(5,newSkillButton,'Agregar Skill') 
+    }
     }
 
   countdownTimer(timerInSeconds: number, element: HTMLInputElement, textToShow: string){
@@ -135,7 +148,7 @@ export class SkillsComponent implements OnInit {
       divMaxSkillsReached.style.display = 'none';
   }
 
-  loadEducation(): void {
+  loadSkills(): void {
     const _username = this.activatedRoute.snapshot.params['username'];
     this.skillService.detailsByUsername(_username).subscribe({
       next: skill => {
@@ -151,16 +164,10 @@ export class SkillsComponent implements OnInit {
     });
   }
 
-  getCirclesFromDb() {
-    this.skillService.list().subscribe((data) => {
-      this.skills = data;
-    });
-  }
-
   ngOnInit(): void {
     this.username = this.tokenService.getUserName();
     this.routeEdit = this.router.url.includes(`edit/${this.username}`);
-    this.loadEducation();
+    this.loadSkills();
   }  
 }
 
