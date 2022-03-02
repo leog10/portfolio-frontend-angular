@@ -34,8 +34,8 @@ export class CircleComponent {
   @Output()
   closing = new EventEmitter<void>();
 
-  hasRoute(route: string) {
-    return this.router.url === route;
+  hasRoute(): boolean {
+    return this.router.url.includes('edit');
   }
 
   buttonDisabled: boolean = true;
@@ -115,17 +115,7 @@ export class CircleComponent {
     };
   }
 
-  generateId() {
-    let year = new Date().getFullYear();
-    let date = Date.now();
-    let id = `${year}${date}`
-    this.circle.id = Number(id);
-  }
-
   ngOnInit(): void {
-    this.generateId()
-    setTimeout (() => {
     this.circlesDbService.addCircle(this.circle).subscribe();
-   }, 100);
   }
 }

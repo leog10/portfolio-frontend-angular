@@ -21,8 +21,8 @@ export class StartCirclesComponent implements OnInit {
 
   constructor(private circlesDbService: CirclesDbService, private router: Router) { }
 
-  hasRoute(route: string) {
-    return this.router.url === route;
+  hasRoute(): boolean {
+    return this.router.url.includes('edit');
   }
 
   circulos: ICircle[] = [];
@@ -131,6 +131,8 @@ export class StartCirclesComponent implements OnInit {
   
   ngOnInit(): void {
     this.getCirclesFromDb();
+    setTimeout(() => {
+      console.log('start circles: ', this.circulos[0])
+    }, 100);
   }
-
 }

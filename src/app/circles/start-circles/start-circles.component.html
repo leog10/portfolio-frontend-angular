@@ -1,4 +1,4 @@
-<ng-container *ngIf="hasRoute('/edit'); else inicioTemplate">
+<ng-container *ngIf="hasRoute(); else inicioTemplate">
   <div
     class="circle-container"
     *ngFor="let circle of circulos"
@@ -202,7 +202,7 @@
   <div
     class="circle-container"
     *ngFor="let circle of circulos"
-    [id]="circle.id"
+    id="{{ circle.id }}"
   >
     <h2>{{ circle.title }}</h2>
     <div class="progress-wrapper">

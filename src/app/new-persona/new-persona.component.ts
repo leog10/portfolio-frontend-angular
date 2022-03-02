@@ -36,7 +36,20 @@ export class NewPersonaComponent implements OnInit {
     private tokenService: TokenService,
   ) { }
 
-  ngOnInit(): void {        
+  ngOnInit(): void {
+    this.username = this.tokenService.getUserName();
+    this.personaService.detailsByUsername(this.username).subscribe({
+      next: persona => {
+        this.persona = persona;
+      },
+      error: err => {
+        }
+      });
+    setTimeout(() => {      
+      if (this.persona) {
+        this.router.navigate([`/portfolio/${this.username}`]);
+      }
+    }, 100);
   }
 
   onCreate(): void {

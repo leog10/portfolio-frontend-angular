@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { ICircle } from '../../circle-object/ICircle';
 import { environment } from 'src/environments/environment';
@@ -14,15 +14,15 @@ export class CirclesDbService {
   private skillUrl = environment.skillURL;
 
   getData(): Observable<ICircle[]> {
-    return this.http.get<ICircle[]>(this.skillUrl);
+    return this.http.get<ICircle[]>(this.skillUrl + 'list');
   }
 
   deleteCircle(circle: ICircle): Observable<ICircle> {    
-    return this.http.delete<ICircle>(this.skillUrl + `delete${circle.id}`);
+    return this.http.delete<ICircle>(this.skillUrl + `delete/${circle.id}`);
   }
 
   updateCircle(circle: ICircle): Observable<ICircle> {    
-    return this.http.put<ICircle>(this.skillUrl + `update${circle.id}`, circle);
+    return this.http.put<ICircle>(this.skillUrl + `update/${circle.id}`, circle);
   }
 
   addCircle(circle: ICircle): Observable<ICircle> {

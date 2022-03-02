@@ -23,17 +23,17 @@ export class InterceptorService implements HttpInterceptor {
     
     let intReq = this.addToken(req, token);
         
-    return next.handle(intReq).pipe(catchError((err: HttpErrorResponse) => {
+    return next.handle(intReq).pipe(catchError((err: HttpErrorResponse) => {      
       if (err.status === 401) {
         const dto: JwtDTO = new JwtDTO(this.tokenService.getToken());
         return this.authService.refresh(dto).pipe(concatMap((data: any) => {
           this.tokenService.setToken(data.token);
           intReq = this.addToken(req, data.token);
           return next.handle(intReq);
-        }));       
+        }));
       } else {
-        //this.tokenService.logOut();
-        return throwError(() => new Error('Error token'));
+        this.tokenService.logOut();
+        return throwError(() => (err.error.mensaje));
       }
     }));
   }
