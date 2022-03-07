@@ -1,9 +1,9 @@
-<div class="card mt-2 py-4 px-5">
+<div class="card container-sm mt-2 py-4 ps-4">
   <div id="experience">
     <div class="d-flex">
-      <h2 class="flex-grow-1 flex-shrink-1 m-auto">Experiencia</h2>
-      <div *ngIf="routeEdit" class="d-flex align-self-center">
-        <a class="d-flex align-self-end a_icon"
+      <h4 class="flex-grow-1">Experiencia</h4>
+      <div *ngIf="routeEdit" class="d-flex">
+        <a class="d-flex a_icon align-self-end me-1"
           ><i
             class="fa fa-plus"
             data-title="Agregar"
@@ -15,7 +15,7 @@
     </div>
     <div>
       <ul class="items-list" id="expList">
-        <li *ngFor="let exp of experiences" class="d-flex my-2">
+        <li *ngFor="let exp of experiences" class="d-flex mt-2 mb-4">
           <div class="flex-grow-1">
             <div class="d-flex">
               <div class="my-3">
@@ -30,22 +30,22 @@
               </div>
               <div class="mx-3">
                 <div>
-                  <h3 class="mx-2 my-2" id="exp-position">
+                  <h5 class="mx-2 my-0" id="exp-position">
                     {{ exp.position }}
-                  </h3>
+                  </h5>
                   <p class="ms-2 mb-0">
                     <span id="exp-company">{{ exp.company }}</span
                     ><span> - </span><span id="exp-mode">{{ exp.mode }}</span>
                   </p>
-                  <h4 class="ms-2 text-secondary my-0">
+                  <h6 class="ms-2 text-secondary my-0">
                     <span id="exp-start">{{ exp.startTime }}</span
                     ><span> – </span><span id="exp-end">{{ exp.endTime }}</span
                     ><span> – </span
                     ><span id="exp-time">{{ exp.timeAtPosition }}</span>
-                  </h4>
-                  <h4 class="ms-2 text-secondary my-0" id="exp-location">
+                  </h6>
+                  <h6 class="ms-2 text-secondary my-0" id="exp-location">
                     {{ exp.location }}
-                  </h4>
+                  </h6>
                 </div>
               </div>
             </div>
@@ -54,7 +54,7 @@
             <div class="">
               <a class="a_icon"
                 ><i
-                  class="fa fa-pen"
+                  class="fa fa-pen me-1"
                   data-title="Editar"
                   data-bs-toggle="modal"
                   data-bs-target="#editExpModal"
