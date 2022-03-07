@@ -1,7 +1,7 @@
-<div class="card mt-2 py-4 px-5">
+<div class="card container-sm mt-2 py-4 mb-3 ps-4">
   <div id="projects">
     <div class="d-flex">
-      <h2 class="flex-grow-1 flex-shrink-1 m-auto">Proyectos</h2>
+      <h4 class="flex-grow-1 flex-shrink-1 m-auto">Proyectos</h4>
       <div *ngIf="routeEdit" class="d-flex align-self-center">
         <a class="d-flex align-self-end a_icon"
           ><i
@@ -18,10 +18,7 @@
         class="items-list d-flex flex-wrap justify-content-around"
         id="projectList"
       >
-        <li
-          *ngFor="let project of projects"
-          class="d-flex align-items-center project_container"
-        >
+        <li *ngFor="let project of projects" class="d-flex project_container">
           <div class="flex-grow-1">
             <div class="d-flex flex-column">
               <div class="my-3 text-center">
@@ -33,9 +30,9 @@
               </div>
               <div class="mx-3">
                 <div class="d-flex flex-column align-items-center">
-                  <h3 class="mx-2 my-2" id="project-name">
+                  <h4 class="mx-2 my-2" id="project-name">
                     {{ project.name }}
-                  </h3>
+                  </h4>
                   <p class="mb-0 projects_techs">
                     <span id="project-description">{{
                       project.description
