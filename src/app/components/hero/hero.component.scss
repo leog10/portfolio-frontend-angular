@@ -11,6 +11,7 @@
 }
 
 .background_image {
+  cursor: pointer;
   border-radius: inherit;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -19,9 +20,11 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
+  z-index: 98;
 }
 
 .profile_image {
+  cursor: pointer;
   border-radius: 50%;
   width: 160px;
   height: 160px;
