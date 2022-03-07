@@ -79,10 +79,10 @@
         </div>
 
         <form #skillForm="ngForm" class="skill_form">
-          <h3>Customize!</h3>
+          <h3>Personalizar!</h3>
 
           <div class="cf">
-            <label for="semicircle">Semicircle:</label>
+            <label for="semicircle">Semicirculo:</label>
             <input
               class="skill_input"
               id="semicircle"
@@ -93,7 +93,7 @@
           </div>
 
           <div class="cf">
-            <label for="rounded">Rounded:</label>
+            <label for="rounded">Redondeado:</label>
             <input
               class="skill_input"
               id="rounded"
@@ -104,7 +104,7 @@
           </div>
 
           <div class="cf">
-            <label for="clockwise">Clockwise:</label>
+            <label for="clockwise">Sentido horario:</label>
             <input
               class="skill_input"
               id="clockwise"
@@ -115,7 +115,7 @@
           </div>
 
           <div class="cf">
-            <label for="current">Current:</label>
+            <label for="current">Valor actual:</label>
             <input
               class="skill_input"
               id="current"
@@ -126,7 +126,7 @@
           </div>
 
           <div class="cf">
-            <label for="stroke">Stroke:</label>
+            <label for="stroke">Grosor:</label>
             <input
               class="skill_input"
               id="stroke"
@@ -137,7 +137,7 @@
           </div>
 
           <div class="cf">
-            <label for="radius">Radius:</label>
+            <label for="radius">Radio:</label>
             <input
               class="skill_input"
               id="radius"
@@ -148,7 +148,7 @@
           </div>
 
           <div class="cf">
-            <label for="duration">Duration:</label>
+            <label for="duration">Duración:</label>
             <input
               class="skill_input"
               id="duration"
@@ -159,7 +159,7 @@
           </div>
 
           <div class="cf">
-            <label for="animationDelay">Animation delay:</label>
+            <label for="animationDelay">Demora animación:</label>
             <input
               class="skill_input"
               id="animationDelay"
@@ -181,7 +181,7 @@
           </div>
 
           <div class="cf">
-            <label for="background">Background color:</label>
+            <label for="background">Color fondo:</label>
             <input
               class="skill_input"
               id="background"
@@ -217,7 +217,7 @@
         *ngFor="let skill of skills"
         id="{{ skill.id }}"
       >
-        <h2>{{ skill.title }}</h2>
+        <h5>{{ skill.title }}</h5>
         <div class="progress-wrapper">
           <div class="current" [ngStyle]="getOverlayStyle(skill.id!)">
             {{ skill.current }}%

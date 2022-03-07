@@ -1,12 +1,20 @@
 <div class="card container-sm p-0 pb-4 mt-5">
-  <img
-    class="background_image"
-    src="https://firebasestorage.googleapis.com/v0/b/portfolio-leog.appspot.com/o/leoadmin%2Fwallpaperbetter.jpg?alt=media&token=5b813617-9e15-4e4e-8034-9dbeb242e33f"
-    alt="background"
-  />
+  <img class="background_image" [src]="persona.backImg" alt="background" />
+  <a
+    *ngIf="routeEdit"
+    class="edit_background_button"
+    data-bs-toggle="modal"
+    data-bs-target="#editBackgroundModal"
+  ></a>
 
   <div *ngIf="persona">
     <div class="d-flex profile_div ps-4">
+      <a
+        *ngIf="routeEdit"
+        class="edit_profile_pic_button"
+        data-bs-toggle="modal"
+        data-bs-target="#editProfilePicModal"
+      ></a>
       <img
         [src]="persona.profileImg"
         alt=""
@@ -63,7 +71,7 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content border-0">
       <div class="modal-header">
-        <h4 class="modal-title" id="editProfileLabel">Editar Perfil</h4>
+        <h5 class="modal-title" id="editProfileLabel">Editar Perfil</h5>
         <button
           type="button"
           class="btn-close"
@@ -175,13 +183,6 @@
             >
               Guardar
             </button>
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
           </div>
         </form>
 
@@ -190,3 +191,173 @@
     </div>
   </div>
 </div>
+
+<!-- Foto Perfil Modal -->
+<div
+  *ngIf="1 === 1"
+  class="modal fade border-0"
+  id="editProfilePicModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="true"
+  tabindex="-1"
+  aria-labelledby="editProfilePicModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content border-0">
+      <div class="modal-header border-0">
+        <h5 class="modal-title text-white" id="editProfilePicModalLabel">
+          Editar Foto
+        </h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Edit Form -->
+
+        <div class="container-sm">
+          <div id="editProfilePic" class="d-flex justify-content-center">
+            <img class="profile_image" [src]="persona.profileImg" alt="" />
+          </div>
+        </div>
+
+        <form
+          *ngIf="1 === 1"
+          #editProfilePicForm="ngForm"
+          (ngSubmit)="onUpdate()"
+          novalidate
+        >
+          <div class="">
+            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1 text-white"
+              >Carga una imagen nueva.</label
+            >
+            <input
+              class="form-control form-control-sm"
+              id="formFileSm"
+              type="file"
+              name="img"
+              [ngModel]="persona.profileImg"
+              required
+            />
+            <div *ngIf="editProfilePicForm.valid">
+              <span class="text-warning fs-6 ms-1">Aviso: </span>
+              <span class="text-white fs-6"
+                >Tu foto actual sera eliminada!</span
+              >
+            </div>
+          </div>
+
+          <div class="modal-footer border-secondary mt-3 mb-0">
+            <button
+              class="btn btn-danger fw-bold"
+              data-bs-dismiss="modal"
+              [disabled]="!persona.profileImg"
+              type="submit"
+            >
+              Borrar
+            </button>
+            <button
+              class="btn btn-primary fw-bold"
+              data-bs-dismiss="modal"
+              [disabled]="!editProfilePicForm.valid"
+              type="submit"
+            >
+              Guardar Foto
+            </button>
+          </div>
+        </form>
+
+        <!-- End Edit Form -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin Foto Perfil Modal -->
+
+<!-- Background Modal -->
+<div
+  *ngIf="1 === 1"
+  class="modal fade border-0"
+  id="editBackgroundModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="true"
+  tabindex="-1"
+  aria-labelledby="editBackgroundModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content border-0">
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="editBackgroundModalLabel">Editar Fondo</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Edit Form -->
+
+        <div class="d-flex justify-content-center container-sm">
+          <img
+            class="background_image flex-grow-1"
+            [src]="persona.backImg"
+            alt=""
+          />
+        </div>
+
+        <form
+          *ngIf="1 === 1"
+          #editBackgroundForm="ngForm"
+          (ngSubmit)="onUpdate()"
+          novalidate
+        >
+          <div class="">
+            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1"
+              >Carga una imagen nueva.</label
+            >
+            <input
+              class="form-control form-control-sm"
+              id="formFileSm"
+              type="file"
+              name="img"
+              [ngModel]="persona.backImg"
+              required
+            />
+            <div *ngIf="editBackgroundForm.valid">
+              <span class="text-danger fs-6 ms-1 mt-1">Aviso: </span>
+              <span class="fs-6">Tu fondo actual sera eliminado!</span>
+            </div>
+          </div>
+
+          <div class="modal-footer border-secondary mt-3 mb-0">
+            <button
+              class="btn btn-danger fw-bold"
+              data-bs-dismiss="modal"
+              [disabled]="!persona.backImg"
+              type="submit"
+            >
+              Borrar
+            </button>
+            <button
+              class="btn btn-primary fw-bold"
+              data-bs-dismiss="modal"
+              [disabled]="!editBackgroundForm.valid"
+              type="submit"
+            >
+              Guardar Foto
+            </button>
+          </div>
+        </form>
+
+        <!-- End Edit Form -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin Background Modal -->
