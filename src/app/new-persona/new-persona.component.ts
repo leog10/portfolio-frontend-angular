@@ -41,6 +41,7 @@ export class NewPersonaComponent implements OnInit {
         this.persona = persona;
       },
       error: err => {
+        console.log(err)
         }
       });
     setTimeout(() => {      

@@ -1,0 +1,25 @@
+.btn:focus {
+  box-shadow: none !important;
+  outline: #4d90fe solid 2px;
+}
+
+.btn-outline-primary {
+  color: #0a66c2 !important;
+  font-weight: 500;
+  padding: 0.2rem 1.2rem;
+}
+
+.btn-outline-primary:hover {
+  background-color: #eaf4fe;
+  box-shadow: inset 0 0 0 1px #0a66c2 !important;
+  outline: 0 none;
+}
+
+.btn-outline-primary:active {
+  box-shadow: none !important;
+  outline: 0px none !important;
+}
+
+.border-secondary {
+  border-color: #ebebeb !important;
+}
