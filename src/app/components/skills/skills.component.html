@@ -1,7 +1,7 @@
-<div class="card mt-2 py-4 px-5">
+<div class="card container-sm mt-2 py-4 px-5">
   <div id="skills">
     <div class="d-flex">
-      <h2 class="flex-grow-1 flex-shrink-1 m-auto">Hard & Soft Skills</h2>
+      <h4 class="flex-grow-1 flex-shrink-1 m-auto">Hard & Soft Skills</h4>
       <div *ngIf="routeEdit" class="add_skill">
         <button
           class="skill_button"
@@ -213,7 +213,7 @@
     </ng-container>
     <ng-template #inicioTemplate>
       <div
-        class="skill_container"
+        class="skill_container_portfolio"
         *ngFor="let skill of skills"
         id="{{ skill.id }}"
       >

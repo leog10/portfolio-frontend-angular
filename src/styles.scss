@@ -57,7 +57,7 @@ body {
 
 .skill_container {
   width: 100%;
-  max-width: 550px;
+  max-width: 450px;
   min-width: 360px;
   margin: 10px 0px;
   padding: 25px 0px;
@@ -72,6 +72,27 @@ body {
 }
 
 .skill_container:hover {
+  box-shadow: 0 0 17px 0 hsl(0deg 0% 42% / 30%);
+  transform: translateY(-2px);
+}
+
+.skill_container_portfolio {
+  width: 100%;
+  max-width: 280px;
+  min-width: 200px;
+  margin: 10px 25px;
+  padding: 25px 0px;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.01);
+  border-radius: 0.25rem;
+  transition: all 0.1s ease-in;
+  -webkit-transition: all 0.1s ease-in;
+  -moz-transition: all ease-in 0.1s;
+  -o-transition: all ease-in 0.1s;
+}
+
+.skill_container_portfolio:hover {
   box-shadow: 0 0 17px 0 hsl(0deg 0% 42% / 30%);
   transform: translateY(-2px);
 }
