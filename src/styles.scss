@@ -4,6 +4,14 @@ body {
   background-color: #f0f2f5;
 }
 
+.card {
+  border-radius: 0.5rem !important;
+}
+
+.container-sm {
+  max-width: 1200px;
+}
+
 .skill_title_container {
   display: inline-flex;
   width: auto;

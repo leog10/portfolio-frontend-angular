@@ -1,11 +1,3 @@
-.hero_section {
-  clip-path: polygon(0 0, 100% 0%, 100% 45%, 0 100%);
-  background: linear-gradient(145deg, #d24a97, #c468bc, #fcc85b, #94d7f4);
-  background-size: 500% 300%;
-  animation: gradient 10s ease infinite;
-  height: 100vh;
-}
-
 @keyframes gradient {
   0% {
     background-position: 0% 84%;
@@ -18,16 +10,21 @@
   }
 }
 
-.hero_container {
-  height: 25rem;
-  background-color: #0a2540;
-  border: 0;
+.background_image {
+  border-radius: inherit;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  height: 300px;
+  width: inherit;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .profile_image {
   border-radius: 50%;
-  width: 182px;
-  height: 182px;
+  width: 160px;
+  height: 160px;
   z-index: 99;
 }
 
@@ -47,12 +44,12 @@
 }
 
 .fas:hover {
-  background-color: rgba(204, 187, 187, 0.473);
+  background-color: lightgray;
 }
 
 .fas {
   margin-top: 6rem;
-  color: white;
+  color: black;
   display: block;
   height: 2.4rem;
   width: 2.4rem;
@@ -64,6 +61,20 @@
 .a_edit {
   text-decoration: none;
   cursor: pointer;
+}
+
+.fa {
+  color: black;
+  display: block;
+  height: 2.4rem;
+  width: 2.4rem;
+  line-height: 2.4rem;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.fa:hover {
+  background-color: lightgray;
 }
 
 /*
@@ -81,7 +92,7 @@
   */
 [data-title]:after {
   content: attr(data-title);
-  background: rgba(204, 187, 187, 0.473);
+  background: rgba(60, 64, 67, 0.9);
   border-radius: 4px;
   color: #ffffff;
   font: 500 12px "Roboto", arial, sans-serif;
