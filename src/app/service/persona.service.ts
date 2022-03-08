@@ -35,5 +35,9 @@ export class PersonaService {
 
   public delete(id: number): Observable<any> {
     return this.http.delete<any>(this.personaURL + `delete/${id}`);
+  } 
+  
+  public updateImg(id: number, img: Object): Observable<Object> {
+    return this.http.put<Object>(this.personaURL + `update/image/${id}`, img);
   }
 }

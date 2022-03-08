@@ -1,5 +1,10 @@
 <div class="card container-sm p-0 pb-4 mt-5">
-  <img class="background_image" [src]="persona.backImg" alt="background" />
+  <img
+    *ngIf="persona"
+    class="background_image"
+    [src]="persona.backImg"
+    alt="background"
+  />
   <a
     *ngIf="routeEdit"
     class="edit_background_button"
@@ -148,32 +153,6 @@
             ></textarea>
           </div>
 
-          <div class="">
-            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1"
-              >Agrega una foto de perfil</label
-            >
-            <input
-              class="form-control form-control-sm"
-              id="formFileSm"
-              type="file"
-              [(ngModel)]="backImg"
-              name="backImg"
-            />
-          </div>
-
-          <div class="">
-            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1"
-              >Agrega una foto de portada</label
-            >
-            <input
-              class="form-control form-control-sm"
-              id="formFileSm"
-              type="file"
-              [(ngModel)]="profileImg"
-              name="profileImg"
-            />
-          </div>
-
           <div class="modal-footer border-0 mt-1">
             <button
               class="btn btn-primary fw-bold"
@@ -194,11 +173,11 @@
 
 <!-- Foto Perfil Modal -->
 <div
-  *ngIf="1 === 1"
+  *ngIf="persona"
   class="modal fade border-0"
   id="editProfilePicModal"
   data-bs-backdrop="static"
-  data-bs-keyboard="true"
+  data-bs-keyboard="false"
   tabindex="-1"
   aria-labelledby="editProfilePicModalLabel"
   aria-hidden="true"
@@ -210,9 +189,11 @@
           Editar Foto
         </h5>
         <button
+          [disabled]="uploadProgress[0] > 0"
           type="button"
           class="btn-close btn-close-white"
           data-bs-dismiss="modal"
+          (click)="editProfilePicForm.reset()"
           aria-label="Close"
         ></button>
       </div>
@@ -226,44 +207,63 @@
         </div>
 
         <form
-          *ngIf="1 === 1"
           #editProfilePicForm="ngForm"
-          (ngSubmit)="onUpdate()"
+          (ngSubmit)="onProfileImgUpdate()"
           novalidate
         >
           <div class="">
             <label for="formFileSm" class="form-label mt-3 mb-0 ms-1 text-white"
-              >Carga una imagen nueva.</label
+              >Carga una nueva imagen:</label
             >
             <input
+              #profileImg
               class="form-control form-control-sm"
               id="formFileSm"
               type="file"
-              name="img"
-              [ngModel]="persona.profileImg"
+              name="profileImg"
+              (change)="profileImgListener($event)"
+              accept=".png,.jpg,.jpeg"
+              [ngModel]=""
               required
             />
-            <div *ngIf="editProfilePicForm.valid">
+            <div *ngIf="profileImg.value.length > 0">
               <span class="text-warning fs-6 ms-1">Aviso: </span>
               <span class="text-white fs-6"
-                >Tu foto actual sera eliminada!</span
+                >Tu foto actual sera reemplazada!</span
               >
+            </div>
+          </div>
+
+          <div *ngIf="uploadProgress.length > 0">
+            <div>
+              <div class="progress mt-2">
+                <div
+                  class="progress-bar bg-info progress-bar-striped progress-bar-animated"
+                  role="progressbar"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  [ngStyle]="{ width: uploadProgress[0] + '%' }"
+                  attr.aria-valuenow="{{ uploadProgress[0] }}"
+                ></div>
+              </div>
             </div>
           </div>
 
           <div class="modal-footer border-secondary mt-3 mb-0">
             <button
+              id="deleteProfileImgButton"
+              type="button"
+              *ngIf="persona.profileImg"
               class="btn btn-danger fw-bold"
-              data-bs-dismiss="modal"
               [disabled]="!persona.profileImg"
-              type="submit"
+              (click)="deleteProfileImage(persona.profileImg)"
             >
               Borrar
             </button>
             <button
+              id="saveProfileImgButton"
               class="btn btn-primary fw-bold"
-              data-bs-dismiss="modal"
-              [disabled]="!editProfilePicForm.valid"
+              [disabled]="!(profileImg.value.length > 0)"
               type="submit"
             >
               Guardar Foto
@@ -280,11 +280,11 @@
 
 <!-- Background Modal -->
 <div
-  *ngIf="1 === 1"
+  *ngIf="persona"
   class="modal fade border-0"
   id="editBackgroundModal"
   data-bs-backdrop="static"
-  data-bs-keyboard="true"
+  data-bs-keyboard="false"
   tabindex="-1"
   aria-labelledby="editBackgroundModalLabel"
   aria-hidden="true"
@@ -294,9 +294,11 @@
       <div class="modal-header border-0">
         <h5 class="modal-title" id="editBackgroundModalLabel">Editar Fondo</h5>
         <button
+          [disabled]="uploadProgress[0] > 0"
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
+          (click)="editBackgroundForm.reset()"
           aria-label="Close"
         ></button>
       </div>
@@ -312,9 +314,8 @@
         </div>
 
         <form
-          *ngIf="1 === 1"
           #editBackgroundForm="ngForm"
-          (ngSubmit)="onUpdate()"
+          (ngSubmit)="onBackgroundImgUpdate()"
           novalidate
         >
           <div class="">
@@ -326,27 +327,46 @@
               id="formFileSm"
               type="file"
               name="img"
-              [ngModel]="persona.backImg"
+              accept=".png,.jpg,.jpeg"
+              (change)="backgroundImgListener($event)"
+              [ngModel]=""
               required
             />
             <div *ngIf="editBackgroundForm.valid">
               <span class="text-danger fs-6 ms-1 mt-1">Aviso: </span>
-              <span class="fs-6">Tu fondo actual sera eliminado!</span>
+              <span class="fs-6">Tu fondo actual sera reemplazado!</span>
+            </div>
+          </div>
+
+          <div *ngIf="uploadProgress.length > 0">
+            <div>
+              <div class="progress mt-2">
+                <div
+                  class="progress-bar bg-info progress-bar-striped progress-bar-animated"
+                  role="progressbar"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  [ngStyle]="{ width: uploadProgress[0] + '%' }"
+                  attr.aria-valuenow="{{ uploadProgress[0] }}"
+                ></div>
+              </div>
             </div>
           </div>
 
           <div class="modal-footer border-secondary mt-3 mb-0">
             <button
+              id="deleteBackImgButton"
+              type="button"
+              *ngIf="persona.backImg"
               class="btn btn-danger fw-bold"
-              data-bs-dismiss="modal"
               [disabled]="!persona.backImg"
-              type="submit"
+              (click)="deleteBackgroundImage(persona.backImg)"
             >
               Borrar
             </button>
             <button
+              id="saveBackImgButton"
               class="btn btn-primary fw-bold"
-              data-bs-dismiss="modal"
               [disabled]="!editBackgroundForm.valid"
               type="submit"
             >

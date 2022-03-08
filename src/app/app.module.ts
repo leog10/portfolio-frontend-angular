@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 import { AppComponent } from './app.component';
 import { EditComponent } from './routes/edit/edit.component';
@@ -20,6 +22,7 @@ import { LoginRegisterComponent } from './auth/login/login.component';
 import { NewPersonaComponent } from './new-persona/new-persona.component';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     RoundProgressModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]
