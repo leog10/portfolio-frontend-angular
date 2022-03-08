@@ -18,17 +18,14 @@
         <li *ngFor="let exp of experiences" class="d-flex mt-2 mb-4">
           <div class="flex-grow-1">
             <div class="d-flex">
-              <div class="my-3">
+              <div class="my-1">
                 <img
                   id="exp-img"
                   class="logo_image"
-                  [src]="
-                    'https://www.muycomputer.com/wp-content/uploads/2020/12/google.png' ||
-                    exp.img
-                  "
+                  src="../../../assets/images/office.jpg"
                 />
               </div>
-              <div class="mx-3">
+              <div class="mx-1">
                 <div>
                   <h5 class="mx-2 my-0" id="exp-position">
                     {{ exp.position }}
