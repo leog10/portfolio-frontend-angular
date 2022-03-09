@@ -2,13 +2,18 @@ import { Injectable } from '@angular/core';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
 import { PersonaService } from './persona.service';
+import { ProjectService } from './project.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
-  constructor(private storage: AngularFireStorage, private personaService: PersonaService) { }
+  constructor(
+    private storage: AngularFireStorage, 
+    private personaService: PersonaService,
+    private projectService: ProjectService
+    ) { }
 
   task!: AngularFireUploadTask;
   ref!: AngularFireStorageReference;
@@ -38,22 +43,36 @@ export class FirebaseService {
       finalize(() => this.ref.getDownloadURL().subscribe({
         next: imgURL => {
           obj[key] = imgURL;
-          this.updateImgInDatabase(personaId, obj);
+          this.checkUpdateImgInDatabase(personaId, obj);
         }
       }))
     ).subscribe();
   }
 
-  //Update image in database with a string url.
+  checkUpdateImgInDatabase(personaId: number, img: Object) {
+    if (Object.keys(img)[0] === 'projectImg') {
+      this.updateProjectImgInDatabase(personaId, img);
+    } else {
+      this.updateImgInDatabase(personaId, img);
+    }
+  }
+
+  //Update project image in database with a string url.
+  updateProjectImgInDatabase(id: number, img: Object) {
+    this.projectService.updateImg(id, img).subscribe();
+    window.location.reload();
+  }
+
+  //Update persona image in database with a string url.
   updateImgInDatabase(personaId: number, img: Object) {
     this.personaService.updateImg(personaId,img).subscribe();
     window.location.reload();
-  }    
+  }
   
   //Call updateImgInDatabase to put an empty string.
   deleteImg(personaId: number, imgURL: string, imgObj: Object) {
     this.deleteImgInStorage(imgURL);
-    this.updateImgInDatabase(personaId, imgObj);    
+    this.checkUpdateImgInDatabase(personaId, imgObj);    
   }
   
   //Delete image in firebase storage.

@@ -4,13 +4,27 @@ ul.items-list {
 }
 
 .project_image {
-  max-width: 250px;
-  max-height: 200px;
+  width: 250px;
+  height: 200px;
   pointer-events: none;
+}
+
+#editProjectImage .project_image {
+  width: 400px !important;
+  height: 500px !important;
 }
 
 .fa {
   color: black;
+  display: block;
+  height: 2.4rem;
+  width: 2.4rem;
+  line-height: 2.4rem;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.fa-solid {
   display: block;
   height: 2.4rem;
   width: 2.4rem;
@@ -24,7 +38,8 @@ ul.items-list {
   cursor: pointer;
 }
 
-.fa:hover {
+.fa:hover,
+.fa-camera:hover {
   background-color: lightgray;
 }
 

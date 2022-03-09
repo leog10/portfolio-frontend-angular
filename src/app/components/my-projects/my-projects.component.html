@@ -25,11 +25,30 @@
           <div class="flex-grow-1">
             <div class="d-flex flex-column">
               <div class="my-3 text-center">
+                <div *ngIf="routeEdit" class="position-absolute">
+                  <a class="a_icon"
+                    ><i
+                      class="fa-solid fa-camera"
+                      data-title="Editar imagen"
+                      data-bs-toggle="modal"
+                      data-bs-target="#editProjectImageModal"
+                      (click)="editableProject(project.id!)"
+                    ></i
+                  ></a>
+                </div>
                 <img
+                  *ngIf="!project.projectImg; else projectCustomImg"
                   id="projectImg"
                   class="project_image"
                   src="../../../assets/images/default-project.jpg"
                 />
+                <ng-template #projectCustomImg>
+                  <img
+                    [src]="project.projectImg"
+                    alt=""
+                    class="project_image"
+                  />
+                </ng-template>
               </div>
               <div class="mx-3">
                 <div class="d-flex flex-column align-items-center">
@@ -51,7 +70,7 @@
             </div>
           </div>
           <div *ngIf="routeEdit" class="data-control edit_icons">
-            <div class="">
+            <div class="mt-3">
               <a class="a_icon"
                 ><i
                   class="fa fa-pen"
@@ -67,7 +86,7 @@
                 ><i
                   class="fa fa-trash"
                   data-title="Borrar"
-                  (click)="onDelete(project.id!)"
+                  (click)="onDelete(project.id!, project.projectImg)"
                 ></i
               ></a>
             </div>
@@ -163,25 +182,12 @@
             </div>
           </div>
 
-          <div class="">
-            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1"
-              >Si lo desea, agregue una imagen.</label
-            >
-            <input
-              class="form-control form-control-sm"
-              id="formFileSm"
-              type="file"
-              name="img"
-              [(ngModel)]="img"
-            />
-          </div>
-
           <div class="modal-footer border-0 mb-0">
             <button
               class="btn btn-primary fw-bold"
-              data-bs-dismiss="modal"
               [disabled]="!newProjectForm.valid"
               type="submit"
+              data-bs-dismiss="modal"
             >
               Guardar
             </button>
@@ -279,19 +285,6 @@
             </div>
           </div>
 
-          <div class="">
-            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1"
-              >Si lo desea, agregue una imagen.</label
-            >
-            <input
-              class="form-control form-control-sm"
-              id="formFileSm"
-              type="file"
-              name="img"
-              [(ngModel)]="editProject.img"
-            />
-          </div>
-
           <div class="modal-footer border-0 mb-0">
             <button
               class="btn btn-primary fw-bold"
@@ -310,3 +303,120 @@
   </div>
 </div>
 <!-- End Edit Project Modal -->
+
+<!-- Edit Project Image Modal -->
+<div
+  *ngIf="projects[0]"
+  class="modal fade border-0"
+  id="editProjectImageModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="editProjectImageModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content border-0">
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="editProjectImageModalLabel">
+          Editar Imagen
+        </h5>
+        <button
+          [disabled]="uploadProgress[0] > 0"
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="editProjectImageForm.reset()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Edit Form -->
+
+        <div
+          *ngIf="editProject"
+          id="editProjectImage"
+          class="d-flex justify-content-center"
+        >
+          <img
+            *ngIf="!editProject.projectImg; else projectImg"
+            class="project_image"
+            src="../../../assets/images/default-project.jpg"
+          />
+          <ng-template #projectImg>
+            <img class="project_image" [src]="editProject.projectImg" />
+          </ng-template>
+        </div>
+
+        <form
+          #editProjectImageForm="ngForm"
+          (ngSubmit)="onProjectImgUpdate(editProject.projectImg)"
+          novalidate
+        >
+          <div class="">
+            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1"
+              >Carga una imagen nueva.</label
+            >
+            <input
+              #projectImage
+              class="form-control form-control-sm"
+              id="formFileSm"
+              type="file"
+              name="projectImg"
+              (change)="projectImgListener($event)"
+              accept=".png,.jpg,.jpeg"
+              [ngModel]=""
+              required
+            />
+            <div *ngIf="projectImage.value.length > 0">
+              <span class="text-danger fs-6 ms-1 mt-1">Aviso: </span>
+              <span class="fs-6">La imagen actual sera reemplazada!</span>
+            </div>
+          </div>
+
+          <div *ngIf="uploadProgress.length > 0">
+            <div>
+              <div class="progress mt-2">
+                <div
+                  class="progress-bar bg-info progress-bar-striped progress-bar-animated"
+                  role="progressbar"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  [ngStyle]="{ width: uploadProgress[0] + '%' }"
+                  attr.aria-valuenow="{{ uploadProgress[0] }}"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            *ngIf="editProject"
+            class="modal-footer border-secondary mt-3 mb-0"
+          >
+            <button
+              id="deleteProjectImgButton"
+              type="button"
+              *ngIf="editProject.projectImg"
+              class="btn btn-danger fw-bold"
+              [disabled]="!editProject.projectImg"
+              (click)="deleteProjectImage(editProject.projectImg)"
+            >
+              Borrar
+            </button>
+            <button
+              id="saveProjectImgButton"
+              class="btn btn-primary fw-bold"
+              [disabled]="!(projectImage.value.length > 0)"
+              type="submit"
+            >
+              Guardar
+            </button>
+          </div>
+        </form>
+
+        <!-- End Edit Form -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin Project Image Modal -->

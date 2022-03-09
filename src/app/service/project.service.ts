@@ -32,4 +32,8 @@ export class ProjectService {
   public delete(id: number): Observable<any> {
     return this.http.delete<any>(this.projectURL + `delete/${id}`);
   }
+
+  public updateImg(id: number, img: Object): Observable<Object> {
+    return this.http.put<Object>(this.projectURL + `update/image/${id}`, img);
+  }
 }
