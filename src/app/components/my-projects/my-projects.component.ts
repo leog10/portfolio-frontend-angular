@@ -101,7 +101,8 @@ export class MyProjectsComponent implements OnInit {
   onDelete(id: number, imgUrl: string) {
     this.projectService.delete(id).subscribe({
       next: () => {
-        if (imgUrl != null) {
+        if (imgUrl.length > 0 && imgUrl != null) {
+          console.log(imgUrl)
           this.deleteProjectImage(imgUrl);
         }        
         this.ngOnInit();
