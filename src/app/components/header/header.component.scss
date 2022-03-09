@@ -23,3 +23,69 @@
 .border-secondary {
   border-color: #ebebeb !important;
 }
+
+.profile_image {
+  pointer-events: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.profile_image_open {
+  pointer-events: none;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+}
+
+.a_menu {
+  text-decoration: none;
+  cursor: pointer;
+  color: gray;
+  font-size: 16px;
+  line-height: 12px;
+}
+
+.a_menu_open {
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+  font-weight: 500;
+  font-size: 19px;
+  align-self: normal;
+}
+
+hr {
+  background-color: lightgray !important;
+}
+
+.menu_positon {
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+  font-size: 18px;
+  line-height: 25px;
+  align-self: normal;
+}
+
+.dropdown-menu {
+  top: 120% !important;
+  min-width: 14rem;
+  right: 0;
+  left: auto;
+}
+
+.button_menu {
+  padding-left: 4.1rem;
+  padding-right: 4.1rem;
+  font-size: 19px;
+}
+
+.logout_a {
+  text-decoration: none;
+}
+
+.logout_a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
