@@ -19,7 +19,7 @@ import { interceptorProvider } from './interceptors/interceptor.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginRegisterComponent } from './auth/login/login.component';
-import { NewPersonaComponent } from './new-persona/new-persona.component';
+import { NewPersonaComponent } from './routes/new-persona/new-persona.component';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
