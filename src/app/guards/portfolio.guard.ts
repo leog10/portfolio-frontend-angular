@@ -26,11 +26,13 @@ export class EditGuard implements CanActivate {
 
             if (!routeHasProfile && this.tokenService.isLogged()) {
               // CAMBIAR POR PAGINA 404
+              this.router.navigate(['/new']);
               window.location.href = `${window.location.origin}/new`;              
               return;
             }
             if (!routeHasProfile && !this.tokenService.isLogged()) {
               // CAMBIAR POR PAGINA 404
+              this.router.navigate(['/login']);
               window.location.href = `${window.location.origin}/login`;              
               return;
             } 

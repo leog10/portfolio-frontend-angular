@@ -6,7 +6,7 @@ import { EditComponent } from './routes/edit/edit.component';
 import { PortfolioComponent } from './routes/portfolio/portfolio.component';
 import { LoginGuard } from './guards/login.guard';
 import { NewPersonaGuard } from './guards/new-persona.guard';
-import { EditGuard } from './guards/edit.guard';
+import { EditGuard } from './guards/portfolio.guard';
 
 const routes: Routes = [  
   {path: 'login', component: LoginRegisterComponent, canActivate: [LoginGuard]},
