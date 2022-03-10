@@ -14,6 +14,8 @@ export class HeroComponent implements OnInit {
 
   username!: string;
 
+  hasProfile!: boolean;
+
   routeEdit: boolean = false; 
 
   persona: any;
@@ -137,7 +139,10 @@ export class HeroComponent implements OnInit {
   ngOnInit(): void {
     this.username = this.tokenService.getUserName();
     this.routeEdit = this.router.url.includes(`edit/${this.username}`);
-    if (this.router.url.includes('portfolio') || this.router.url.includes(this.username)) {      
+    this.personaService.existsByUsername(this.username).subscribe(exists => {
+      this.hasProfile = exists;
+    })
+    if (this.router.url.includes('portfolio') || this.router.url.includes(this.username)) {
       this.loadPersona();
     } else {
       const param = this.activatedRoute.snapshot.params['username'];

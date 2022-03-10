@@ -21,69 +21,129 @@
           </button></a
         >
         <ng-template #logged>
-          <div *ngIf="persona" class="btn-group">
-            <a
-              class="a_menu"
-              data-bs-toggle="dropdown"
-              data-bs-display="static"
-              aria-expanded="false"
-            >
-              <img
-                *ngIf="!persona.profileImg; else userProfileImg"
-                src="../../../assets/images/default-profile.jpg"
-                alt=""
-                class="profile_image border border-5 border-white"
-              />
-              <ng-template #userProfileImg>
-                <div class="d-flex flex-column align-items-center">
+          <div *ngIf="hasProfile; else noProfile">
+            <div *ngIf="persona" class="btn-group">
+              <a
+                class="a_menu"
+                data-bs-toggle="dropdown"
+                data-bs-display="static"
+                aria-expanded="false"
+              >
+                <div
+                  *ngIf="!persona.profileImg; else userProfileImg"
+                  class="d-flex flex-column align-items-center"
+                >
                   <img
-                    [src]="persona.profileImg"
+                    src="../../../assets/images/default-profile.jpg"
                     alt=""
                     class="profile_image border border-5 border-white"
                   />
                   <a class="a_menu dropdown-toggle">Yo</a>
                 </div>
-              </ng-template>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg-end">
-              <div class="d-flex align-items-center">
-                <a routerLink="/edit/{{ username }}" class="align-self-start">
-                  <img
-                    [src]="persona.profileImg"
-                    alt=""
-                    class="profile_image_open border border-5 border-white"
-                  />
-                </a>
-                <div class="d-flex flex-column">
-                  <a routerLink="/edit/{{ username }}" class="a_menu_open"
-                    >{{ persona.firstName }} {{ persona.lastName }}</a
-                  >
-                  <a routerLink="/edit/{{ username }}" class="menu_positon">{{
-                    persona.position
-                  }}</a>
+                <ng-template #userProfileImg>
+                  <div class="d-flex flex-column align-items-center">
+                    <img
+                      [src]="persona.profileImg"
+                      alt=""
+                      class="profile_image border border-5 border-white"
+                    />
+                    <a class="a_menu dropdown-toggle">Yo</a>
+                  </div>
+                </ng-template>
+              </a>
+              <div class="dropdown-menu dropdown-menu-lg-end">
+                <div class="d-flex align-items-center">
+                  <a routerLink="/edit/{{ username }}" class="align-self-start">
+                    <img
+                      [src]="
+                        persona.profileImg ||
+                        '../../../assets/images/default-profile.jpg'
+                      "
+                      alt=""
+                      class="profile_image_open border border-5 border-white"
+                    />
+                  </a>
+                  <div class="d-flex flex-column">
+                    <a routerLink="/edit/{{ username }}" class="a_menu_open"
+                      >{{ persona.firstName }} {{ persona.lastName }}</a
+                    >
+                    <a routerLink="/edit/{{ username }}" class="menu_positon">{{
+                      persona.position
+                    }}</a>
+                  </div>
                 </div>
-              </div>
-              <div class="d-flex justify-content-center mt-2">
-                <button
-                  routerLink="/edit/{{ username }}"
-                  type="button"
-                  class="btn btn-outline-primary rounded-pill button_menu py-0"
+                <div class="d-flex justify-content-center mt-2">
+                  <button
+                    routerLink="/edit/{{ username }}"
+                    type="button"
+                    class="btn btn-outline-primary rounded-pill button_menu py-0"
+                  >
+                    Editar Perfil
+                  </button>
+                </div>
+                <li><hr class="dropdown-divider" /></li>
+                <a
+                  routerLink="/portfolio/{{ username }}"
+                  class="logout_a ms-2 text-secondary fs-6"
+                  >Ver Perfil Público</a
                 >
-                  Editar Perfil
-                </button>
+                <li><hr class="dropdown-divider" /></li>
+                <a
+                  (click)="onLogout()"
+                  class="logout_a ms-2 text-secondary fs-6"
+                  >Cerrar Sesión</a
+                >
               </div>
-              <li><hr class="dropdown-divider" /></li>
-              <a
-                routerLink="/portfolio/{{ username }}"
-                class="logout_a ms-2 text-secondary fs-6"
-                >Ver Perfil Público</a
-              >
-              <li><hr class="dropdown-divider" /></li>
-              <a (click)="onLogout()" class="logout_a ms-2 text-secondary fs-6"
-                >Cerrar Sesión</a
-              >
             </div>
           </div>
+          <ng-template #noProfile>
+            <div class="btn-group">
+              <a
+                class="a_menu"
+                data-bs-toggle="dropdown"
+                data-bs-display="static"
+                aria-expanded="false"
+              >
+                <div class="d-flex flex-column align-items-center">
+                  <img
+                    src="../../../assets/images/default-profile.jpg"
+                    alt=""
+                    class="profile_image border border-5 border-white"
+                  />
+                  <a class="a_menu dropdown-toggle">Yo</a>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-lg-end">
+                <div class="d-flex align-items-center">
+                  <a routerLink="/new" class="align-self-start">
+                    <img
+                      src="../../../assets/images/default-profile.jpg"
+                      alt=""
+                      class="profile_image_open border border-5 border-white"
+                    />
+                  </a>
+                  <div class="d-flex flex-column">
+                    <a routerLink="/new" class="a_menu_open">{{ username }}</a>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center mt-2">
+                  <button
+                    routerLink="/new"
+                    type="button"
+                    class="btn btn-outline-primary rounded-pill button_menu py-0"
+                  >
+                    Crear Perfil
+                  </button>
+                </div>
+                <li><hr class="dropdown-divider" /></li>
+                <a
+                  (click)="onLogout()"
+                  class="logout_a ms-2 text-secondary fs-6"
+                  >Cerrar Sesión</a
+                >
+              </div>
+            </div>
+          </ng-template>
         </ng-template>
       </div>
     </div>

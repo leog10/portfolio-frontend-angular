@@ -13,6 +13,8 @@ export class NewPersonaComponent implements OnInit {
 
   username!: string;
 
+  hasProfile!: boolean;
+
   day: number = new Date().getDate();
   month: number = new Date().getMonth() + 1;
   year: number = new Date().getFullYear();
@@ -36,19 +38,17 @@ export class NewPersonaComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = this.tokenService.getUserName();
-    this.personaService.detailsByUsername(this.username).subscribe({
-      next: persona => {
-        this.persona = persona;
+    this.personaService.existsByUsername(this.username).subscribe({
+      next: exists => {
+        this.hasProfile = exists;
+        if (this.hasProfile) {
+          this.router.navigate([`/portfolio/${this.username}`]);
+        }
       },
       error: err => {
         console.log(err)
         }
-      });
-    setTimeout(() => {      
-      if (this.persona) {
-        this.router.navigate([`/portfolio/${this.username}`]);
-      }
-    }, 100);
+      });    
   }
 
   onCreate(): void {

@@ -30,10 +30,7 @@ export class LoginRegisterComponent implements OnInit {
   constructor(
     private tokenService: TokenService,
     private authService: AuthService,
-    private router: Router,
-
-    //test
-    private personaService: PersonaService
+    private router: Router
   ) { }
 
   persona!: Persona;
@@ -45,23 +42,8 @@ export class LoginRegisterComponent implements OnInit {
     this.loginUser = new LoginUser(this.username,this.password);
     this.authService.login(this.loginUser).subscribe({
       next: data => {
-        this.tokenService.setToken(data.token);        
-
-        this.personaService.detailsByUsername(this.username).subscribe({
-          next: persona => {
-            this.persona = persona;
-          },
-          error: err => {
-            }
-          });
-        setTimeout(() => {
-          if (this.persona) {
-            this.router.navigate([`/portfolio/${this.username}`]);
-          } else {
-            this.router.navigate(['/new']);
-          }
-        }, 100);
-
+        this.tokenService.setToken(data.token);
+        this.router.navigate(['/new']);
       },
       error: err => {        
         alert(err);

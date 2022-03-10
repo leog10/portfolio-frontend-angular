@@ -5,11 +5,12 @@ import { NewPersonaComponent } from './routes/new-persona/new-persona.component'
 import { EditComponent } from './routes/edit/edit.component';
 import { PortfolioComponent } from './routes/portfolio/portfolio.component';
 import { LoginGuard } from './guards/login.guard';
+import { NewPersonaGuard } from './guards/new-persona.guard';
 
 const routes: Routes = [
   {path: 'portfolio/:username', component: PortfolioComponent},
   {path: 'login', component: LoginRegisterComponent, canActivate: [LoginGuard]},
-  {path: 'new', component: NewPersonaComponent},  
+  {path: 'new', component: NewPersonaComponent, canActivate: [NewPersonaGuard]},
   {path: 'edit/:username', component: EditComponent},
   {path: '**', redirectTo: 'login', pathMatch: 'full'}
 ]

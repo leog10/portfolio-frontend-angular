@@ -40,4 +40,8 @@ export class PersonaService {
   public updateImg(id: number, img: Object): Observable<Object> {
     return this.http.put<Object>(this.personaURL + `update/image/${id}`, img);
   }
+
+  public existsByUsername(username: string): Observable<boolean> {
+    return this.http.get<boolean>(this.personaURL + `exists/${username}`);
+  }
 }

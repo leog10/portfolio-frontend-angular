@@ -16,6 +16,8 @@ export class HeaderComponent implements OnInit {
 
   isLogged = false;
 
+  hasProfile!: boolean;
+
   username!: string;
   
   persona: any;
@@ -38,7 +40,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = this.tokenService.getUserName();
-    this.isLogged = this.tokenService.isLogged()
-    this.getUserProfileImage();
-    }  
+    this.isLogged = this.tokenService.isLogged()    
+    this.personaService.existsByUsername(this.username).subscribe(exists => {
+      this.hasProfile = exists;
+      if (this.hasProfile) {      
+        this.getUserProfileImage();        
+      }
+    })    
+  }  
 }
