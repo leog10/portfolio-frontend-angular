@@ -15,6 +15,7 @@ export class HeroComponent implements OnInit {
   username!: string;
 
   hasProfile!: boolean;
+  routeHasProfile!: boolean;
 
   routeEdit: boolean = false; 
 
@@ -62,7 +63,7 @@ export class HeroComponent implements OnInit {
   onUpdate(): void {
     this.personaService.update(this.persona.id,this.editPersona).subscribe({
       next: () => {        
-        window.location.reload();
+        this.ngOnInit();
       },
       error: err => {        
         alert(err.error.mensaje);
@@ -137,16 +138,33 @@ export class HeroComponent implements OnInit {
   //END IMAGES
 
   ngOnInit(): void {
+    this.loadPersona();
     this.username = this.tokenService.getUserName();
     this.routeEdit = this.router.url.includes(`edit/${this.username}`);
+
+    /* const param = this.activatedRoute.snapshot.params['username'];
+    
+    
+    
     this.personaService.existsByUsername(this.username).subscribe(exists => {
       this.hasProfile = exists;
-    })
+    });
+    this.personaService.existsByUsername(param).subscribe(exists => {
+      this.routeHasProfile = exists;
+    });
+    if (!this.routeHasProfile && this.tokenService.isLogged()) {      
+      this.router.navigate([`/new`]);
+      return;
+    }
+    if (!this.routeHasProfile && !this.tokenService.isLogged()) {
+      this.router.navigate([`/login`]);
+      return;
+    }
     if (this.router.url.includes('portfolio') || this.router.url.includes(this.username)) {
       this.loadPersona();
     } else {
       const param = this.activatedRoute.snapshot.params['username'];
-      this.router.navigate([`/portfolio/${param}`])
-    }
+      this.router.navigate([`/portfolio/${param}`]);
+    } */
   }
 }

@@ -154,12 +154,8 @@ export class SkillsComponent implements OnInit {
       next: skill => {
         this.skills = skill;
       },
-      error: () => {
-        if (!this.username) {
-          this.router.navigate(['/login']);
-        } else {
-          window.location.href = `${window.location.origin}/portfolio/${this.username}`;
-        }        
+      error: err => {
+        console.log(err);
       }
     });
   }
