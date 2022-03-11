@@ -24,6 +24,7 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 import { NotFoundComponent } from './routes/not-found/not-found.component';
+import { IndexComponent } from './routes/index/index.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { NotFoundComponent } from './routes/not-found/not-found.component';
     SkillsComponent,
     MyProjectsComponent,
     NewPersonaComponent,
-    NotFoundComponent    
+    NotFoundComponent,
+    IndexComponent    
   ],
   imports: [
     BrowserModule,    
