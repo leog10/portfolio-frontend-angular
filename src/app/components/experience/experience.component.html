@@ -51,7 +51,7 @@
             <div class="">
               <a class="a_icon"
                 ><i
-                  class="fa fa-pen me-1"
+                  class="fa-solid fa-pen-clip me-1"
                   data-title="Editar"
                   data-bs-toggle="modal"
                   data-bs-target="#editExpModal"
@@ -62,7 +62,7 @@
             <div class="">
               <a class="a_icon"
                 ><i
-                  class="fa fa-trash"
+                  class="fa-solid fa-trash-can"
                   data-title="Borrar"
                   (click)="onDelete(exp.id!)"
                 ></i
@@ -214,7 +214,7 @@
 
           <div class="modal-footer border-0 mb-0">
             <button
-              class="btn btn-primary fw-bold"
+              class="btn btn-outline-primary fw-bold rounded-pill"
               data-bs-dismiss="modal"
               [disabled]="!newExpForm.valid"
               type="submit"
@@ -369,7 +369,7 @@
 
           <div class="modal-footer border-0 mb-0">
             <button
-              class="btn btn-primary fw-bold"
+              class="btn btn-outline-primary fw-bold rounded-pill"
               data-bs-dismiss="modal"
               [disabled]="!editExpForm.valid"
               type="submit"

@@ -4,7 +4,7 @@
       <h4 class="flex-grow-1 flex-shrink-1">Hard & Soft Skills</h4>
       <div *ngIf="routeEdit" class="add_skill">
         <button
-          class="skill_button"
+          class="btn btn-outline-success fw-bold rounded-pill"
           id="newSkill"
           type="button"
           [disabled]="false"
@@ -21,7 +21,9 @@
   <div id="startSkills">
     <ng-container *ngIf="routeEdit; else inicioTemplate">
       <div class="skill_container" *ngFor="let skill of skills" [id]="skill.id">
-        <p *ngIf="skillForm.dirty" class="text-danger">No olvides guardar!</p>
+        <p *ngIf="skillForm.dirty || skillTitle.dirty" class="text-danger">
+          No olvides guardar!
+        </p>
         <div class="d-flex justify-content-end">
           <div class="a_icon position-absolute">
             <i
@@ -68,23 +70,27 @@
             class="collapse collapse-horizontal"
             id="skillForm{{ skill.id }}"
           >
-            <div class="card-body px-0 mt-1" style="width: 450px">
-              <div class="skill_title_container">
+            <div class="card-body px-0" style="width: 450px">
+              <div class="skill_title_container d-flex flex-column">
+                <p class="p-0 ps-5 mb-1 ms-3 align-self-start">
+                  Modificar título:
+                </p>
                 <input
-                  class="skill_edit_title"
+                  #skillTitle="ngModel"
+                  class="skill_edit_title align-self-center"
                   type="text"
                   [(ngModel)]="skill.title"
                 />
               </div>
               <div class="mt-3">
                 <button
-                  class="skill_button"
+                  class="btn btn-outline-success rounded-pill m-1 py-1"
                   (click)="increment(skill); skillForm.form.markAsDirty()"
                 >
                   Incrementar
                 </button>
                 <button
-                  class="skill_button"
+                  class="btn btn-outline-danger rounded-pill m-1 py-1"
                   (click)="decrement(skill); skillForm.form.markAsDirty()"
                 >
                   Reducir
@@ -92,13 +98,13 @@
               </div>
               <div>
                 <button
-                  class="skill_button"
+                  class="btn btn-outline-success rounded-pill m-1 py-1"
                   (click)="increment(skill, 10); skillForm.form.markAsDirty()"
                 >
                   Incrementar (10)
                 </button>
                 <button
-                  class="skill_button"
+                  class="btn btn-outline-danger rounded-pill m-1 py-1"
                   (click)="decrement(skill, 10); skillForm.form.markAsDirty()"
                 >
                   Reducir (10)
@@ -218,14 +224,18 @@
                   />
                 </div>
 
-                <div class="button_container">
+                <div class="button_container mt-4">
                   <button
-                    class="skill_button"
+                    class="btn btn-outline-primary fw-bold rounded-pill"
                     [id]="'saveButton' + skill.id"
                     [disabled]="false"
                     data-bs-toggle="collapse"
                     [attr.data-bs-target]="'#skillForm' + skill.id"
-                    (click)="saveCircle(skill); skillForm.form.markAsPristine()"
+                    (click)="
+                      saveCircle(skill);
+                      skillForm.form.markAsPristine();
+                      skillTitle.control.markAsPristine()
+                    "
                   >
                     Guardar
                   </button>

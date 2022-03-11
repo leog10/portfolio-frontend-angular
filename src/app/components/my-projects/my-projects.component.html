@@ -73,7 +73,7 @@
             <div class="mt-3">
               <a class="a_icon"
                 ><i
-                  class="fa fa-pen"
+                  class="fa-solid fa-pen-clip"
                   data-title="Editar"
                   data-bs-toggle="modal"
                   data-bs-target="#editProjectModal"
@@ -84,7 +84,7 @@
             <div class="">
               <a class="a_icon"
                 ><i
-                  class="fa fa-trash"
+                  class="fa-solid fa-trash-can"
                   data-title="Borrar"
                   (click)="onDelete(project.id!, project.projectImg)"
                 ></i
@@ -184,7 +184,7 @@
 
           <div class="modal-footer border-0 mb-0">
             <button
-              class="btn btn-primary fw-bold"
+              class="btn btn-outline-primary fw-bold rounded-pill"
               [disabled]="!newProjectForm.valid"
               type="submit"
               data-bs-dismiss="modal"
@@ -287,7 +287,7 @@
 
           <div class="modal-footer border-0 mb-0">
             <button
-              class="btn btn-primary fw-bold"
+              class="btn btn-outline-primary fw-bold rounded-pill"
               data-bs-dismiss="modal"
               [disabled]="!editProjectForm.valid"
               type="submit"
@@ -397,7 +397,7 @@
               id="deleteProjectImgButton"
               type="button"
               *ngIf="editProject.projectImg"
-              class="btn btn-danger fw-bold"
+              class="btn btn-outline-danger fw-bold rounded-pill"
               [disabled]="!editProject.projectImg"
               (click)="deleteProjectImage(editProject.projectImg)"
             >
@@ -405,7 +405,7 @@
             </button>
             <button
               id="saveProjectImgButton"
-              class="btn btn-primary fw-bold"
+              class="btn btn-outline-primary fw-bold rounded-pill"
               [disabled]="!(projectImage.value.length > 0)"
               type="submit"
             >

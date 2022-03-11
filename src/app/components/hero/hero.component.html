@@ -37,8 +37,8 @@
         />
       </ng-template>
       <div class="ms-auto me-3" *ngIf="routeEdit">
-        <a class="a_edit" data-bs-toggle="modal" data-bs-target="#editProfile"
-          ><i class="fas fa-pen" data-title="Editar"></i
+        <a class="a_icon" data-bs-toggle="modal" data-bs-target="#editProfile"
+          ><i class="fa-solid fa-user-pen" data-title="Editar"></i
         ></a>
       </div>
     </div>
@@ -59,17 +59,24 @@
 </div>
 
 <!-- Acerca de -->
-<div class="card container-sm mt-2 py-4 p-0">
-  <div class="d-flex ps-4">
-    <h4 class="mb-0">Acerca de</h4>
-    <div class="ms-auto me-3" *ngIf="routeEdit">
-      <a class="a_edit" data-bs-toggle="modal" data-bs-target="#editAbout"
-        ><i class="fa fa-pen" data-title="Editar"></i
-      ></a>
+<div class="card container-sm mt-2 py-4 ps-4">
+  <div id="aboutMe">
+    <div class="d-flex">
+      <h4 class="flex-grow-1">Acerca de</h4>
+      <div *ngIf="routeEdit" class="d-flex">
+        <a
+          class="d-flex a_icon align-self-end me-1"
+          data-title="Editar"
+          data-bs-toggle="modal"
+          data-bs-target="#editAbout"
+          ><i class="fa-solid fa-pen-clip"></i
+        ></a>
+      </div>
     </div>
-  </div>
-  <div class="d-flex ps-4">
-    <span class="mt-3">{{ persona?.aboutMe }}</span>
+
+    <div class="d-flex">
+      <span class="mt-3">{{ persona?.aboutMe }}</span>
+    </div>
   </div>
 </div>
 
@@ -166,7 +173,7 @@
 
           <div class="modal-footer border-0 mt-1">
             <button
-              class="btn btn-primary fw-bold"
+              class="btn btn-outline-primary fw-bold rounded-pill"
               data-bs-dismiss="modal"
               [disabled]="!profileForm.valid"
               type="submit"
@@ -209,64 +216,12 @@
         <!-- Acerca De Form -->
 
         <form #aboutForm="ngForm" (ngSubmit)="onUpdate()" novalidate>
-          <div style="display: none" class="row">
-            <div class="form-group col">
-              <label class="d-none" for="firstName"></label>
-              <input
-                type="text"
-                name="firstName"
-                id="firstName"
-                class="form-control mt-0"
-                placeholder="Nombre"
-                [(ngModel)]="editPersona.firstName"
-                required
-              />
-            </div>
-            <div class="form-group col">
-              <label class="d-none" for="lastName"></label>
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                placeholder="Apellido"
-                class="form-control"
-                [(ngModel)]="editPersona.lastName"
-                required
-              />
-            </div>
-          </div>
-          <div style="display: none" class="form-group">
-            <label class="d-none" for="position"></label>
-            <input
-              type="text"
-              name="position"
-              id="position"
-              placeholder="Ocupación/Título Ej: Programador Web"
-              class="form-control mt-2"
-              [(ngModel)]="editPersona.position"
-              required
-            />
-          </div>
-
-          <div style="display: none" class="form-group">
-            <label class="d-none" for="location"></label>
-            <input
-              type="text"
-              name="location"
-              id="location"
-              placeholder="Ubicación"
-              class="form-control mt-2"
-              [(ngModel)]="editPersona.location"
-              required
-            />
-          </div>
-
           <div class="form-group">
             <label class="d-none" for="aboutMe"></label>
             <textarea
               name="aboutMe"
               id="aboutMe"
-              rows="2"
+              rows="4"
               class="form-control mt-2"
               placeholder="Acerca de tí"
               maxlength="255"
@@ -277,7 +232,7 @@
 
           <div class="modal-footer border-0 mt-1">
             <button
-              class="btn btn-primary fw-bold"
+              class="btn btn-outline-primary fw-bold rounded-pill"
               data-bs-dismiss="modal"
               [disabled]="!aboutForm.valid"
               type="submit"
@@ -389,7 +344,7 @@
               id="deleteProfileImgButton"
               type="button"
               *ngIf="persona.profileImg"
-              class="btn btn-danger fw-bold"
+              class="btn btn-danger fw-bold rounded-pill"
               [disabled]="!persona.profileImg"
               (click)="deleteProfileImage(persona.profileImg)"
             >
@@ -397,7 +352,7 @@
             </button>
             <button
               id="saveProfileImgButton"
-              class="btn btn-primary fw-bold"
+              class="btn btn-outline-primary fw-bold rounded-pill"
               [disabled]="!(profileImg.value.length > 0)"
               type="submit"
             >
@@ -501,7 +456,7 @@
               id="deleteBackImgButton"
               type="button"
               *ngIf="persona.backImg"
-              class="btn btn-danger fw-bold"
+              class="btn btn-outline-danger fw-bold rounded-pill"
               [disabled]="!persona.backImg"
               (click)="deleteBackgroundImage(persona.backImg)"
             >
@@ -509,7 +464,7 @@
             </button>
             <button
               id="saveBackImgButton"
-              class="btn btn-primary fw-bold"
+              class="btn btn-outline-primary fw-bold rounded-pill"
               [disabled]="!editBackgroundForm.valid"
               type="submit"
             >

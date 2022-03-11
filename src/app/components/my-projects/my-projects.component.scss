@@ -14,17 +14,9 @@ ul.items-list {
   height: 500px !important;
 }
 
-.fa {
-  color: black;
-  display: block;
-  height: 2.4rem;
-  width: 2.4rem;
-  line-height: 2.4rem;
-  text-align: center;
-  border-radius: 50%;
-}
-
+.fa,
 .fa-solid {
+  color: black;
   display: block;
   height: 2.4rem;
   width: 2.4rem;
@@ -39,7 +31,8 @@ ul.items-list {
 }
 
 .fa:hover,
-.fa-camera:hover {
+.fa-camera:hover,
+.fa-solid:hover {
   background-color: lightgray;
 }
 

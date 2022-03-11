@@ -9,7 +9,8 @@ ul.items-list {
   pointer-events: none;
 }
 
-.fa {
+.fa,
+.fa-solid {
   color: black;
   display: block;
   height: 2.4rem;
@@ -24,7 +25,8 @@ ul.items-list {
   cursor: pointer;
 }
 
-.fa:hover {
+.fa:hover,
+.fa-solid:hover {
   background-color: lightgray;
 }
 
