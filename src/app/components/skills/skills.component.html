@@ -22,12 +22,27 @@
     <ng-container *ngIf="routeEdit; else inicioTemplate">
       <div class="skill_container" *ngFor="let skill of skills" [id]="skill.id">
         <p *ngIf="skillForm.dirty" class="text-danger">No olvides guardar!</p>
+        <div class="d-flex justify-content-end">
+          <div class="a_icon position-absolute">
+            <i
+              class="fa-solid fa-trash-can me-1"
+              data-title="Borrar"
+              [id]="'deleteButton' + skill.id"
+              (click)="deleteSkill(skill)"
+            ></i>
+            <i
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#skillForm' + skill.id"
+              aria-expanded="false"
+              aria-controls="collapseWidthExample"
+              class="fa-solid fa-pen-clip me-1 mt-1"
+              data-title="Editar"
+              [id]="'deleteButton' + skill.id"
+            ></i>
+          </div>
+        </div>
         <div class="skill_title_container">
-          <input
-            class="skill_edit_title"
-            type="text"
-            [(ngModel)]="skill.title"
-          />
+          <h5>{{ skill.title }}</h5>
         </div>
         <div class="progress-wrapper">
           <div class="current" [ngStyle]="getOverlayStyle(skill.id!)">
@@ -48,167 +63,177 @@
             [animationDelay]="skill.animationDelay"
           ></round-progress>
         </div>
-
         <div>
-          <button
-            class="skill_button"
-            (click)="increment(skill); skillForm.form.markAsDirty()"
+          <div
+            class="collapse collapse-horizontal"
+            id="skillForm{{ skill.id }}"
           >
-            Incrementar
-          </button>
-          <button
-            class="skill_button"
-            (click)="decrement(skill); skillForm.form.markAsDirty()"
-          >
-            Reducir
-          </button>
+            <div class="card-body px-0 mt-1" style="width: 450px">
+              <div class="skill_title_container">
+                <input
+                  class="skill_edit_title"
+                  type="text"
+                  [(ngModel)]="skill.title"
+                />
+              </div>
+              <div class="mt-3">
+                <button
+                  class="skill_button"
+                  (click)="increment(skill); skillForm.form.markAsDirty()"
+                >
+                  Incrementar
+                </button>
+                <button
+                  class="skill_button"
+                  (click)="decrement(skill); skillForm.form.markAsDirty()"
+                >
+                  Reducir
+                </button>
+              </div>
+              <div>
+                <button
+                  class="skill_button"
+                  (click)="increment(skill, 10); skillForm.form.markAsDirty()"
+                >
+                  Incrementar (10)
+                </button>
+                <button
+                  class="skill_button"
+                  (click)="decrement(skill, 10); skillForm.form.markAsDirty()"
+                >
+                  Reducir (10)
+                </button>
+              </div>
+
+              <form #skillForm="ngForm" class="skill_form">
+                <h3>Personalizar!</h3>
+
+                <div class="cf">
+                  <label for="semicircle">Semicirculo:</label>
+                  <input
+                    class="skill_input"
+                    id="semicircle"
+                    name="semicircle"
+                    type="checkbox"
+                    [(ngModel)]="skill.semicircle"
+                  />
+                </div>
+
+                <div class="cf">
+                  <label for="rounded">Redondeado:</label>
+                  <input
+                    class="skill_input"
+                    id="rounded"
+                    name="rounded"
+                    type="checkbox"
+                    [(ngModel)]="skill.rounded"
+                  />
+                </div>
+
+                <div class="cf">
+                  <label for="clockwise">Sentido horario:</label>
+                  <input
+                    class="skill_input"
+                    id="clockwise"
+                    name="clockwise"
+                    type="checkbox"
+                    [(ngModel)]="skill.clockwise"
+                  />
+                </div>
+
+                <div class="cf">
+                  <label for="current">Valor actual:</label>
+                  <input
+                    class="skill_input"
+                    id="current"
+                    name="current"
+                    type="number"
+                    [(ngModel)]="skill.current"
+                  />
+                </div>
+
+                <div class="cf">
+                  <label for="stroke">Grosor:</label>
+                  <input
+                    class="skill_input"
+                    id="stroke"
+                    name="stroke"
+                    type="number"
+                    [(ngModel)]="skill.stroke"
+                  />
+                </div>
+
+                <div class="cf">
+                  <label for="radius">Radio:</label>
+                  <input
+                    class="skill_input"
+                    id="radius"
+                    name="radius"
+                    type="number"
+                    [(ngModel)]="skill.radius"
+                  />
+                </div>
+
+                <div class="cf">
+                  <label for="duration">Duración:</label>
+                  <input
+                    class="skill_input"
+                    id="duration"
+                    name="duration"
+                    type="number"
+                    [(ngModel)]="skill.duration"
+                  />
+                </div>
+
+                <div class="cf">
+                  <label for="animationDelay">Demora animación:</label>
+                  <input
+                    class="skill_input"
+                    id="animationDelay"
+                    name="animationDelay"
+                    type="number"
+                    [(ngModel)]="skill.animationDelay"
+                  />
+                </div>
+
+                <div class="cf">
+                  <label for="color">Color:</label>
+                  <input
+                    class="skill_input"
+                    id="color"
+                    name="color"
+                    type="color"
+                    [(ngModel)]="skill.color"
+                  />
+                </div>
+
+                <div class="cf">
+                  <label for="background">Color fondo:</label>
+                  <input
+                    class="skill_input"
+                    id="background"
+                    name="background"
+                    type="color"
+                    [(ngModel)]="skill.background"
+                  />
+                </div>
+
+                <div class="button_container">
+                  <button
+                    class="skill_button"
+                    [id]="'saveButton' + skill.id"
+                    [disabled]="false"
+                    data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#skillForm' + skill.id"
+                    (click)="saveCircle(skill); skillForm.form.markAsPristine()"
+                  >
+                    Guardar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        <div>
-          <button
-            class="skill_button"
-            (click)="increment(skill, 10); skillForm.form.markAsDirty()"
-          >
-            Incrementar (10)
-          </button>
-          <button
-            class="skill_button"
-            (click)="decrement(skill, 10); skillForm.form.markAsDirty()"
-          >
-            Reducir (10)
-          </button>
-        </div>
-
-        <form #skillForm="ngForm" class="skill_form">
-          <h3>Personalizar!</h3>
-
-          <div class="cf">
-            <label for="semicircle">Semicirculo:</label>
-            <input
-              class="skill_input"
-              id="semicircle"
-              name="semicircle"
-              type="checkbox"
-              [(ngModel)]="skill.semicircle"
-            />
-          </div>
-
-          <div class="cf">
-            <label for="rounded">Redondeado:</label>
-            <input
-              class="skill_input"
-              id="rounded"
-              name="rounded"
-              type="checkbox"
-              [(ngModel)]="skill.rounded"
-            />
-          </div>
-
-          <div class="cf">
-            <label for="clockwise">Sentido horario:</label>
-            <input
-              class="skill_input"
-              id="clockwise"
-              name="clockwise"
-              type="checkbox"
-              [(ngModel)]="skill.clockwise"
-            />
-          </div>
-
-          <div class="cf">
-            <label for="current">Valor actual:</label>
-            <input
-              class="skill_input"
-              id="current"
-              name="current"
-              type="number"
-              [(ngModel)]="skill.current"
-            />
-          </div>
-
-          <div class="cf">
-            <label for="stroke">Grosor:</label>
-            <input
-              class="skill_input"
-              id="stroke"
-              name="stroke"
-              type="number"
-              [(ngModel)]="skill.stroke"
-            />
-          </div>
-
-          <div class="cf">
-            <label for="radius">Radio:</label>
-            <input
-              class="skill_input"
-              id="radius"
-              name="radius"
-              type="number"
-              [(ngModel)]="skill.radius"
-            />
-          </div>
-
-          <div class="cf">
-            <label for="duration">Duración:</label>
-            <input
-              class="skill_input"
-              id="duration"
-              name="duration"
-              type="number"
-              [(ngModel)]="skill.duration"
-            />
-          </div>
-
-          <div class="cf">
-            <label for="animationDelay">Demora animación:</label>
-            <input
-              class="skill_input"
-              id="animationDelay"
-              name="animationDelay"
-              type="number"
-              [(ngModel)]="skill.animationDelay"
-            />
-          </div>
-
-          <div class="cf">
-            <label for="color">Color:</label>
-            <input
-              class="skill_input"
-              id="color"
-              name="color"
-              type="color"
-              [(ngModel)]="skill.color"
-            />
-          </div>
-
-          <div class="cf">
-            <label for="background">Color fondo:</label>
-            <input
-              class="skill_input"
-              id="background"
-              name="background"
-              type="color"
-              [(ngModel)]="skill.background"
-            />
-          </div>
-
-          <div class="button_container">
-            <button
-              class="skill_button"
-              [id]="'saveButton' + skill.id"
-              [disabled]="false"
-              (click)="saveCircle(skill); skillForm.form.markAsPristine()"
-            >
-              Guardar
-            </button>
-            <button
-              class="skill_button"
-              [id]="'deleteButton' + skill.id"
-              (click)="deleteSkill(skill)"
-            >
-              Borrar
-            </button>
-          </div>
-        </form>
       </div>
     </ng-container>
     <ng-template #inicioTemplate>

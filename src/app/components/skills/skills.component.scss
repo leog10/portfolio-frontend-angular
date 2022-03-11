@@ -10,6 +10,25 @@ ul.items-list {
   padding-left: 0rem;
 }
 
+.a_icon {
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 99;
+}
+
+.fa-solid {
+  color: black;
+  display: block;
+  height: 2.4rem;
+  width: 2.4rem;
+  line-height: 2.4rem;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.fa-solid:hover {
+  background-color: lightgray;
+}
 /*
       The following code comes from another project:
       
