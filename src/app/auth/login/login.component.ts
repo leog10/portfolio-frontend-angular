@@ -38,6 +38,8 @@ export class LoginRegisterComponent implements OnInit {
 
   persona!: Persona;
 
+  errorMsg!: string;
+
   ngOnInit(): void {
     }
 
@@ -49,7 +51,8 @@ export class LoginRegisterComponent implements OnInit {
         this.router.navigate(['/new']);
       },
       error: err => {        
-        alert(err);
+        this.errorMsg = "campos inválidos";
+        console.log(err)
       }
     });
   }
