@@ -21,7 +21,7 @@
         id="password"
         placeholder="Contraseña"
         class="form-control mt-2"
-        [(ngModel)]="password"
+        [(ngModel)]="passwordLogin"
         required
       />
     </div>
@@ -79,36 +79,91 @@
         <form #registerForm="ngForm" (ngSubmit)="onRegister()" novalidate>
           <div class="form-group">
             <input
+              [class.is-valid]="usernameRegister.valid"
+              [class.is-invalid]="
+                usernameRegister.invalid &&
+                (usernameRegister.dirty || usernameRegister.touched)
+              "
               placeholder="Nombre de usuario"
               type="text"
               name="usernameRegister"
               id="usernameRegister"
               class="form-control register_input"
+              minlength="5"
+              #usernameRegister="ngModel"
+              [pattern]="userPattern"
               required
-              [(ngModel)]="usernameRegister"
+              [(ngModel)]="usernameReg"
             />
+            <div
+              *ngIf="
+                usernameRegister.invalid &&
+                (usernameRegister.dirty || usernameRegister.touched)
+              "
+              class="alert alert-danger p-1 m-0"
+            >
+              <div *ngIf="usernameRegister.errors?.['required']">
+                Nombre obligatorio.
+              </div>
+              <div *ngIf="usernameRegister.errors?.['minlength']">
+                El nombre debe contener al menos 5 caracteres.
+              </div>
+              <div *ngIf="usernameRegister.errors?.['pattern']">
+                Usuario inválido.
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <input
+              [class.is-valid]="email.valid"
+              [class.is-invalid]="
+                email.invalid && (email.dirty || email.touched)
+              "
               placeholder="Correo electrónico"
-              type="text"
+              type="email"
               name="email"
               id="email"
               class="form-control register_input"
+              email
+              #email="ngModel"
+              [pattern]="emailPattern"
               required
-              [(ngModel)]="email"
+              [(ngModel)]="emailReg"
             />
+            <div
+              *ngIf="email.invalid && (email.dirty || email.touched)"
+              class="alert alert-danger p-1 m-0"
+            >
+              <div *ngIf="email.errors?.['required']">Email obligatorio.</div>
+              <div *ngIf="email.errors?.['pattern']">Email inválido.</div>
+            </div>
           </div>
           <div class="form-group">
             <input
+              [class.is-invalid]="
+                password.invalid && (password.dirty || password.touched)
+              "
+              [class.is-valid]="password.valid"
               placeholder="Contraseña"
               type="password"
-              name="passwordRegister"
-              id="passwordRegister"
+              name="password"
+              id="password"
               class="form-control register_input"
               [(ngModel)]="passwordRegister"
+              password
+              #password="ngModel"
+              [pattern]="passPattern"
               required
             />
+            <div
+              *ngIf="password.invalid && password.dirty"
+              class="alert alert-danger p-1 m-0"
+            >
+              <div *ngIf="password.errors?.['pattern'] || password.dirty">
+                La contraseña debe contener al menos 6 caracteres, 1 minúscula,
+                1 mayúscula y 1 número.
+              </div>
+            </div>
           </div>
           <div class="mb-3 mt-4">
             <div class="form-group mt-3 d-grid col-5 mx-auto">

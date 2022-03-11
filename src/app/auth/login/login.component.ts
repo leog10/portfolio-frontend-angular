@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { NewUser } from 'src/app/models/new-user';
 import { Persona } from 'src/app/models/persona';
 import { AuthService } from 'src/app/service/auth.service';
-import { PersonaService } from 'src/app/service/persona.service';
 import { TokenService } from 'src/app/service/token.service';
 import { LoginUser } from './../../models/login-user';
 
@@ -17,16 +16,20 @@ export class LoginRegisterComponent implements OnInit {
   // LOGIN \\
   loginUser!: LoginUser;
   username!: string;
-  password!: string;
+  passwordLogin!: string;
   // LOGIN \\
 
   // REGISTER \\
   newUser!: NewUser;
-  usernameRegister!: string;
-  email!: string;
+  usernameReg!: string;
+  emailReg!: string;
   passwordRegister!: string;  
   // REGISTER \\
 
+  userPattern = "^(?=.{5,12}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$";
+  emailPattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+  passPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]*).{6,20}$";
+  
   constructor(
     private tokenService: TokenService,
     private authService: AuthService,
@@ -39,7 +42,7 @@ export class LoginRegisterComponent implements OnInit {
     }
 
   onLogin(): void {
-    this.loginUser = new LoginUser(this.username,this.password);
+    this.loginUser = new LoginUser(this.username,this.passwordLogin);
     this.authService.login(this.loginUser).subscribe({
       next: data => {
         this.tokenService.setToken(data.token);
@@ -52,7 +55,7 @@ export class LoginRegisterComponent implements OnInit {
   }
 
   onRegister(): void {
-    this.newUser = new NewUser(this.usernameRegister, this.email, this.passwordRegister);
+    this.newUser = new NewUser(this.usernameReg, this.emailReg, this.passwordRegister);
     this.authService.new(this.newUser).subscribe({
       next: () => {
         window.location.reload();
