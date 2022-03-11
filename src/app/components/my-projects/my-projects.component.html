@@ -233,7 +233,7 @@
           novalidate
         >
           <div class="form-group col">
-            <label class="d-none" for="name"></label>
+            <label class="text-secondary" for="name">Nombre del proyecto</label>
             <input
               type="text"
               name="name"
@@ -246,12 +246,14 @@
           </div>
 
           <div class="form-group col">
-            <label class="d-none" for="description"></label>
+            <label class="text-secondary mt-2" for="description"
+              >Descripción</label
+            >
             <input
               type="text"
               name="description"
               id="description"
-              class="form-control mt-2"
+              class="form-control"
               placeholder="Descripción"
               [(ngModel)]="editProject.description"
               required
@@ -260,7 +262,7 @@
 
           <div class="row mt-2">
             <div class="form-group col">
-              <label class="d-none" for="startTime"></label>
+              <label class="text-secondary" for="startTime">Fecha Inicio</label>
               <input
                 type="text"
                 name="startTime"
@@ -272,7 +274,7 @@
               />
             </div>
             <div class="form-group col">
-              <label class="d-none" for="endTime"></label>
+              <label class="text-secondary" for="endTime">Fecha Fin</label>
               <input
                 type="text"
                 name="endTime"

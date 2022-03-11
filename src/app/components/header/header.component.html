@@ -27,36 +27,22 @@
                 data-bs-display="static"
                 aria-expanded="false"
               >
-                <div
-                  *ngIf="!persona.profileImg; else userProfileImg"
-                  class="d-flex flex-column align-items-center"
-                >
+                <div class="d-flex flex-column align-items-center">
                   <img
-                    src="../../../assets/images/default-profile.jpg"
+                    [src]="persona.profileImg"
                     alt=""
                     class="profile_image border border-5 border-white"
+                    onerror="this.src='../../../assets/images/default-profile.jpg';"
                   />
                   <a class="a_menu dropdown-toggle">Yo</a>
                 </div>
-                <ng-template #userProfileImg>
-                  <div class="d-flex flex-column align-items-center">
-                    <img
-                      [src]="persona.profileImg"
-                      alt=""
-                      class="profile_image border border-5 border-white"
-                    />
-                    <a class="a_menu dropdown-toggle">Yo</a>
-                  </div>
-                </ng-template>
               </a>
               <div class="dropdown-menu dropdown-menu-lg-end">
                 <div class="d-flex align-items-center">
                   <a routerLink="/edit/{{ username }}" class="align-self-start">
                     <img
-                      [src]="
-                        persona.profileImg ||
-                        '../../../assets/images/default-profile.jpg'
-                      "
+                      [src]="persona.profileImg"
+                      onerror="this.src='../../../assets/images/default-profile.jpg';"
                       alt=""
                       class="profile_image_open border border-5 border-white"
                     />

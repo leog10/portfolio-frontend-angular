@@ -22,7 +22,8 @@
                 <img
                   id="exp-img"
                   class="logo_image"
-                  src="../../../assets/images/office.jpg"
+                  [src]="exp.img"
+                  onerror="this.src='../../../assets/images/office.jpg';"
                 />
               </div>
               <div class="mx-1">
@@ -140,7 +141,7 @@
               name="mode"
               id="mode"
               class="form-control mt-2"
-              placeholder="Modo Ej: PartTime/FullTime"
+              placeholder="Modo Ej: PartTime/FullTime/Freelance"
               [(ngModel)]="mode"
               required
             />
@@ -199,17 +200,22 @@
             />
           </div>
 
-          <div class="">
-            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1"
-              >Si lo desea, agregue una imagen.</label
+          <div class="form-group col">
+            <label class="form-label mt-3 mb-0 text-secondary ms-1" for="img"
+              >Si lo desea, agregue una url de imagen descriptiva.</label
             >
             <input
-              class="form-control form-control-sm"
-              id="formFileSm"
-              type="file"
+              type="text"
               name="img"
+              id="img"
+              class="form-control"
+              placeholder="Imagen descriptiva"
               [(ngModel)]="img"
             />
+            <span class="text-secondary ms-1 fs-6"
+              >Ej.:
+              https://www.unl.edu.ar/wp-content/uploads/2018/05/cropped-favicon-300x300.png</span
+            >
           </div>
 
           <div class="modal-footer border-0 mb-0">
@@ -263,7 +269,7 @@
           novalidate
         >
           <div class="form-group col">
-            <label class="d-none" for="position"></label>
+            <label class="text-secondary" for="position">Posición</label>
             <input
               type="text"
               name="position"
@@ -276,12 +282,12 @@
           </div>
 
           <div class="form-group col">
-            <label class="d-none" for="company"></label>
+            <label class="text-secondary mt-2" for="company">Empresa</label>
             <input
               type="text"
               name="company"
               id="company"
-              class="form-control mt-2"
+              class="form-control"
               placeholder="Empresa"
               [(ngModel)]="editExperience.company"
               required
@@ -289,25 +295,27 @@
           </div>
 
           <div class="form-group col">
-            <label class="d-none" for="mode"></label>
+            <label class="text-secondary mt-2" for="mode"
+              >Tipo de empleo: FullTime/PartTime/Freelance</label
+            >
             <input
               type="text"
               name="mode"
               id="mode"
-              class="form-control mt-2"
-              placeholder="Modo Ej: PartTime/FullTime"
+              class="form-control"
+              placeholder="Tipo de empleo Ej: PartTime/FullTime/Freelance"
               [(ngModel)]="editExperience.mode"
               required
             />
           </div>
 
           <div class="form-group col">
-            <label class="d-none" for="location"></label>
+            <label class="text-secondary mt-2" for="location">Ubicación</label>
             <input
               type="text"
               name="location"
               id="location"
-              class="form-control mt-2"
+              class="form-control"
               placeholder="Ubicación"
               [(ngModel)]="editExperience.location"
               required
@@ -316,7 +324,7 @@
 
           <div class="row mt-2">
             <div class="form-group col">
-              <label class="d-none" for="startTime"></label>
+              <label class="text-secondary" for="startTime">Fecha Inicio</label>
               <input
                 type="text"
                 name="startTime"
@@ -328,7 +336,7 @@
               />
             </div>
             <div class="form-group col">
-              <label class="d-none" for="endTime"></label>
+              <label class="text-secondary" for="endTime">Fecha Fin</label>
               <input
                 type="text"
                 name="endTime"
@@ -342,7 +350,9 @@
           </div>
 
           <div class="form-group col">
-            <label class="d-none" for="timeAtPosition"></label>
+            <label class="text-secondary mt-2" for="timeAtPosition"
+              >Duración en empleo</label
+            >
             <input
               type="text"
               name="timeAtPosition"
@@ -354,17 +364,22 @@
             />
           </div>
 
-          <div class="">
-            <label for="formFileSm" class="form-label mt-3 mb-0 ms-1"
-              >Si lo desea, agregue una imagen.</label
+          <div class="form-group col">
+            <label class="form-label mt-3 mb-0 text-secondary ms-1" for="img"
+              >Si lo desea, agregue una url de imagen descriptiva.</label
             >
             <input
-              class="form-control form-control-sm"
-              id="formFileSm"
-              type="file"
+              type="text"
               name="img"
+              id="img"
+              class="form-control"
+              placeholder="Imagen descriptiva"
               [(ngModel)]="editExperience.img"
             />
+            <span class="text-secondary ms-1 fs-6"
+              >Ej.:
+              https://www.unl.edu.ar/wp-content/uploads/2018/05/cropped-favicon-300x300.png</span
+            >
           </div>
 
           <div class="modal-footer border-0 mb-0">

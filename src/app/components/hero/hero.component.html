@@ -34,6 +34,7 @@
           [src]="persona.profileImg"
           alt=""
           class="profile_image border border-5 border-white"
+          onerror="this.src='../../../assets/images/default-profile.jpg';"
         />
       </ng-template>
       <div class="ms-auto me-3" *ngIf="routeEdit">
@@ -108,7 +109,7 @@
         <form #profileForm="ngForm" (ngSubmit)="onUpdate()" novalidate>
           <div class="row">
             <div class="form-group col">
-              <label class="d-none" for="firstName"></label>
+              <label class="text-secondary" for="firstName">Nombre</label>
               <input
                 type="text"
                 name="firstName"
@@ -120,7 +121,7 @@
               />
             </div>
             <div class="form-group col">
-              <label class="d-none" for="lastName"></label>
+              <label class="text-secondary" for="lastName">Apellido</label>
               <input
                 type="text"
                 name="lastName"
@@ -133,26 +134,26 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="d-none" for="position"></label>
+            <label class="mt-2 text-secondary" for="position">Ocupación</label>
             <input
               type="text"
               name="position"
               id="position"
               placeholder="Ocupación/Título Ej: Programador Web"
-              class="form-control mt-2"
+              class="form-control"
               [(ngModel)]="editPersona.position"
               required
             />
           </div>
 
           <div class="form-group">
-            <label class="d-none" for="location"></label>
+            <label class="mt-2 text-secondary" for="location">Ubicación</label>
             <input
               type="text"
               name="location"
               id="location"
               placeholder="Ubicación"
-              class="form-control mt-2"
+              class="form-control"
               [(ngModel)]="editPersona.location"
               required
             />
@@ -217,12 +218,14 @@
 
         <form #aboutForm="ngForm" (ngSubmit)="onUpdate()" novalidate>
           <div class="form-group">
-            <label class="d-none" for="aboutMe"></label>
+            <label class="mt-2 text-secondary" for="aboutMe"
+              >Descripción sobre ti</label
+            >
             <textarea
               name="aboutMe"
               id="aboutMe"
               rows="4"
-              class="form-control mt-2"
+              class="form-control"
               placeholder="Acerca de tí"
               maxlength="255"
               [(ngModel)]="editPersona.aboutMe"
