@@ -114,11 +114,6 @@ export class EducationComponent implements OnInit {
   ngOnInit(): void {
     this.username = this.tokenService.getUserName();
     this.routeEdit = this.router.url.includes(`edit/${this.username}`);
-    if (this.router.url.includes('portfolio') || this.router.url.includes(this.username)) {      
-      this.loadEducation();
-    } else {
-      const param = this.activatedRoute.snapshot.params['username'];
-      this.router.navigate([`/portfolio/${param}`])
-    }    
+    this.loadEducation();    
   }
 }

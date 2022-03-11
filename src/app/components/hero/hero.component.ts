@@ -141,30 +141,5 @@ export class HeroComponent implements OnInit {
     this.loadPersona();
     this.username = this.tokenService.getUserName();
     this.routeEdit = this.router.url.includes(`edit/${this.username}`);
-
-    /* const param = this.activatedRoute.snapshot.params['username'];
-    
-    
-    
-    this.personaService.existsByUsername(this.username).subscribe(exists => {
-      this.hasProfile = exists;
-    });
-    this.personaService.existsByUsername(param).subscribe(exists => {
-      this.routeHasProfile = exists;
-    });
-    if (!this.routeHasProfile && this.tokenService.isLogged()) {      
-      this.router.navigate([`/new`]);
-      return;
-    }
-    if (!this.routeHasProfile && !this.tokenService.isLogged()) {
-      this.router.navigate([`/login`]);
-      return;
-    }
-    if (this.router.url.includes('portfolio') || this.router.url.includes(this.username)) {
-      this.loadPersona();
-    } else {
-      const param = this.activatedRoute.snapshot.params['username'];
-      this.router.navigate([`/portfolio/${param}`]);
-    } */
   }
 }

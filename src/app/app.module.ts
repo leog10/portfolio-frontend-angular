@@ -23,6 +23,7 @@ import { NewPersonaComponent } from './routes/new-persona/new-persona.component'
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
+import { NotFoundComponent } from './routes/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { environment } from 'src/environments/environment';
     HeroComponent,
     SkillsComponent,
     MyProjectsComponent,
-    NewPersonaComponent    
+    NewPersonaComponent,
+    NotFoundComponent    
   ],
   imports: [
     BrowserModule,    

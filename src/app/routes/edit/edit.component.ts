@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditComponent implements OnInit {
 
+  loading: boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.loading = false;      
+    }, 500);
   }
 
 }

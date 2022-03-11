@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { PersonaService } from '../service/persona.service';
 import { TokenService } from '../service/token.service';
 
@@ -12,7 +11,8 @@ export class EditGuard implements CanActivate {
   constructor(     
     private personaService: PersonaService,
     private tokenService: TokenService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   canActivate(
@@ -24,20 +24,28 @@ export class EditGuard implements CanActivate {
       this.personaService.existsByUsername(param).subscribe(exists => {
             const routeHasProfile = exists;
 
-            if (!routeHasProfile && this.tokenService.isLogged()) {
-              // CAMBIAR POR PAGINA 404
-              this.router.navigate(['/new']);
+            const username = this.tokenService.getUserName();
+
+            if (route.paramMap.get('username') === username && !routeHasProfile) {
               window.location.href = `${window.location.origin}/new`;              
-              return;
+              return false;
+            }            
+
+            if (!routeHasProfile) {
+              // PAGINA 404
+              window.location.href = `${window.location.origin}/404`;              
+              return false;
             }
-            if (!routeHasProfile && !this.tokenService.isLogged()) {
-              // CAMBIAR POR PAGINA 404
-              this.router.navigate(['/login']);
-              window.location.href = `${window.location.origin}/login`;              
-              return;
-            } 
+
+            if (this.router.url.includes('portfolio') || this.router.url.includes(username)) {
+              return true;
+            } else {              
+              this.router.navigate([`/portfolio/${param}`]);              
+              return true;
+            }
+            
           });
-          return true;    
+          return true;
   }
   
 }

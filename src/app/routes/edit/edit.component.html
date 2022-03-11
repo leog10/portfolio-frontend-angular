@@ -1,6 +1,17 @@
-<app-header></app-header>
-<app-hero></app-hero>
-<app-education></app-education>
-<app-skills></app-skills>
-<app-experience></app-experience>
-<app-my-projects></app-my-projects>
+<div
+  *ngIf="loading; else portfolio"
+  class="container-fluid d-flex justify-content-center align-items-center vh-100"
+>
+  <div class="d-flex flex-column align-items-center">
+    <div class="spinner-border text-primary" role="status"></div>
+    <span class="">Loading...</span>
+  </div>
+</div>
+<ng-template #portfolio>
+  <app-header></app-header>
+  <app-hero></app-hero>
+  <app-education></app-education>
+  <app-skills></app-skills>
+  <app-experience></app-experience>
+  <app-my-projects></app-my-projects>
+</ng-template>
