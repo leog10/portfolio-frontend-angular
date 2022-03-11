@@ -31,10 +31,6 @@ export class HeroComponent implements OnInit {
     private firebaseService: FirebaseService
     ) { }
 
-  collapse() {
-    document.getElementById('MenuNavegacion')!.className = 'navbar-collapse py-0 collapsing';
-  }
-
   loadPersona(): void {
     const _username = this.activatedRoute.snapshot.params['username'];
     this.personaService.detailsByUsername(_username).subscribe({
