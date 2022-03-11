@@ -16,7 +16,8 @@ const routes: Routes = [
   {path: 'portfolio/:username', component: PortfolioComponent, canActivate: [EditGuard]},
   {path: 'edit/:username', component: EditComponent, canActivate: [EditGuard]},
   {path: '404', component: NotFoundComponent},
-  {path: '', component: IndexComponent},
+  {path: 'inicio', component: IndexComponent},
+  {path: '', redirectTo: 'inicio', pathMatch: 'full'},
   {path: '**', redirectTo: '404', pathMatch: 'full'}
   //{path: '**', redirectTo: 'login', pathMatch: 'full'}
 ]
