@@ -48,7 +48,7 @@ export class LoginRegisterComponent implements OnInit {
     this.authService.login(this.loginUser).subscribe({
       next: data => {
         this.tokenService.setToken(data.token);
-        this.router.navigate(['/new']);
+        this.router.navigate([`/edit/${this.username}`]);
       },
       error: err => {        
         this.errorMsg = "campos inválidos";

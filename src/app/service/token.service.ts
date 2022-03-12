@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 const TOKEN_KEY = 'AuthToken';
+const REFRESHTOKEN_KEY = 'auth-refreshtoken';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,14 @@ export class TokenService {
 
   public getToken(): string {
     return localStorage.getItem(TOKEN_KEY)!;
+  }
+
+  public setRefreshToken(token: string): void {
+    localStorage.removeItem(REFRESHTOKEN_KEY);
+    localStorage.setItem(REFRESHTOKEN_KEY, token);
+  }
+  public getRefreshToken(): string {
+    return localStorage.getItem(REFRESHTOKEN_KEY)!;
   }
 
   public isLogged(): boolean {

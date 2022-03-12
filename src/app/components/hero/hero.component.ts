@@ -46,12 +46,8 @@ export class HeroComponent implements OnInit {
           persona.backImg,
           persona.profileImg);
       },
-      error: () => {
-        if (!this.username) {
-          this.router.navigate(['/login']);
-        } else {
-          window.location.href = `${window.location.origin}/portfolio/${this.username}`;
-        }        
+      error: err => {
+        console.log('Error: ',err.error.mensaje);
       }
     });
   }  
@@ -62,7 +58,7 @@ export class HeroComponent implements OnInit {
         this.ngOnInit();
       },
       error: err => {        
-        alert(err.error.mensaje);
+        console.log('Error: ',err.error.mensaje);
       }
     });
   }  

@@ -14,7 +14,7 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.loading = false;      
-    }, 500);
+    }, 250);
   }
 
 }
