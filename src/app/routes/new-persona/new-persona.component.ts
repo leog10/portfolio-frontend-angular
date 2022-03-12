@@ -25,7 +25,7 @@ export class NewPersonaComponent implements OnInit {
   lastName!: string;
   position!: string;
   location!: string;
-  aboutMe!: string;
+  aboutMeNew!: string;
   birthday!: string;
   backImg!: string;
   profileImg!: string;
@@ -61,7 +61,7 @@ export class NewPersonaComponent implements OnInit {
       _month = `0${this.month}`
     }
     this.birthday = _day + '-' + _month + '-' + this.year;
-    this.persona = new Persona(this.firstName, this.lastName, this.position, this.location, this.aboutMe, this.birthday, this.backImg, this.profileImg);
+    this.persona = new Persona(this.firstName, this.lastName, this.position, this.location, this.aboutMeNew, this.birthday, this.backImg, this.profileImg);
     this.personaService.create(this.persona).subscribe({
       next: () => {
         this.router.navigate([`/edit/${this.username}`]);
