@@ -1,12 +1,18 @@
 <app-header></app-header>
-<div class="mt-1 p-1 container-fluid">
-  <h2 class="mt-5 p-5 text-center">Ups... Parece que te perdiste!</h2>
-  <div class="text-center mt-4">
-    <a (click)="goBack()">
-      <button class="btn btn-outline-primary">Volver</button>
-    </a>
+<div class="mt-5 pt-5 container-fluid">
+  <h2 class="text-center">Ups... Parece que te perdiste!</h2>
+  <div class="text-center mt-4 mb-2">
+    <img
+      class="pulp_not_found"
+      src="../../../assets/images/404.gif"
+      alt="not-found"
+    />
   </div>
-  <div class="text-center container-sm mt-4 mb-2">
-    <img width="700" src="../../../assets/images/404.gif" alt="not-found" />
+  <div class="text-center p-1 mt-5">
+    <a (click)="goBack()">
+      <button class="btn btn-outline-primary">
+        Volver a la página anterior
+      </button>
+    </a>
   </div>
 </div>
