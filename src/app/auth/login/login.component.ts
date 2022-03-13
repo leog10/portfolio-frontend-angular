@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NewUser } from 'src/app/models/new-user';
-import { Persona } from 'src/app/models/persona';
 import { AuthService } from 'src/app/service/auth.service';
+import { PersonaService } from 'src/app/service/persona.service';
 import { TokenService } from 'src/app/service/token.service';
 import { LoginUser } from './../../models/login-user';
 
@@ -33,22 +33,32 @@ export class LoginRegisterComponent implements OnInit {
   constructor(
     private tokenService: TokenService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private personaService: PersonaService
   ) { }
 
-  persona!: Persona;
+  errorMsg!: string;  
 
-  errorMsg!: string;
-
-  ngOnInit(): void {
+  ngOnInit(): void {    
     }
 
   onLogin(): void {
-    this.loginUser = new LoginUser(this.username,this.passwordLogin);
+    this.loginUser = new LoginUser(this.username,this.passwordLogin);    
     this.authService.login(this.loginUser).subscribe({
       next: data => {
-        this.tokenService.setToken(data.token);
-        this.router.navigate([`/edit/${this.username}`]);
+        this.tokenService.setToken(data.token);        
+        this.personaService.existsByUsername(this.username).subscribe({
+          next: exists => {
+            if (exists) {
+              this.router.navigate([`/edit/${this.username}`]);
+            } else {
+              this.router.navigate([`/new/`]);
+            }
+          }
+        })
+        
+
+        
       },
       error: err => {        
         this.errorMsg = "campos inválidos";
