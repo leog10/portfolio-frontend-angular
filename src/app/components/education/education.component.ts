@@ -130,7 +130,7 @@ export class EducationComponent implements OnInit {
   onUpdate(): void {    
     this.educationService.update(this.educations[this.indexOfEditEducation].id!,this.editEducation).subscribe({
       next: () => {
-        this.ngOnInit();        
+        window.location.reload();
       },
       error: error => {        
         alert(error);

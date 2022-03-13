@@ -54,7 +54,7 @@ export class ExperienceComponent implements OnInit {
       this.startTimeFormatted.push(dateFormatted);
     };
     for (const time of endTime) {
-      if (time === 'actualidad' || time === 'Actualidad') {
+      if (time === 'actualidad') {
         break;
       }
       const yearMonth: string[] = time.split('-');      
@@ -155,7 +155,7 @@ export class ExperienceComponent implements OnInit {
   onUpdate(): void {    
     this.experienceService.update(this.experiences[this.indexOfEditExperience].id!,this.editExperience).subscribe({
       next: () => {
-        this.ngOnInit();        
+        window.location.reload();
       },
       error: error => {        
         alert(error);

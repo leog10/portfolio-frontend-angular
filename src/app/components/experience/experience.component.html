@@ -333,7 +333,9 @@
             <div class="form-group col">
               <label class="text-secondary" for="startTime">Fecha Inicio</label>
               <input
-                type="text"
+                type="month"
+                min="1925-01"
+                max="2022-03"
                 name="startTime"
                 id="startTime"
                 class="form-control"
@@ -342,10 +344,12 @@
                 required
               />
             </div>
-            <div class="form-group col mt-2">
+            <div class="form-group col">
               <label class="text-secondary" for="endTime">Fecha Fin</label>
               <input
-                type="text"
+                type="month"
+                min="1925-01"
+                max="2022-03"
                 name="endTime"
                 id="endTime"
                 class="form-control"
