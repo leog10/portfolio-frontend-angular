@@ -21,6 +21,7 @@ export class HeroComponent implements OnInit {
 
   persona: any;
   
+  // Persona Editable
   editFirstName!: string
   editLastName!: string
   editPosition!: string
@@ -38,11 +39,16 @@ export class HeroComponent implements OnInit {
     private firebaseService: FirebaseService
     ) { }
 
+    // Carga la persona según el parametro 'username' en la ruta.
+    // Busca persona en base de datos por usuario y la asigna a la variable persona.    
   loadPersona(): void {
     const _username = this.activatedRoute.snapshot.params['username'];
     this.personaService.detailsByUsername(_username).subscribe({
       next: persona => {
         this.persona = persona;
+
+        // Carga los datos de la persona en una variable alternativa para \
+        // evitar actualizar la vista al mismo tiempo que se edita con NgModel.
         this.editFirstName = persona.firstName;
         this.editLastName = persona.lastName;
         this.editPosition = persona.position;
@@ -58,6 +64,7 @@ export class HeroComponent implements OnInit {
     });
   }  
 
+  // Actualiza el perfil y mantiene el atributo aboutMe original.
   updateProfile(): void {
     const _persona = new Persona(
       this.editFirstName, 
@@ -78,6 +85,7 @@ export class HeroComponent implements OnInit {
     });
   }
 
+  // Actualiza el atributo aboutMe y mantiene los demas originales.
   updateAbout(): void {
     const _persona = new Persona(
       this.persona.firstName, 
