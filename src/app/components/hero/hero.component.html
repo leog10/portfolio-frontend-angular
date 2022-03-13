@@ -106,7 +106,7 @@
       <div class="modal-body">
         <!-- Perfil Form -->
 
-        <form #profileForm="ngForm" (ngSubmit)="onUpdate()" novalidate>
+        <form #profileForm="ngForm" (ngSubmit)="updateProfile()" novalidate>
           <div class="row">
             <div class="form-group col">
               <label class="text-secondary" for="firstName">Nombre</label>
@@ -116,7 +116,7 @@
                 id="firstName"
                 class="form-control mt-0"
                 placeholder="Nombre"
-                [(ngModel)]="editPersona.firstName"
+                [(ngModel)]="editFirstName"
                 required
               />
             </div>
@@ -128,7 +128,7 @@
                 id="lastName"
                 placeholder="Apellido"
                 class="form-control"
-                [(ngModel)]="editPersona.lastName"
+                [(ngModel)]="editLastName"
                 required
               />
             </div>
@@ -141,7 +141,7 @@
               id="position"
               placeholder="Ocupación/Título Ej: Programador Web"
               class="form-control"
-              [(ngModel)]="editPersona.position"
+              [(ngModel)]="editPosition"
               required
             />
           </div>
@@ -154,22 +154,9 @@
               id="location"
               placeholder="Ubicación"
               class="form-control"
-              [(ngModel)]="editPersona.location"
+              [(ngModel)]="editLocation"
               required
             />
-          </div>
-
-          <div style="display: none" class="form-group">
-            <label class="d-none" for="aboutMe"></label>
-            <textarea
-              name="aboutMe"
-              id="aboutMe"
-              rows="2"
-              class="form-control mt-2"
-              placeholder="Acerca de tí"
-              maxlength="255"
-              [(ngModel)]="editPersona.aboutMe"
-            ></textarea>
           </div>
 
           <div class="modal-footer border-0 mt-1">
@@ -216,7 +203,7 @@
       <div class="modal-body">
         <!-- Acerca De Form -->
 
-        <form #aboutForm="ngForm" (ngSubmit)="onUpdate()" novalidate>
+        <form #aboutForm="ngForm" (ngSubmit)="updateAbout()" novalidate>
           <div class="form-group">
             <label class="mt-2 text-secondary" for="aboutMe"
               >Descripción sobre ti</label
@@ -229,7 +216,7 @@
               class="form-control"
               placeholder="Acerca de tí"
               maxlength="255"
-              [(ngModel)]="editPersona.aboutMe"
+              [(ngModel)]="editAboutMe"
               required
               [class.is_max_warning]="aboutMe.value.length > 254"
             ></textarea>

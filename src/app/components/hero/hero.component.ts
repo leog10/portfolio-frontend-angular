@@ -21,7 +21,14 @@ export class HeroComponent implements OnInit {
 
   persona: any;
   
-  editPersona: any;  
+  editFirstName!: string
+  editLastName!: string
+  editPosition!: string
+  editLocation!: string
+  editAboutMe!: string
+  editBirthday!: string
+  editBackImg!: string
+  editProfileImg!: string
 
   constructor(
     private tokenService: TokenService,
@@ -36,15 +43,14 @@ export class HeroComponent implements OnInit {
     this.personaService.detailsByUsername(_username).subscribe({
       next: persona => {
         this.persona = persona;
-        this.editPersona = new Persona(
-          persona.firstName,
-          persona.lastName,
-          persona.position,
-          persona.location,
-          persona.aboutMe,
-          persona.birthday,
-          persona.backImg,
-          persona.profileImg);
+        this.editFirstName = persona.firstName;
+        this.editLastName = persona.lastName;
+        this.editPosition = persona.position;
+        this.editLocation = persona.location;
+        this.editAboutMe = persona.aboutMe;
+        this.editBirthday = persona.birthday;
+        this.editBackImg = persona.backImg;
+        this.editProfileImg = persona.profileImg;
       },
       error: err => {
         console.log('Error: ',err.error.mensaje);
@@ -52,8 +58,37 @@ export class HeroComponent implements OnInit {
     });
   }  
 
-  onUpdate(): void {
-    this.personaService.update(this.persona.id,this.editPersona).subscribe({
+  updateProfile(): void {
+    const _persona = new Persona(
+      this.editFirstName, 
+      this.editLastName, 
+      this.editPosition, 
+      this.editLocation, 
+      this.persona.aboutMe, 
+      this.editBirthday, 
+      this.editBackImg, 
+      this.editProfileImg);
+    this.personaService.update(this.persona.id, _persona).subscribe({
+      next: () => {        
+        this.ngOnInit();
+      },
+      error: err => {        
+        console.log('Error: ',err.error.mensaje);
+      }
+    });
+  }
+
+  updateAbout(): void {
+    const _persona = new Persona(
+      this.persona.firstName, 
+      this.persona.lastName, 
+      this.persona.position, 
+      this.persona.location, 
+      this.editAboutMe, 
+      this.persona.birthday, 
+      this.persona.backImg, 
+      this.persona.profileImg);
+    this.personaService.update(this.persona.id, _persona).subscribe({
       next: () => {        
         this.ngOnInit();
       },
