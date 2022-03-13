@@ -154,37 +154,37 @@
             />
           </div>
 
-          <div class="row mt-2">
-            <div class="form-group col">
-              <label class="d-none" for="startTime"></label>
-              <input
-                type="text"
-                name="startTime"
-                id="startTime"
-                class="form-control"
-                placeholder="Fecha Inicio"
-                [(ngModel)]="startTime"
-                required
-              />
-            </div>
-            <div class="form-group col">
-              <label class="d-none" for="endTime"></label>
-              <input
-                type="text"
-                name="endTime"
-                id="endTime"
-                class="form-control"
-                placeholder="Fecha Fin/Actualidad"
-                [(ngModel)]="endTime"
-                required
-              />
-            </div>
+          <div class="form-group col">
+            <label class="text-secondary" for="startTime">Fecha Inicio</label>
+            <input
+              type="month"
+              min="1950-01"
+              max="2022-03"
+              name="startTime"
+              id="startTime"
+              class="form-control"
+              placeholder="Fecha Inicio"
+              [(ngModel)]="startTime"
+              required
+            />
+          </div>
+          <div class="form-group col">
+            <label class="text-secondary" for="endTime">Fecha Fin</label>
+            <input
+              type="month"
+              min="1950-01"
+              max="2022-03"
+              name="endTime"
+              id="endTime"
+              class="form-control"
+              placeholder="Fecha Fin/Actualidad"
+              [(ngModel)]="endTime"
+              required
+            />
           </div>
 
           <div class="">
-            <label
-              for="formFileSm"
-              class="form-label mt-3 mb-0 text-secondary ms-1"
+            <label for="img" class="form-label mt-3 mb-0 text-secondary ms-1"
               >Si lo desea, agregue una url de imagen descriptiva.</label
             >
             <input
@@ -303,31 +303,33 @@
             />
           </div>
 
-          <div class="row mt-2">
-            <div class="form-group col">
-              <label class="text-secondary" for="startTime">Fecha Inicio</label>
-              <input
-                type="text"
-                name="startTime"
-                id="startTime"
-                class="form-control"
-                placeholder="Fecha Inicio"
-                [(ngModel)]="editEducation.startTime"
-                required
-              />
-            </div>
-            <div class="form-group col">
-              <label class="text-secondary" for="endTime">Fecha Fin</label>
-              <input
-                type="text"
-                name="endTime"
-                id="endTime"
-                class="form-control"
-                placeholder="Fecha Fin/Actualidad"
-                [(ngModel)]="editEducation.endTime"
-                required
-              />
-            </div>
+          <div class="form-group col">
+            <label class="text-secondary" for="startTime">Fecha Inicio</label>
+            <input
+              type="month"
+              min="1950-01"
+              max="2022-03"
+              name="startTime"
+              id="startTime"
+              class="form-control"
+              placeholder="Fecha Inicio"
+              [(ngModel)]="editEducation.startTime"
+              required
+            />
+          </div>
+          <div class="form-group col">
+            <label class="text-secondary" for="endTime">Fecha Fin</label>
+            <input
+              type="month"
+              min="1950-01"
+              max="2022-03"
+              name="endTime"
+              id="endTime"
+              class="form-control"
+              placeholder="Fecha Fin/Actualidad"
+              [(ngModel)]="editEducation.endTime"
+              required
+            />
           </div>
 
           <div class="">

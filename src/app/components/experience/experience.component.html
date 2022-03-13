@@ -109,93 +109,89 @@
           novalidate
         >
           <div class="form-group col">
-            <label class="d-none" for="position"></label>
+            <label class="text-secondary" for="position">Cargo</label>
             <input
               type="text"
               name="position"
               id="position"
               class="form-control"
-              placeholder="Posición"
+              placeholder="Ej: Java Back End developer"
               [(ngModel)]="position"
               required
             />
           </div>
 
-          <div class="form-group col">
-            <label class="d-none" for="company"></label>
+          <div class="form-group col mt-1">
+            <label class="text-secondary" for="company">Empresa</label>
             <input
               type="text"
               name="company"
               id="company"
-              class="form-control mt-2"
-              placeholder="Empresa"
+              class="form-control"
+              placeholder="Ej: Google"
               [(ngModel)]="company"
               required
             />
           </div>
 
-          <div class="form-group col">
-            <label class="d-none" for="mode"></label>
-            <input
-              type="text"
-              name="mode"
-              id="mode"
-              class="form-control mt-2"
-              placeholder="Modo Ej: PartTime/FullTime/Freelance"
-              [(ngModel)]="mode"
+          <div class="form-group col mt-1">
+            <label class="text-secondary" for="mode">Tipo de empleo</label>
+            <select
+              class="form-select"
+              aria-label="mode"
               required
-            />
+              [(ngModel)]="mode"
+              name="mode"
+            >
+              <option [ngValue]="" hidden disabled selected>
+                Selecciona una opción
+              </option>
+              <option value="Full Time">Full Time</option>
+              <option value="Part Time">Part Time</option>
+              <option value="Freelancer">Freelancer</option>
+              <option value="Dueño">Dueño</option>
+              <option value="Emprendedor">Emprendedor</option>
+            </select>
           </div>
 
-          <div class="form-group col">
-            <label class="d-none" for="location"></label>
+          <div class="form-group col mt-1">
+            <label class="text-secondary" for="location">Ubicación</label>
             <input
               type="text"
               name="location"
               id="location"
-              class="form-control mt-2"
+              class="form-control"
               placeholder="Ubicación"
               [(ngModel)]="location"
               required
             />
           </div>
 
-          <div class="row mt-2">
-            <div class="form-group col">
-              <label class="d-none" for="startTime"></label>
-              <input
-                type="text"
-                name="startTime"
-                id="startTime"
-                class="form-control"
-                placeholder="Fecha Inicio"
-                [(ngModel)]="startTime"
-                required
-              />
-            </div>
-            <div class="form-group col">
-              <label class="d-none" for="endTime"></label>
-              <input
-                type="text"
-                name="endTime"
-                id="endTime"
-                class="form-control"
-                placeholder="Fecha Fin/Actualidad"
-                [(ngModel)]="endTime"
-                required
-              />
-            </div>
-          </div>
-
-          <div class="form-group col">
-            <label class="d-none" for="timeAtPosition"></label>
+          <div class="form-group col mt-2">
+            <label class="text-secondary" for="startTime">Fecha Inicio</label>
             <input
-              type="text"
-              name="timeAtPosition"
-              id="timeAtPosition"
-              class="form-control mt-2"
-              placeholder="Duración en empleo Ej: 2 años y 1 mes"
-              [(ngModel)]="timeAtPosition"
+              type="month"
+              min="1925-01"
+              max="2022-03"
+              name="startTime"
+              id="startTime"
+              class="form-control"
+              placeholder="Fecha Inicio"
+              [(ngModel)]="startTime"
+              required
+            />
+          </div>
+          <div class="form-group col mt-2">
+            <label class="text-secondary" for="endTime">Fecha Fin</label>
+            <input
+              type="month"
+              min="1925-01"
+              max="2022-03"
+              name="endTime"
+              id="endTime"
+              class="form-control"
+              placeholder="Fecha Fin/Actualidad"
+              [(ngModel)]="endTime"
               required
             />
           </div>
@@ -281,8 +277,8 @@
             />
           </div>
 
-          <div class="form-group col">
-            <label class="text-secondary mt-2" for="company">Empresa</label>
+          <div class="form-group col mt-1">
+            <label class="text-secondary" for="company">Empresa</label>
             <input
               type="text"
               name="company"
@@ -294,23 +290,26 @@
             />
           </div>
 
-          <div class="form-group col">
-            <label class="text-secondary mt-2" for="mode"
-              >Tipo de empleo: FullTime/PartTime/Freelance</label
-            >
-            <input
-              type="text"
-              name="mode"
-              id="mode"
-              class="form-control"
-              placeholder="Tipo de empleo Ej: PartTime/FullTime/Freelance"
-              [(ngModel)]="editExperience.mode"
+          <div class="form-group col mt-1">
+            <label class="" for="mode">Tipo de empleo</label>
+            <select
+              class="form-select"
+              aria-label="mode"
               required
-            />
+              [(ngModel)]="editExperience.mode"
+              name="editExperience.mode"
+              aria-placeholder="Selecciona una opción"
+            >
+              <option value="Full Time">Full Time</option>
+              <option value="Part Time">Part Time</option>
+              <option value="Freelancer">Freelancer</option>
+              <option value="Dueño">Dueño</option>
+              <option value="Emprendedor">Emprendedor</option>
+            </select>
           </div>
 
-          <div class="form-group col">
-            <label class="text-secondary mt-2" for="location">Ubicación</label>
+          <div class="form-group col mt-1">
+            <label class="text-secondary" for="location">Ubicación</label>
             <input
               type="text"
               name="location"
@@ -335,7 +334,7 @@
                 required
               />
             </div>
-            <div class="form-group col">
+            <div class="form-group col mt-2">
               <label class="text-secondary" for="endTime">Fecha Fin</label>
               <input
                 type="text"
@@ -349,23 +348,8 @@
             </div>
           </div>
 
-          <div class="form-group col">
-            <label class="text-secondary mt-2" for="timeAtPosition"
-              >Duración en empleo</label
-            >
-            <input
-              type="text"
-              name="timeAtPosition"
-              id="timeAtPosition"
-              class="form-control mt-2"
-              placeholder="Duración en empleo Ej: 2 años y 1 mes"
-              [(ngModel)]="editExperience.timeAtPosition"
-              required
-            />
-          </div>
-
-          <div class="form-group col">
-            <label class="form-label mt-3 mb-0 text-secondary ms-1" for="img"
+          <div class="form-group col mt-2">
+            <label class="form-label mb-0 text-secondary ms-1" for="img"
               >Si lo desea, agregue una url de imagen descriptiva.</label
             >
             <input

@@ -55,12 +55,14 @@
                   <h4 class="mx-2 my-2" id="project-name">
                     {{ project.name }}
                   </h4>
-                  <p class="mb-0 projects_techs">
-                    <span id="project-description">{{
-                      project.description
-                    }}</span>
-                  </p>
-                  <p class="ms-2 text-secondary my-0">
+                  <div class="d-flex mb-0 projects_techs">
+                    <span
+                      id="project-description"
+                      class="project_description"
+                      >{{ project.description }}</span
+                    >
+                  </div>
+                  <p class="ms-2 text-secondary mb-0 mt-1">
                     <span id="project-start">{{ project.startTime }}</span
                     ><span> – </span
                     ><span id="project-end">{{ project.endTime }}</span>
@@ -130,7 +132,7 @@
           novalidate
         >
           <div class="form-group col">
-            <label class="d-none" for="name"></label>
+            <label class="text-secondary" for="name">Nombre</label>
             <input
               type="text"
               name="name"
@@ -142,40 +144,58 @@
             />
           </div>
 
-          <div class="form-group col">
-            <label class="d-none" for="description"></label>
-            <input
-              type="text"
+          <div class="form-group">
+            <label class="text-secondary" for="description">Descripción</label>
+            <textarea
+              #ProjectDescription
               name="description"
               id="description"
-              class="form-control mt-2"
-              placeholder="Descripción"
+              rows="3"
+              class="form-control"
+              placeholder="Breve descripción del proyecto"
+              maxlength="255"
               [(ngModel)]="description"
+              [class.is_max_warning]="ProjectDescription.value.length > 254"
               required
-            />
+            ></textarea>
+            <div class="d-flex justify-content-end">
+              <span class="text-secondary"
+                >{{ ProjectDescription.value.length }}/255</span
+              >
+            </div>
+            <div
+              *ngIf="ProjectDescription.value.length > 254"
+              class="d-flex justify-content-start"
+            >
+              <span class="alert alert-warning"
+                >Has alcanzado el límite de caracteres</span
+              >
+            </div>
           </div>
 
           <div class="row mt-2">
             <div class="form-group col">
-              <label class="d-none" for="startTime"></label>
+              <label class="text-secondary" for="startTime">Fecha Inicio</label>
               <input
-                type="text"
+                type="month"
+                min="1925-01"
+                max="2022-03"
                 name="startTime"
                 id="startTime"
                 class="form-control"
-                placeholder="Fecha Inicio"
                 [(ngModel)]="startTime"
                 required
               />
             </div>
             <div class="form-group col">
-              <label class="d-none" for="endTime"></label>
+              <label class="text-secondary" for="endTime">Fecha Fin</label>
               <input
-                type="text"
+                type="month"
+                min="1925-01"
+                max="2022-03"
                 name="endTime"
                 id="endTime"
                 class="form-control"
-                placeholder="Fecha Fin/Actualidad"
                 [(ngModel)]="endTime"
                 required
               />
@@ -245,30 +265,45 @@
             />
           </div>
 
-          <div class="form-group col">
-            <label class="text-secondary mt-2" for="description"
-              >Descripción</label
-            >
-            <input
-              type="text"
+          <div class="form-group">
+            <label class="text-secondary" for="description">Descripción</label>
+            <textarea
+              #ProjectDescription
               name="description"
               id="description"
+              rows="3"
               class="form-control"
-              placeholder="Descripción"
+              placeholder="Breve descripción del proyecto"
+              maxlength="255"
               [(ngModel)]="editProject.description"
+              [class.is_max_warning]="ProjectDescription.value.length > 254"
               required
-            />
+            ></textarea>
+            <div class="d-flex justify-content-end">
+              <span class="text-secondary"
+                >{{ ProjectDescription.value.length }}/255</span
+              >
+            </div>
+            <div
+              *ngIf="ProjectDescription.value.length > 254"
+              class="d-flex justify-content-start"
+            >
+              <span class="alert alert-warning"
+                >Has alcanzado el límite de caracteres</span
+              >
+            </div>
           </div>
 
-          <div class="row mt-2">
+          <div class="row">
             <div class="form-group col">
               <label class="text-secondary" for="startTime">Fecha Inicio</label>
               <input
-                type="text"
+                type="month"
+                min="1925-01"
+                max="2022-03"
                 name="startTime"
                 id="startTime"
                 class="form-control"
-                placeholder="Fecha Inicio"
                 [(ngModel)]="editProject.startTime"
                 required
               />
@@ -276,11 +311,12 @@
             <div class="form-group col">
               <label class="text-secondary" for="endTime">Fecha Fin</label>
               <input
-                type="text"
+                type="month"
+                min="1925-01"
+                max="2022-03"
                 name="endTime"
                 id="endTime"
                 class="form-control"
-                placeholder="Fecha Fin/Actualidad"
                 [(ngModel)]="editProject.endTime"
                 required
               />

@@ -62,6 +62,17 @@ ul.items-list {
 .projects_techs {
   overflow-wrap: break-word;
   width: 320px;
+  padding-left: 2.8rem;
+}
+
+.project_description {
+  white-space: pre-wrap;
+  text-align: left !important;
+}
+
+.is_max_warning {
+  border: 2px solid #d8e615c0;
+  box-shadow: 0 0 0 0.25rem rgba(238, 255, 1, 0.5);
 }
 
 /*
