@@ -54,7 +54,10 @@ export class ExperienceComponent implements OnInit {
       this.startTimeFormatted.push(dateFormatted);
     };
     for (const time of endTime) {
-      const yearMonth: string[] = time.split('-');
+      if (time === 'actualidad' || time === 'Actualidad') {
+        break;
+      }
+      const yearMonth: string[] = time.split('-');      
       const date = new Date(Number(yearMonth[0]) ,Number(yearMonth[1])-1);
       const dateFormatted = date.toLocaleString('default', { month: 'short' })+`. ${yearMonth[0]}`;
       this.endTimeFormatted.push(dateFormatted);

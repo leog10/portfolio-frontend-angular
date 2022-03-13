@@ -41,7 +41,11 @@
                   <h6 class="ms-2 text-secondary my-0">
                     <span id="exp-start">{{ startTimeFormatted[i] }}</span
                     ><span> – </span
-                    ><span id="exp-end">{{ endTimeFormatted[i] }}</span
+                    ><span
+                      *ngIf="endTimeFormatted[i]; else actuality"
+                      id="exp-end"
+                      >{{ endTimeFormatted[i] }}</span
+                    ><ng-template #actuality>actualidad</ng-template
                     ><span> – </span
                     ><span id="exp-time">{{ exp.timeAtPosition }}</span>
                   </h6>
