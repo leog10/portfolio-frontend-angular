@@ -1,9 +1,16 @@
 :host {
   background-color: #e9e8e9 !important;
-  padding-bottom: 8.6rem;
+  padding-bottom: 171px;
 }
 
 .pulp_not_found {
   max-width: 100%;
   height: auto;
+}
+
+@supports (-moz-appearance: none) {
+  :host {
+    background-color: #e9e8e9 !important;
+    padding-bottom: 239px !important;
+  }
 }
