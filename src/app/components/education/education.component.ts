@@ -28,6 +28,38 @@ export class EducationComponent implements OnInit {
   endTime!: string;
   location!: string;  
 
+  // DATE FORMATTING
+  startTimeText: string[] = [];
+  endTimeText: string[] = [];
+
+  // Obtiene las fechas y las separa con split('-'). Ej: 2022-04
+  getTimes(educations: Education[]) {
+    for (const education of educations) {
+      this.startTimeText.push(education.startTime);
+      this.endTimeText.push(education.endTime);
+    }
+  }
+
+  startTimeFormatted: string[] = [];
+  endTimeFormatted: string[] = [];
+
+  // Recorre los array de fechas obtenidas con getTimes y les da formato\
+  // de fecha con mes en texto corto. Ej: abr. 2022
+  formatTime(startTime: string[], endTime: string[]) {
+    for (const time of startTime) {
+      const yearMonth: string[] = time.split('-');
+      const date = new Date(Number(yearMonth[0]) ,Number(yearMonth[1])-1);
+      const dateFormatted = date.toLocaleString('default', { month: 'short' })+`. ${yearMonth[0]}`;
+      this.startTimeFormatted.push(dateFormatted);
+    };
+    for (const time of endTime) {
+      const yearMonth: string[] = time.split('-');
+      const date = new Date(Number(yearMonth[0]) ,Number(yearMonth[1])-1);
+      const dateFormatted = date.toLocaleString('default', { month: 'short' })+`. ${yearMonth[0]}`;
+      this.endTimeFormatted.push(dateFormatted);
+    };    
+  }
+
   constructor(
     private tokenService: TokenService,    
     private activatedRoute: ActivatedRoute,
@@ -40,6 +72,12 @@ export class EducationComponent implements OnInit {
     this.educationService.detailsByUsername(_username).subscribe({
       next: education => {
         this.educations = education;
+
+        // Obtiene las fechas y las separa con split('-'). Ej: 2022-04
+        this.getTimes(education);
+        // Recorre el array de fechas obtenidas con getTimes y le da formato\
+        // de fecha con mes en texto corto. Ej: abr. 2022 
+        this.formatTime(this.startTimeText, this.endTimeText);
       },
       error: () => {
         if (!this.username) {

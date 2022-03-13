@@ -15,7 +15,11 @@
     </div>
     <div>
       <ul class="items-list" id="eduList">
-        <li *ngFor="let edu of educations" class="d-flex my-2" id="eduSchool">
+        <li
+          *ngFor="let edu of educations; let i = index"
+          class="d-flex my-2"
+          id="eduSchool"
+        >
           <div class="flex-grow-1">
             <div class="d-flex">
               <div class="my-3">
@@ -35,8 +39,9 @@
                     ><span id="edu-career">{{ edu.career }}</span>
                   </p>
                   <p class="ms-2 text-secondary my-0">
-                    <span id="edu-start">{{ edu.startTime }}</span
-                    ><span> – </span><span id="edu-end">{{ edu.endTime }}</span>
+                    <span id="edu-start">{{ startTimeFormatted[i] }}</span
+                    ><span> - </span
+                    ><span id="edu-end">{{ endTimeFormatted[i] }}</span>
                   </p>
                 </div>
               </div>
