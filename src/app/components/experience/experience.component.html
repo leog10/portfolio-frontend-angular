@@ -194,6 +194,7 @@
           <div class="form-group col mt-2">
             <label class="text-secondary" for="startTime">Fecha Inicio</label>
             <input
+              #startTimeNew
               type="month"
               min="1925-01"
               max="2022-03"
@@ -206,19 +207,31 @@
             />
           </div>
 
-          <div *ngIf="!actualidad.checked" class="form-group col mt-2">
+          <div class="form-group col mt-2">
             <label class="text-secondary" for="endTime">Fecha Fin</label>
             <input
+              #endTimeNew="ngModel"
               type="month"
-              min="1925-01"
+              [min]="startTimeNew.value"
               max="2022-03"
               name="endTime"
               id="endTime"
               class="form-control"
               placeholder="Fecha Fin/Actualidad"
               [(ngModel)]="endTime"
+              [hidden]="actualidad.checked"
+              [class.is-invalid]="
+                startTimeNew.value > endTimeNew.value && endTimeNew.dirty
+              "
               required
             />
+          </div>
+
+          <div
+            *ngIf="startTimeNew.value > endTimeNew.value && endTimeNew.dirty"
+            class="alert alert-danger p-1 m-0"
+          >
+            <div>La fecha final debe ser mayor a la inicial.</div>
           </div>
 
           <div class="form-group col">
@@ -243,7 +256,9 @@
             <button
               class="btn btn-outline-primary fw-bold rounded-pill"
               data-bs-dismiss="modal"
-              [disabled]="!newExpForm.valid"
+              [disabled]="
+                !newExpForm.valid || startTimeNew.value > endTimeNew.value
+              "
               type="submit"
             >
               Guardar
@@ -366,6 +381,7 @@
           <div class="form-group col mt-2">
             <label class="text-secondary" for="startTime">Fecha Inicio</label>
             <input
+              #startTimeEdit
               type="month"
               min="1925-01"
               max="2022-03"
@@ -378,11 +394,12 @@
             />
           </div>
 
-          <div *ngIf="!actualidad.checked" class="form-group col">
+          <div class="form-group col">
             <label class="text-secondary" for="endTime">Fecha Fin</label>
             <input
+              #endTimeEdit="ngModel"
               type="month"
-              min="1925-01"
+              [min]="startTimeEdit.value"
               max="2022-03"
               name="endTime"
               id="endTime"
@@ -390,7 +407,18 @@
               placeholder="Fecha Fin/Actualidad"
               [(ngModel)]="editExperience.endTime"
               required
+              [hidden]="actualidad.checked"
+              [class.is-invalid]="
+                startTimeEdit.value > endTimeEdit.value && endTimeEdit.dirty
+              "
             />
+          </div>
+
+          <div
+            *ngIf="startTimeEdit.value > endTimeEdit.value && endTimeEdit.dirty"
+            class="alert alert-danger p-1 m-0"
+          >
+            <div>La fecha final debe ser mayor a la inicial.</div>
           </div>
 
           <div class="form-group col mt-2">
@@ -415,7 +443,9 @@
             <button
               class="btn btn-outline-primary fw-bold rounded-pill"
               data-bs-dismiss="modal"
-              [disabled]="!editExpForm.valid"
+              [disabled]="
+                !editExpForm.valid || startTimeEdit.value > endTimeEdit.value
+              "
               type="submit"
             >
               Guardar
