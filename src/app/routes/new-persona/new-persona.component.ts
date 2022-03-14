@@ -26,6 +26,9 @@ export class NewPersonaComponent implements OnInit {
   backImg!: string;
   profileImg!: string;
 
+  // Obtiene la fecha actual - 18. Se utiliza en input date como max.
+  minBirthday = `${new Date().getFullYear() - 18}-${(new Date().getMonth()+1).toString().padStart(2, "0")}-${(new Date().getDate()).toString().padStart(2, "0")}`
+
   constructor(
     private personaService: PersonaService,
     private router: Router,
