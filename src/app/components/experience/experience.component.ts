@@ -35,9 +35,9 @@ export class ExperienceComponent implements OnInit {
 
   // Obtiene las fechas y las separa con split('-'). Ej: 2022-04
   getTimes(experiences: Experience[]) {
-    for (const education of experiences) {
-      this.startTimeText.push(education.startTime);
-      this.endTimeText.push(education.endTime);
+    for (const experience of experiences) {
+      this.startTimeText.push(experience.startTime);
+      this.endTimeText.push(experience.endTime);
     }
   }
 
@@ -153,8 +153,7 @@ export class ExperienceComponent implements OnInit {
       this.experiences[this.indexOfEditExperience].endTime,
       this.experiences[this.indexOfEditExperience].timeAtPosition,
       this.experiences[this.indexOfEditExperience].location,
-      );
-      this.editExperience.id = this.experiences[this.indexOfEditExperience].id;
+      );      
   }
 
   editableExperience(id: number): void {
