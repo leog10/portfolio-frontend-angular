@@ -44,4 +44,8 @@ export class PersonaService {
   public existsByUsername(username: string): Observable<boolean> {
     return this.http.get<boolean>(this.personaURL + `exists/${username}`);
   }
+
+  public getUsernameByEmail(email: string): Observable<any> {
+    return this.http.get<any>(this.personaURL + `details/username/${email}`);
+  }
 }

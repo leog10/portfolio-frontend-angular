@@ -43,28 +43,31 @@ export class LoginRegisterComponent implements OnInit {
     }
 
   onLogin(): void {
-    this.loginUser = new LoginUser(this.username,this.passwordLogin);    
-    this.authService.login(this.loginUser).subscribe({
-      next: data => {
-        this.tokenService.setToken(data.token);        
-        this.personaService.existsByUsername(this.username).subscribe({
-          next: exists => {
-            if (exists) {
-              this.router.navigate([`/edit/${this.username}`]);
-            } else {
-              this.router.navigate([`/new/`]);
-            }
+    this.personaService.getUsernameByEmail(this.username).subscribe({
+      next: username => {        
+        this.username = username[0];        
+        this.loginUser = new LoginUser(this.username,this.passwordLogin);    
+        this.authService.login(this.loginUser).subscribe({
+          next: data => {
+            this.tokenService.setToken(data.token);        
+            this.personaService.existsByUsername(this.username).subscribe({
+              next: exists => {
+                if (exists) {
+                  this.router.navigate([`/edit/${this.username}`]);
+                } else {
+                  this.router.navigate([`/new/`]);
+                }
+              }
+            })        
+          },
+          error: err => {        
+            this.errorMsg = "campos inválidos";
+            console.log(err)
           }
-        })
-        
-
-        
-      },
-      error: err => {        
-        this.errorMsg = "campos inválidos";
-        console.log(err)
+        });
       }
-    });
+    })    
+    
   }
 
   onRegister(): void {
