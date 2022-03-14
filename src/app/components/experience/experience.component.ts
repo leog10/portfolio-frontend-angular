@@ -65,6 +65,80 @@ export class ExperienceComponent implements OnInit {
     };    
   }
 
+  // Recorre los array de fechas obtenidas con getTimes y separa con split('-'). Ej: 2022-04\
+  // los meses y años en arrays de fecha inicio y fecha fin. Ej: fechaFin === [2022,1995]
+  // Llama a dateDiff para restar las fechas de inicio y fin en orden de posicion index.
+  timeElapsedCalc(startTime: string[], endTime: string[]) {
+    let startYears = [];
+    let startMonths = [];
+    for (const time of startTime) {
+      const yearMonth: string[] = time.split('-');      
+      startYears.push(yearMonth[0]);
+      startMonths.push(yearMonth[1]);
+    };
+    let endYears = [];
+    let endMonths = [];
+    for (const time of endTime) {
+      if (time === 'actualidad') {
+        endYears.push('actualidad');
+        endMonths.push('actualidad');
+        continue;
+      }
+      const yearMonth: string[] = time.split('-');
+      endYears.push(yearMonth[0]);
+      endMonths.push(yearMonth[1]);
+    };
+
+    for (let i = 0; i < startYears.length; i++) {
+      this.dateDiff(Number(endYears[i]), Number(startYears[i]), Number(endMonths[i]), Number(startMonths[i]));       
+    }
+  }
+
+  // TIEMPO EN LA POSICION
+  // UTILIZADO EN HTML
+  timeElapsed: string[] = [];
+
+  // Las fechas endYear y endMonth pueden contener el string 'actualidad' por lo tanto\
+  // devolveran NaN.
+  // Se evalua si las respectivas fechas son NaN y se crea una nueva fecha(hoy).
+  // Se extrae el año actual y se asigna a _endYear para ser utilizado en adelante.
+  // Se extrae el mes actual y se asigna a _endMonth (y se suma 1 ya que Date.getMonth()\
+  // devuelve el index en un array de 12 posiciones) para ser utilizado en adelante.
+  // El resultado se guarda en timeElapsed.
+  dateDiff(endYear: number, startYear: number, endMonth: number, startMonth: number) {
+    let _endYear = endYear;
+    let _endMonth = endMonth;
+
+    if (Number.isNaN(endYear)) {      
+      let today = new(Date);
+      _endYear = today.getFullYear();      
+    }
+
+    if (Number.isNaN(endMonth)) {
+      let today = new(Date);      
+      _endMonth = today.getMonth()+1;      
+    }
+
+    if (_endMonth < startMonth) {
+      _endYear--;
+      _endMonth += 12;
+    }
+
+    if (_endYear - startYear === 0 && _endMonth - startMonth === 0) {
+      this.timeElapsed.push(`0 meses`);
+    } else if (_endYear - startYear === 0 && _endMonth - startMonth === 1) {
+      this.timeElapsed.push(`1 mes`);
+    } else if (_endYear - startYear === 0) {
+      this.timeElapsed.push(`${_endMonth - startMonth} meses`);
+    } else if (_endYear - startYear !== 0 && _endMonth - startMonth === 0) {
+      this.timeElapsed.push(`${_endYear - startYear} años`);
+    } else if (_endYear - startYear !== 0 && _endMonth - startMonth === 1) {
+      this.timeElapsed.push(`${_endYear - startYear} años 1 mes`);
+    } else {
+      this.timeElapsed.push(`${_endYear - startYear} años ${_endMonth - startMonth} meses`);
+    }
+  }
+
   constructor(
     private tokenService: TokenService,    
     private activatedRoute: ActivatedRoute,
@@ -83,6 +157,7 @@ export class ExperienceComponent implements OnInit {
         // Recorre el array de fechas obtenidas con getTimes y le da formato\
         // de fecha con mes en texto corto. Ej: abr. 2022 
         this.formatTime(this.startTimeText, this.endTimeText);
+        this.timeElapsedCalc(this.startTimeText, this.endTimeText);
       },
       error: () => {
         if (!this.username) {

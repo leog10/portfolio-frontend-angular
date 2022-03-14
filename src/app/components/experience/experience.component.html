@@ -38,7 +38,7 @@
                     <span id="exp-company">{{ exp.company }}</span
                     ><span> - </span><span id="exp-mode">{{ exp.mode }}</span>
                   </p>
-                  <h6 class="ms-2 text-secondary my-0">
+                  <p class="ms-2 text-secondary my-0">
                     <span id="exp-start">{{ startTimeFormatted[i] }}</span
                     ><span> – </span
                     ><span
@@ -47,11 +47,11 @@
                       >{{ endTimeFormatted[i] }}</span
                     ><ng-template #actuality>actualidad</ng-template
                     ><span> – </span
-                    ><span id="exp-time">{{ exp.timeAtPosition }}</span>
-                  </h6>
-                  <h6 class="ms-2 text-secondary my-0" id="exp-location">
+                    ><span id="exp-time">{{ timeElapsed[i] }}</span>
+                  </p>
+                  <p class="ms-2 text-secondary my-0" id="exp-location">
                     {{ exp.location }}
-                  </h6>
+                  </p>
                 </div>
               </div>
             </div>
