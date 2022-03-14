@@ -91,7 +91,7 @@
   id="newExpModal"
   data-bs-backdrop="static"
   data-bs-keyboard="true"
-  (keydown.escape)="newExpForm.reset()"
+  (keydown.escape)="newExpForm.reset(); actualidad.checked = false"
   tabindex="-1"
   aria-labelledby="newExpModalLabel"
   aria-hidden="true"
@@ -104,7 +104,7 @@
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
-          (click)="newExpForm.reset()"
+          (click)="newExpForm.reset(); actualidad.checked = false"
           aria-label="Close"
         ></button>
       </div>
@@ -175,6 +175,22 @@
             />
           </div>
 
+          <div class="form-check mt-3">
+            <input
+              #actualidad
+              class="form-check-input"
+              type="checkbox"
+              value="actualidadNew"
+              id="endTimeNew"
+              name="endTimeNew"
+              (click)="isActualJob($event)"
+              required
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Actualmente tengo este cargo
+            </label>
+          </div>
+
           <div class="form-group col mt-2">
             <label class="text-secondary" for="startTime">Fecha Inicio</label>
             <input
@@ -189,7 +205,8 @@
               required
             />
           </div>
-          <div class="form-group col mt-2">
+
+          <div *ngIf="!actualidad.checked" class="form-group col mt-2">
             <label class="text-secondary" for="endTime">Fecha Fin</label>
             <input
               type="month"
@@ -329,35 +346,51 @@
             />
           </div>
 
-          <div class="row mt-2">
-            <div class="form-group col">
-              <label class="text-secondary" for="startTime">Fecha Inicio</label>
-              <input
-                type="month"
-                min="1925-01"
-                max="2022-03"
-                name="startTime"
-                id="startTime"
-                class="form-control"
-                placeholder="Fecha Inicio"
-                [(ngModel)]="editExperience.startTime"
-                required
-              />
-            </div>
-            <div class="form-group col">
-              <label class="text-secondary" for="endTime">Fecha Fin</label>
-              <input
-                type="month"
-                min="1925-01"
-                max="2022-03"
-                name="endTime"
-                id="endTime"
-                class="form-control"
-                placeholder="Fecha Fin/Actualidad"
-                [(ngModel)]="editExperience.endTime"
-                required
-              />
-            </div>
+          <div class="form-check mt-3">
+            <input
+              #actualidad
+              class="form-check-input"
+              type="checkbox"
+              value="actualidad"
+              id="endTime"
+              name="endTime"
+              (click)="updateEditExperienceActualJob($event)"
+              [checked]="editExperience.endTime === 'actualidad'"
+              required
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Actualmente tengo este cargo
+            </label>
+          </div>
+
+          <div class="form-group col mt-2">
+            <label class="text-secondary" for="startTime">Fecha Inicio</label>
+            <input
+              type="month"
+              min="1925-01"
+              max="2022-03"
+              name="startTime"
+              id="startTime"
+              class="form-control"
+              placeholder="Fecha Inicio"
+              [(ngModel)]="editExperience.startTime"
+              required
+            />
+          </div>
+
+          <div *ngIf="!actualidad.checked" class="form-group col">
+            <label class="text-secondary" for="endTime">Fecha Fin</label>
+            <input
+              type="month"
+              min="1925-01"
+              max="2022-03"
+              name="endTime"
+              id="endTime"
+              class="form-control"
+              placeholder="Fecha Fin/Actualidad"
+              [(ngModel)]="editExperience.endTime"
+              required
+            />
           </div>
 
           <div class="form-group col mt-2">

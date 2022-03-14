@@ -55,7 +55,8 @@ export class ExperienceComponent implements OnInit {
     };
     for (const time of endTime) {
       if (time === 'actualidad') {
-        break;
+        this.endTimeFormatted.push('actualidad');
+        continue;
       }
       const yearMonth: string[] = time.split('-');      
       const date = new Date(Number(yearMonth[0]) ,Number(yearMonth[1])-1);
@@ -93,6 +94,14 @@ export class ExperienceComponent implements OnInit {
     });
   }
 
+  isActualJob(event: any) {
+    if (event.target.checked) {
+      this.endTime = 'actualidad';
+    } else {
+      this.endTime = '';
+    }    
+  }
+
   onCreate(): void {
     const _experience = new Experience(
       this.position,
@@ -106,7 +115,7 @@ export class ExperienceComponent implements OnInit {
       );
     this.experienceService.create(_experience).subscribe({
       next: () => {
-        this.ngOnInit();
+        window.location.reload();
       },
       error: error => {
         console.log('Error al crear Experiencia',error);
@@ -135,7 +144,7 @@ export class ExperienceComponent implements OnInit {
   }
 
   loadEditExperience(): void {
-    this.editExperience = new Experience(
+    this.editExperience = new Experience(      
       this.experiences[this.indexOfEditExperience].position,
       this.experiences[this.indexOfEditExperience].company,
       this.experiences[this.indexOfEditExperience].img,
@@ -145,11 +154,20 @@ export class ExperienceComponent implements OnInit {
       this.experiences[this.indexOfEditExperience].timeAtPosition,
       this.experiences[this.indexOfEditExperience].location,
       );
+      this.editExperience.id = this.experiences[this.indexOfEditExperience].id;
   }
 
   editableExperience(id: number): void {
     this.findIndexOfExperience(id);
     this.loadEditExperience();
+  }
+
+  updateEditExperienceActualJob(event: any) {
+    if (event.target.checked) {
+      this.editExperience.endTime = 'actualidad';
+    } else {
+      this.editExperience.endTime = '';
+    }    
   }
 
   onUpdate(): void {    
@@ -168,5 +186,4 @@ export class ExperienceComponent implements OnInit {
     this.routeEdit = this.router.url.includes(`edit/${this.username}`);
     this.loadExperience();
   }
-
 }
