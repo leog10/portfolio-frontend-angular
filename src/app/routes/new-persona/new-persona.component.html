@@ -82,15 +82,15 @@
         rows="3"
         class="form-control mt-2"
         placeholder="Acerca de tí"
-        maxlength="255"
+        maxlength="500"
         [(ngModel)]="aboutMeNew"
-        [class.is_max_warning]="aboutMe.value.length > 254"
+        [class.is_max_warning]="aboutMe.value.length > 499"
       ></textarea>
       <div class="d-flex justify-content-end">
-        <span class="text-secondary">{{ aboutMe.value.length }}/255</span>
+        <span class="text-secondary">{{ aboutMe.value.length }}/500</span>
       </div>
       <div
-        *ngIf="aboutMe.value.length > 254"
+        *ngIf="aboutMe.value.length > 499"
         class="d-flex justify-content-start"
       >
         <span class="alert alert-warning"
