@@ -43,17 +43,18 @@ export class LoginRegisterComponent implements OnInit {
     }
 
   onLogin(): void {
+    let _username: string;
     this.personaService.getUsernameByEmail(this.username).subscribe({
       next: username => {        
-        this.username = username[0];        
+        _username = username[0];        
         this.loginUser = new LoginUser(this.username,this.passwordLogin);    
         this.authService.login(this.loginUser).subscribe({
           next: data => {
-            this.tokenService.setToken(data.token);        
-            this.personaService.existsByUsername(this.username).subscribe({
+            this.tokenService.setToken(data.token); 
+            this.personaService.existsByUsername(_username).subscribe({
               next: exists => {
                 if (exists) {
-                  this.router.navigate([`/edit/${this.username}`]);
+                  this.router.navigate([`/edit/${_username}`]);
                 } else {
                   this.router.navigate([`/new/`]);
                 }

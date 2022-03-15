@@ -1,0 +1,70 @@
+<app-header></app-header>
+<!-- Password Recovery -->
+<div class="password_recovery_form">
+  <h5 class="pt-3 ps-3">Recupera tu cuenta</h5>
+  <hr class="block" />
+  <p class="mb-3 ps-3">Ingresa tu usuario o email para recuperar tu cuenta.</p>
+  <form
+    #passRecoveryForm="ngForm"
+    (ngSubmit)="
+      onSendEmail(); msgAwait = 'await'; (recoveryPassButton.disabled)
+    "
+    novalidate
+  >
+    <div class="form-group px-3">
+      <input
+        [class.is-valid]="userData.valid"
+        [class.is-invalid]="userData.invalid && userData.dirty"
+        placeholder="Correo electrónico"
+        type="email"
+        name="userData"
+        id="userData"
+        class="form-control"
+        #userData="ngModel"
+        required
+        [(ngModel)]="mailTo"
+      />
+      <div
+        *ngIf="userData.invalid && userData.dirty"
+        class="alert alert-danger p-1 mt-2"
+      >
+        <div>Ingresa tu usuario o email.</div>
+      </div>
+    </div>
+    <hr />
+    <div class="pb-3 px-2">
+      <div class="form-group d-flex justify-content-end">
+        <button
+          type="button"
+          class="btn btn-secondary btn-sm px-3 me-2"
+          (click)="goBack()"
+        >
+          Cancelar
+        </button>
+        <button
+          #recoveryPassButton
+          type="submit"
+          class="btn btn-primary btn-sm px-3"
+          [disabled]="!passRecoveryForm.valid"
+        >
+          Buscar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="msgAwait" class="message alert alert-success d-flex">
+  <div class="spinner-border text-success me-2" role="status"></div>
+  <p class="mb-0">Aguarda un momento...</p>
+</div>
+
+<div *ngIf="msgSuccess" class="message alert alert-success">
+  <p class="mb-0">{{ msgSuccess }}</p>
+  <p class="mb-0">Por favor, verifica tu correo electrónico.</p>
+</div>
+
+<div *ngIf="msgFail" class="message alert alert-danger">
+  <p class="mb-0">Error:</p>
+  <p class="mb-0">{{ msgFail }}</p>
+</div>

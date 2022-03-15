@@ -26,6 +26,8 @@ import { environment } from 'src/environments/environment';
 import { NotFoundComponent } from './routes/not-found/not-found.component';
 import { IndexComponent } from './routes/index/index.component';
 import { authInterceptorProviders } from './interceptors/auth.interceptor';
+import { SendEmailComponent } from './changepassword/send-email/send-email.component';
+import { ChangePasswordComponent } from './changepassword/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { authInterceptorProviders } from './interceptors/auth.interceptor';
     MyProjectsComponent,
     NewPersonaComponent,
     NotFoundComponent,
-    IndexComponent    
+    IndexComponent,
+    SendEmailComponent,
+    ChangePasswordComponent    
   ],
   imports: [
     BrowserModule,    

@@ -1,0 +1,26 @@
+.password_recovery_form {
+  margin: 10rem auto 0;
+  background-color: #fff;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  box-sizing: border-box;
+  width: 520px;
+}
+
+.message {
+  margin: 2rem auto 0;
+  width: 520px;
+}
+
+.btn-secondary {
+  background-color: #e4e6eb !important;
+  box-shadow: none;
+  border-color: #e4e6eb;
+  color: #4b4f56;
+  font-weight: 500;
+}
+
+.btn-primary {
+  font-weight: 500;
+}
