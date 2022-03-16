@@ -13,7 +13,7 @@
         ></a>
       </div>
     </div>
-    <div *ngIf="educations.length > 0; else eduPlaceholder">
+    <div *ngIf="educationPlaceholder.length > 0; else eduPlaceholder">
       <ul class="items-list" id="eduList">
         <li
           *ngFor="let edu of educations; let i = index"
@@ -77,11 +77,7 @@
       <div *ngFor="let repeat of [1, 2]">
         <div class="d-flex">
           <div class="my-3">
-            <img
-              id="edu-img"
-              class="logo_image me-2"
-              [src]="'../../../assets/images/APLogo-20-20.png'"
-            />
+            <div class="spinner-grow text-secondary me-2" role="status"></div>
           </div>
           <div class="flex-grow-1">
             <p class="card-text placeholder-glow">
