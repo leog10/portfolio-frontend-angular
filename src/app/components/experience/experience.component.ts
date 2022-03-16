@@ -16,6 +16,7 @@ export class ExperienceComponent implements OnInit {
 
   routeEdit: boolean = false;
 
+  experiencePlaceholder: string = 'loading';
   //LIST OF EXPERIENCES
   experiences: Experience[] = [];
 
@@ -147,11 +148,18 @@ export class ExperienceComponent implements OnInit {
   ) { }
 
   loadExperience(): void {
+    // Reset a todas los calculos de fechas.
+    this.startTimeText = [];
+    this.endTimeText = [];
+    this.startTimeFormatted = [];
+    this.endTimeFormatted = [];
+    this.timeElapsed = [];
+    // Fin reset.
     const _username = this.activatedRoute.snapshot.params['username'];
     this.experienceService.detailsByUsername(_username).subscribe({
       next: experience => {
         this.experiences = experience;
-
+        this.experiencePlaceholder = 'loaded'
         // Obtiene las fechas y las separa con split('-'). Ej: 2022-04
         this.getTimes(experience);
         // Recorre el array de fechas obtenidas con getTimes y le da formato\
@@ -159,11 +167,11 @@ export class ExperienceComponent implements OnInit {
         this.formatTime(this.startTimeText, this.endTimeText);
         this.timeElapsedCalc(this.startTimeText, this.endTimeText);
       },
-      error: () => {
+      error: err => {
         if (!this.username) {
           this.router.navigate(['/login']);
         } else {
-          window.location.href = `${window.location.origin}/portfolio/${this.username}`;
+          console.log(err);
         }        
       }
     });
@@ -188,9 +196,10 @@ export class ExperienceComponent implements OnInit {
       this.timeAtPosition,
       this.location
       );
+      this.experiencePlaceholder = 'loading'
     this.experienceService.create(_experience).subscribe({
       next: () => {
-        window.location.reload();
+        this.ngOnInit();
       },
       error: error => {
         console.log('Error al crear Experiencia',error);
@@ -199,6 +208,7 @@ export class ExperienceComponent implements OnInit {
   }
 
   onDelete(id: number) {
+    this.experiencePlaceholder = 'loading'
     this.experienceService.delete(id).subscribe({
       next: () => {
         this.ngOnInit();
@@ -244,10 +254,11 @@ export class ExperienceComponent implements OnInit {
     }    
   }
 
-  onUpdate(): void {    
+  onUpdate(): void {
+    this.experiencePlaceholder = 'loading'
     this.experienceService.update(this.experiences[this.indexOfEditExperience].id!,this.editExperience).subscribe({
       next: () => {
-        window.location.reload();
+        this.ngOnInit();
       },
       error: error => {        
         alert(error);

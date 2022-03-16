@@ -80,11 +80,11 @@ export class EducationComponent implements OnInit {
         // de fecha con mes en texto corto. Ej: abr. 2022 
         this.formatTime(this.startTimeText, this.endTimeText);
       },
-      error: () => {
+      error: err => {
         if (!this.username) {
           this.router.navigate(['/login']);
         } else {
-          window.location.href = `${window.location.origin}/portfolio/${this.username}`;
+          console.log(err);
         }        
       }
     });
@@ -136,7 +136,7 @@ export class EducationComponent implements OnInit {
         this.ngOnInit();
       },
       error: error => {        
-        alert(error);
+        console.log(error);
       }
     });
   }

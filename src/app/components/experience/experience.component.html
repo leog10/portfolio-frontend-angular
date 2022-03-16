@@ -2,7 +2,10 @@
   <div id="experience">
     <div class="d-flex">
       <h4 class="flex-grow-1">Experiencia</h4>
-      <div *ngIf="routeEdit" class="d-flex">
+      <div
+        *ngIf="routeEdit && experiencePlaceholder === 'loaded'"
+        class="d-flex"
+      >
         <a class="d-flex a_icon align-self-end me-1"
           ><i
             class="fa fa-plus"
@@ -13,7 +16,7 @@
         ></a>
       </div>
     </div>
-    <div>
+    <div *ngIf="experiencePlaceholder === 'loaded'; else expPlaceholder">
       <ul class="items-list" id="expList">
         <li
           *ngFor="let exp of experiences; let i = index"
@@ -81,6 +84,26 @@
         </li>
       </ul>
     </div>
+    <!-- Placeholder -->
+    <ng-template #expPlaceholder>
+      <div *ngFor="let repeat of [1, 2]">
+        <div class="d-flex">
+          <div class="my-3">
+            <div class="spinner-grow text-secondary me-2" role="status"></div>
+          </div>
+          <div class="flex-grow-1">
+            <p class="card-text placeholder-glow">
+              <span class="placeholder col-3"></span>
+              <br />
+              <span class="placeholder col-3"></span>
+              <br />
+              <span class="placeholder col-2"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <!-- End Placeholder -->
   </div>
 </div>
 
