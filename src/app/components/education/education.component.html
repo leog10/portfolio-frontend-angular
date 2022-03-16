@@ -13,7 +13,7 @@
         ></a>
       </div>
     </div>
-    <div>
+    <div *ngIf="educations.length > 0; else eduPlaceholder">
       <ul class="items-list" id="eduList">
         <li
           *ngFor="let edu of educations; let i = index"
@@ -22,7 +22,7 @@
         >
           <div class="flex-grow-1">
             <div class="d-flex">
-              <div class="my-3">
+              <div class="my-3 align-self-center">
                 <img
                   id="edu-img"
                   class="logo_image me-2"
@@ -32,7 +32,7 @@
               </div>
               <div>
                 <div>
-                  <h5 class="my-2" id="edu-school">{{ edu.school }}</h5>
+                  <h5 class="my-2 ms-1" id="edu-school">{{ edu.school }}</h5>
                   <p class="ms-2 mb-0">
                     <span id="edu-title">{{ edu.title }}</span
                     ><span> - </span
@@ -72,6 +72,28 @@
         </li>
       </ul>
     </div>
+    <!-- Placeholder -->
+    <ng-template #eduPlaceholder>
+      <div class="d-flex">
+        <div class="my-3">
+          <img
+            id="edu-img"
+            class="logo_image me-2"
+            [src]="'../../../assets/images/APLogo-20-20.png'"
+          />
+        </div>
+        <div class="flex-grow-1">
+          <p class="card-text placeholder-glow">
+            <span class="placeholder col-3"></span>
+            <br />
+            <span class="placeholder col-3"></span>
+            <br />
+            <span class="placeholder col-2"></span>
+          </p>
+        </div>
+      </div>
+    </ng-template>
+    <!-- End Placeholder -->
   </div>
 </div>
 
