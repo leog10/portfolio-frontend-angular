@@ -25,6 +25,8 @@ export class SkillsComponent implements OnInit {
 
   username!: string;
 
+  skillsPlaceholder: string = 'loading';
+
   skills: Skill[] = [];
 
   constructor(
@@ -52,10 +54,9 @@ export class SkillsComponent implements OnInit {
     if (document.getElementById('startSkills')!.childElementCount > 5) {
       newSkillButton.disabled = true;
       divMaxSkillsReached.style.display = '';
-    } else {
+    } else {      
       this.newSkill();
-      newSkillButton.disabled = true;
-      this.countdownTimer(5,newSkillButton,'Agregar Skill') 
+      this.skillsPlaceholder = 'loading';      
     }
     }
 
@@ -119,11 +120,12 @@ export class SkillsComponent implements OnInit {
   borrarSkillEnDb(skill: Skill) {
     this.skillService.delete(skill).subscribe(() =>{
       this.skills = this.skills.filter((dato) => dato.id !== skill.id);
+      this.ngOnInit();
     });
   }
 
   //Borra el Custom Element del DOM y borra el objeto de la base de datos.
-  deleteSkill(skill: Skill) {
+  deleteSkill(skill: Skill) {    
     (<HTMLInputElement> document.getElementById('deleteButton'+(skill.id?.toString()))).disabled = true;
     (<HTMLInputElement> document.getElementById('saveButton'+(skill.id?.toString()))).disabled = true;
     //Pasa el parametro id a string para manipular el DOM con getElementById que recibe un string como parametro.
@@ -134,7 +136,8 @@ export class SkillsComponent implements OnInit {
     //Se crea un delay antes de eliminar el elemento para dar tiempo a la animacion de cierre a mostrarse en pantalla.
     setTimeout (() => {
       (<HTMLInputElement> document.getElementById(_idToSring)).style.display = 'none';
-      this.borrarSkillEnDb(skill);      
+      this.skillsPlaceholder = 'loading';
+      this.borrarSkillEnDb(skill);
     }, 450);
 
     let newSkillButton = (<HTMLInputElement> document.getElementById('newSkill'));
@@ -144,10 +147,16 @@ export class SkillsComponent implements OnInit {
   }
 
   loadSkills(): void {
+    this.skillsPlaceholder = 'loading';
     const _username = this.activatedRoute.snapshot.params['username'];
     this.skillService.detailsByUsername(_username).subscribe({
       next: skill => {
-        this.skills = skill;
+        if (skill.length > 0) {
+          this.skillsPlaceholder = 'loaded';
+          this.skills = skill;
+        } else {
+          this.skillsPlaceholder = 'loaded';
+        }        
       },
       error: err => {
         console.log(err);

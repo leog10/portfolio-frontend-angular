@@ -7,7 +7,7 @@
           class="btn btn-outline-success fw-bold rounded-pill"
           id="newSkill"
           type="button"
-          [disabled]="false"
+          [disabled]="skillsPlaceholder === 'loading'"
           (click)="createSkill()"
         >
           Agregar Skill
@@ -18,7 +18,10 @@
       </div>
     </div>
   </div>
-  <div id="startSkills">
+  <div
+    id="startSkills"
+    *ngIf="skillsPlaceholder === 'loaded'; else skillsShowPlaceholder"
+  >
     <ng-container *ngIf="routeEdit; else inicioTemplate">
       <div class="skill_container" *ngFor="let skill of skills" [id]="skill.id">
         <p *ngIf="skillForm.dirty || skillTitle.dirty" class="text-danger">
@@ -65,6 +68,7 @@
             [animationDelay]="skill.animationDelay"
           ></round-progress>
         </div>
+        <!-- skill form -->
         <div>
           <div
             class="collapse collapse-horizontal"
@@ -244,6 +248,7 @@
             </div>
           </div>
         </div>
+        <!-- end skill form -->
       </div>
     </ng-container>
     <ng-template #inicioTemplate>
@@ -275,4 +280,10 @@
       </div>
     </ng-template>
   </div>
+  <ng-template #skillsShowPlaceholder>
+    <div class="d-flex justify-content-center align-content-center mx-auto">
+      <div class="spinner-border text-primary" role="status"></div>
+      <span class="ms-2">Cargando...</span>
+    </div>
+  </ng-template>
 </div>
