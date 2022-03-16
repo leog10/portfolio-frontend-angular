@@ -17,6 +17,7 @@ export class MyProjectsComponent implements OnInit {
 
   routeEdit: boolean = false;
 
+  projectsPlaceholder: string = 'loading'
   //LIST OF EDUCATIONS
   projects: Project[] = [];
 
@@ -40,12 +41,13 @@ export class MyProjectsComponent implements OnInit {
     this.projectService.detailsByUsername(_username).subscribe({
       next: project => {
         this.projects = project;
+        this.projectsPlaceholder = 'loaded'
       },
-      error: () => {
+      error: err => {
         if (!this.username) {
           this.router.navigate(['/login']);
         } else {
-          window.location.href = `${window.location.origin}/portfolio/${this.username}`;
+          console.log(err);
         }        
       }
     });
@@ -93,7 +95,7 @@ export class MyProjectsComponent implements OnInit {
         this.ngOnInit();        
       },
       error: error => {        
-        alert(error);
+        console.log(error);
       }
     });
   }
