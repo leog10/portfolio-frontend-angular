@@ -21,9 +21,6 @@ export class SkillsComponent implements OnInit {
   @HostBinding('@state')
   state: 'opened' | 'closed' = 'opened';
 
-  @Output()
-  closed = new EventEmitter<void>();
-
   routeEdit: boolean = false;
 
   username!: string;
@@ -133,19 +130,17 @@ export class SkillsComponent implements OnInit {
     const _idToSring = skill.id!.toString();
     //Agrega la clase ' closing' con espacio para no generar conflicto con las clases existentes.
     //La clase .closing le da una animacion al eliminar el elemento.
-    document.getElementById(_idToSring)!.className += ' closing';
+    document.getElementById(_idToSring)!.className += ' closing';    
     //Se crea un delay antes de eliminar el elemento para dar tiempo a la animacion de cierre a mostrarse en pantalla.
     setTimeout (() => {
-      this.borrarSkillEnDb(skill);
-      if (this.skills.length === 0) {
-        this.closed.emit();
-      }      
+      (<HTMLInputElement> document.getElementById(_idToSring)).style.display = 'none';
+      this.borrarSkillEnDb(skill);      
     }, 450);
 
     let newSkillButton = (<HTMLInputElement> document.getElementById('newSkill'));
     let divMaxSkillsReached = (<HTMLInputElement> document.getElementById('maxSkillsReached'));
       newSkillButton.disabled = false;
-      divMaxSkillsReached.style.display = 'none';
+      divMaxSkillsReached.style.display = 'none';      
   }
 
   loadSkills(): void {

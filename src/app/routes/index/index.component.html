@@ -39,12 +39,10 @@
       ></button>
     </div>
     <div class="carousel-inner rounded-3">
-      <ng-container
-        *ngFor="let persona of personas; while: persona < 3; let i = index"
-      >
+      <ng-container *ngFor="let persona of personas; let i = index">
         <div
           class="carousel-item"
-          data-bs-interval="95000"
+          data-bs-interval="5000"
           *ngIf="i < 3"
           [ngClass]="{ active: i == 0 }"
         >

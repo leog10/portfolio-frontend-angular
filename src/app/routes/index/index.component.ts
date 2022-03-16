@@ -25,7 +25,7 @@ export class IndexComponent implements OnInit {
         for (let i = 0; i < 3; i++) {        
         this.personaService.usernameByPersonaId(this.personas[i].id!).pipe(take(1)).subscribe({
           next: username => {
-              this.username.push(username);
+              this.username[i] = username;
             }
         });
       }      

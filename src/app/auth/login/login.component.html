@@ -1,6 +1,10 @@
 <!-- Login -->
 <div class="login_form">
-  <form #loginForm="ngForm" (ngSubmit)="onLogin()" novalidate>
+  <form
+    #loginForm="ngForm"
+    (ngSubmit)="onLogin(); loginButton.disabled = true"
+    novalidate
+  >
     <div class="form-group">
       <label class="d-none" for="username"></label>
       <input
@@ -27,10 +31,18 @@
     </div>
     <div class="form-group d-grid mt-3">
       <button
+        #loginButton
+        id="loginButton"
         class="btn btn-primary fw-bold"
         [disabled]="!loginForm.valid"
         type="submit"
       >
+        <span
+          *ngIf="loginButton.disabled && loginForm.valid"
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
         Iniciar Sesión
       </button>
     </div>

@@ -43,6 +43,7 @@ export class LoginRegisterComponent implements OnInit {
     }
 
   onLogin(): void {
+    this.errorMsg = '';
     let _username: string;
     this.personaService.getUsernameByEmail(this.username).subscribe({
       next: username => {        
@@ -61,13 +62,19 @@ export class LoginRegisterComponent implements OnInit {
               }
             })        
           },
-          error: err => {        
+          error: err => {  
             this.errorMsg = "campos inválidos";
+            (<HTMLInputElement> document.getElementById('loginButton')).disabled = false;
             console.log(err)
           }
         });
       }
-    })    
+    ,
+  error: err => {
+    this.errorMsg = "campos inválidos";
+    (<HTMLInputElement> document.getElementById('loginButton')).disabled = false;
+    console.log(err)
+  }})    
     
   }
 
