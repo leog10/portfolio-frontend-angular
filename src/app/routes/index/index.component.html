@@ -12,6 +12,7 @@
   <!-- carousel -->
 
   <div
+    *ngIf="username.length > 0; else loadingCarousel"
     id="carouselProfiles"
     class="carousel slide mt-5 profiles_size"
     data-bs-ride="carousel"
@@ -96,4 +97,12 @@
   </div>
 
   <!-- end carousel -->
+  <ng-template #loadingCarousel>
+    <div
+      class="d-flex justify-content-center align-content-center mx-auto mt-5 pt-5"
+    >
+      <div class="spinner-border text-primary" role="status"></div>
+      <span class="ms-2">Cargando...</span>
+    </div>
+  </ng-template>
 </div>
