@@ -41,7 +41,7 @@
             onerror="this.src='../../../assets/images/default-profile.jpg';"
           />
         </ng-template>
-        <div class="ms-auto me-3" *ngIf="routeEdit">
+        <div class="ms-auto me-3" *ngIf="routeEdit && persona">
           <a class="a_icon" data-bs-toggle="modal" data-bs-target="#editProfile"
             ><i class="fa-solid fa-user-pen" data-title="Editar"></i
           ></a>
@@ -119,7 +119,7 @@
   <div id="aboutMe">
     <div class="d-flex">
       <h4 class="flex-grow-1">Acerca de</h4>
-      <div *ngIf="routeEdit" class="d-flex">
+      <div *ngIf="routeEdit && aboutMePlaceholder" class="d-flex">
         <a
           class="d-flex a_icon align-self-end me-1"
           data-title="Editar"
