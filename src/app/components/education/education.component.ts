@@ -91,8 +91,9 @@ export class EducationComponent implements OnInit {
 
   onCreate(): void {
     const education = new Education(this.school, this.title, this.img, this.career, this.startTime, this.endTime, this.location);
+    this.educations = [];
     this.educationService.create(education).subscribe({
-      next: () => {
+      next: () => {        
         this.ngOnInit();
       },
       error: error => {
@@ -139,6 +140,7 @@ export class EducationComponent implements OnInit {
   }
 
   onDelete(id: number) {
+    this.educations = [];
     this.educationService.delete(id).subscribe({
       next: () => {
         this.ngOnInit();

@@ -74,22 +74,24 @@
     </div>
     <!-- Placeholder -->
     <ng-template #eduPlaceholder>
-      <div class="d-flex">
-        <div class="my-3">
-          <img
-            id="edu-img"
-            class="logo_image me-2"
-            [src]="'../../../assets/images/APLogo-20-20.png'"
-          />
-        </div>
-        <div class="flex-grow-1">
-          <p class="card-text placeholder-glow">
-            <span class="placeholder col-3"></span>
-            <br />
-            <span class="placeholder col-3"></span>
-            <br />
-            <span class="placeholder col-2"></span>
-          </p>
+      <div *ngFor="let repeat of [1, 2]">
+        <div class="d-flex">
+          <div class="my-3">
+            <img
+              id="edu-img"
+              class="logo_image me-2"
+              [src]="'../../../assets/images/APLogo-20-20.png'"
+            />
+          </div>
+          <div class="flex-grow-1">
+            <p class="card-text placeholder-glow">
+              <span class="placeholder col-3"></span>
+              <br />
+              <span class="placeholder col-3"></span>
+              <br />
+              <span class="placeholder col-2"></span>
+            </p>
+          </div>
         </div>
       </div>
     </ng-template>
