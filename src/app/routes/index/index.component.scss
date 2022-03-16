@@ -1,0 +1,41 @@
+.profiles_size {
+  height: 450px;
+  width: 1400px;
+  top: 3%;
+}
+
+.profile_image {
+  pointer-events: none;
+  border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  top: 3%;
+  right: 44%;
+  border: solid 5px white;
+  position: inherit;
+}
+
+.profile_image_container {
+  position: absolute;
+  bottom: 0% !important;
+  text-align: center;
+}
+
+.carousel-caption {
+  margin-bottom: 2%;
+}
+
+.profile_link {
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 100;
+  right: 44%;
+  top: 3%;
+  height: 160px;
+  width: 160px;
+}
+
+.profile_link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}

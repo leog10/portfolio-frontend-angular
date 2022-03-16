@@ -8,38 +8,94 @@
   <h5 class="align-self-start text-decoration-underline ms-4">
     O visita los perfiles destacados:
   </h5>
-  <div class="container-fluid">
-    <div class="mt-4 d-flex flex-row flex-wrap justify-content-around">
-      <div>
-        <h5 class="text-center">Diegote 86</h5>
-        <img
-          height="450px"
-          width="350"
-          src="../../../assets/images/default-project.jpg"
-          alt=""
-          class="border-5 border-warning rounded-3"
-        />
-      </div>
-      <div>
-        <h5 class="text-center">Leo Gilli</h5>
-        <img
-          height="450px"
-          width="350"
-          src="../../../assets/images/default-project.jpg"
-          alt=""
-          class="border-5 border-warning rounded-3"
-        />
-      </div>
-      <div>
-        <h5 class="text-center">El Manu de la people</h5>
-        <img
-          height="450px"
-          width="350"
-          src="../../../assets/images/default-project.jpg"
-          alt=""
-          class="border-5 border-warning rounded-3"
-        />
-      </div>
+
+  <!-- carousel -->
+
+  <div
+    id="carouselProfiles"
+    class="carousel slide mt-5 profiles_size"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-indicators">
+      <button
+        type="button"
+        data-bs-target="#carouselProfiles"
+        data-bs-slide-to="0"
+        class="active"
+        aria-current="true"
+        aria-label="Slide 1"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselProfiles"
+        data-bs-slide-to="1"
+        aria-label="Slide 2"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselProfiles"
+        data-bs-slide-to="2"
+        aria-label="Slide 3"
+      ></button>
     </div>
+    <div class="carousel-inner rounded-3">
+      <ng-container
+        *ngFor="let persona of personas; while: persona < 3; let i = index"
+      >
+        <div
+          class="carousel-item"
+          data-bs-interval="95000"
+          *ngIf="i < 3"
+          [ngClass]="{ active: i == 0 }"
+        >
+          <img
+            [src]="persona.backImg"
+            class="d-block w-100 profiles_size"
+            alt="..."
+          />
+          <div class="profiles_size profile_image_container">
+            <a
+              class="profile_link"
+              [routerLink]="'/portfolio/' + username[i]"
+            ></a
+            ><img [src]="persona.profileImg" class="profile_image" alt="..." />
+          </div>
+          <div
+            class="carousel-caption d-none d-md-block text-black bg-gradient bg-white bg-opacity-100 rounded-3"
+          >
+            <a
+              class="text-decoration-none text-black text-decoration-underline"
+              [routerLink]="'/portfolio/' + username[i]"
+            >
+              <h5>{{ persona.firstName }} {{ persona.lastName }}</h5></a
+            >
+            <p>
+              {{ persona.aboutMe }}
+            </p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselProfiles"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselProfiles"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
+
+  <!-- end carousel -->
 </div>
