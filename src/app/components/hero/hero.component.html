@@ -1,6 +1,6 @@
 <div class="hero_container card container-sm p-0 pb-4">
   <div
-    *ngIf="persona; else profilePlaceholder"
+    *ngIf="personaPlaceholder; else profilePlaceholder"
     class="container-sm p-0 rounded-top"
   >
     <img
@@ -113,7 +113,7 @@
       </div>
     </div>
 
-    <div *ngIf="persona; else aboutPlaceholder">
+    <div *ngIf="aboutMePlaceholder; else aboutPlaceholder">
       <div class="d-flex pe-2">
         <span class="mt-3 pre_wrap">{{ persona?.aboutMe }}</span>
       </div>

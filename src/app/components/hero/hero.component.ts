@@ -19,6 +19,9 @@ export class HeroComponent implements OnInit {
 
   routeEdit: boolean = false; 
 
+  personaPlaceholder: any;
+  aboutMePlaceholder: any;
+
   persona: any;
   
   // Persona Editable
@@ -45,8 +48,9 @@ export class HeroComponent implements OnInit {
     const _username = this.activatedRoute.snapshot.params['username'];
     this.personaService.detailsByUsername(_username).subscribe({
       next: persona => {
-        this.persona = persona;
-
+        this.personaPlaceholder = persona;
+        this.aboutMePlaceholder = persona;
+        this.persona = persona;        
         // Carga los datos de la persona en una variable alternativa para \
         // evitar actualizar la vista al mismo tiempo que se edita con NgModel.
         this.editFirstName = persona.firstName;
@@ -66,6 +70,7 @@ export class HeroComponent implements OnInit {
 
   // Actualiza el perfil y mantiene el atributo aboutMe original.
   updateProfile(): void {
+    this.personaPlaceholder = '';
     const _persona = new Persona(
       this.editFirstName, 
       this.editLastName, 
@@ -87,6 +92,7 @@ export class HeroComponent implements OnInit {
 
   // Actualiza el atributo aboutMe y mantiene los demas originales.
   updateAbout(): void {
+    this.aboutMePlaceholder = '';
     const _persona = new Persona(
       this.persona.firstName, 
       this.persona.lastName, 
@@ -98,7 +104,13 @@ export class HeroComponent implements OnInit {
       this.persona.profileImg);
     this.personaService.update(this.persona.id, _persona).subscribe({
       next: () => {        
-        this.ngOnInit();
+        const _username = this.activatedRoute.snapshot.params['username'];
+      this.personaService.detailsByUsername(_username).subscribe({
+        next: persona => {        
+          this.aboutMePlaceholder = persona.aboutMe;
+          this.persona.aboutMe = persona.aboutMe;
+        },
+      });
       },
       error: err => {        
         console.log('Error: ',err.error.mensaje);
