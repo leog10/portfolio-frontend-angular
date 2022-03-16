@@ -2,7 +2,10 @@
   <div id="education">
     <div class="d-flex">
       <h4 class="flex-grow-1">Educación</h4>
-      <div *ngIf="routeEdit" class="d-flex">
+      <div
+        *ngIf="routeEdit && educationPlaceholder === 'loaded'"
+        class="d-flex"
+      >
         <a class="d-flex a_icon align-self-end me-1"
           ><i
             class="fa fa-plus"
@@ -13,7 +16,7 @@
         ></a>
       </div>
     </div>
-    <div *ngIf="educationPlaceholder.length > 0; else eduPlaceholder">
+    <div *ngIf="educationPlaceholder === 'loaded'; else eduPlaceholder">
       <ul class="items-list" id="eduList">
         <li
           *ngFor="let edu of educations; let i = index"

@@ -16,7 +16,7 @@ export class EducationComponent implements OnInit {
 
   routeEdit: boolean = false;
 
-  educationPlaceholder: Education[] = [];
+  educationPlaceholder: string = 'loading';
   //LIST OF EDUCATIONS
   educations: Education[] = [];  
 
@@ -73,7 +73,7 @@ export class EducationComponent implements OnInit {
     this.educationService.detailsByUsername(_username).subscribe({
       next: education => {
         this.educations = education;
-        this.educationPlaceholder = education;
+        this.educationPlaceholder = 'loaded';
         // Obtiene las fechas y las separa con split('-'). Ej: 2022-04
         this.getTimes(education);
         // Recorre el array de fechas obtenidas con getTimes y le da formato\
@@ -92,7 +92,7 @@ export class EducationComponent implements OnInit {
 
   onCreate(): void {
     const education = new Education(this.school, this.title, this.img, this.career, this.startTime, this.endTime, this.location);
-    this.educationPlaceholder = [];
+    this.educationPlaceholder = 'loading';
     this.educationService.create(education).subscribe({
       next: () => {        
         this.ngOnInit();
@@ -130,7 +130,7 @@ export class EducationComponent implements OnInit {
   }
 
   onUpdate(): void {
-    this.educationPlaceholder = [];
+    this.educationPlaceholder = 'loading';
     this.educationService.update(this.educations[this.indexOfEditEducation].id!,this.editEducation).subscribe({
       next: () => {        
         this.ngOnInit();
@@ -142,7 +142,7 @@ export class EducationComponent implements OnInit {
   }
 
   onDelete(id: number) {
-    this.educationPlaceholder = [];
+    this.educationPlaceholder = 'loading';
     this.educationService.delete(id).subscribe({
       next: () => {
         this.ngOnInit();
