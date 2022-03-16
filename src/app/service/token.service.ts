@@ -64,9 +64,14 @@ export class TokenService {
     }
     return true;
   }
+
+  public interceptorLogOut(): void {
+    window.localStorage.clear();
+    this.router.navigate(['/login']);
+  }
   
   public logOut(): void {
     window.localStorage.clear();
-    this.router.navigate(['/']);
+    window.location.href = `${window.location.origin}/`;
   }
 }
