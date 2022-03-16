@@ -59,14 +59,20 @@ export class FirebaseService {
 
   //Update project image in database with a string url.
   updateProjectImgInDatabase(id: number, img: Object) {
-    this.projectService.updateImg(id, img).subscribe();
-    window.location.reload();
+    this.projectService.updateImg(id, img).subscribe({
+      next: res => {
+        window.location.reload();
+      }
+    });    
   }
 
   //Update persona image in database with a string url.
   updateImgInDatabase(personaId: number, img: Object) {
-    this.personaService.updateImg(personaId,img).subscribe();
-    window.location.reload();
+    this.personaService.updateImg(personaId,img).subscribe({
+      next: res => {
+        window.location.reload();
+      }
+    });    
   }
   
   //Call updateImgInDatabase to put an empty string.
