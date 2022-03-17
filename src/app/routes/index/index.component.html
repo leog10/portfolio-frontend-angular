@@ -3,7 +3,7 @@
   <h1>
     Bienvenido a "<span class="text-decoration-underline">Mi Portfolio</span>"
   </h1>
-  <h4>Inicia sesión para crear tu portfolio</h4>
+  <h4><a routerLink="/login">Registrate</a> para crear tu portfolio</h4>
   <hr class="bg-primary" />
   <h5 class="align-self-start text-decoration-underline ms-4">
     O visita los perfiles destacados:
@@ -60,7 +60,7 @@
             ><img [src]="persona.profileImg" class="profile_image" alt="..." />
           </div>
           <div
-            class="carousel-caption d-none d-md-block text-black bg-gradient bg-white bg-opacity-100 rounded-3"
+            class="carousel-caption d-none d-md-block text-black bg-white bg-opacity-100 rounded-3"
           >
             <a
               class="text-decoration-none text-black text-decoration-underline"
@@ -69,7 +69,7 @@
               <h5>{{ persona.firstName }} {{ persona.lastName }}</h5></a
             >
             <p>
-              {{ persona.aboutMe }}
+              {{ persona.position }}
             </p>
           </div>
         </div>

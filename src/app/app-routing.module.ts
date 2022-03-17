@@ -22,8 +22,7 @@ const routes: Routes = [
   {path: 'recuperar-cuenta', component: SendEmailComponent},
   {path: 'cambiar-password/:tokenPassword', component: ChangePasswordComponent},
   {path: '', redirectTo: 'inicio', pathMatch: 'full'},
-  {path: '**', redirectTo: '404', pathMatch: 'full'}
-  //{path: '**', redirectTo: 'login', pathMatch: 'full'}
+  {path: '**', redirectTo: '404', pathMatch: 'full'}  
 ]
 
 @NgModule({
