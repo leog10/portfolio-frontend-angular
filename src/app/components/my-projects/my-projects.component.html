@@ -2,7 +2,10 @@
   <div id="projects">
     <div class="d-flex">
       <h4 class="flex-grow-1 flex-shrink-1 m-auto">Proyectos</h4>
-      <div *ngIf="routeEdit" class="d-flex align-self-center">
+      <div
+        *ngIf="routeEdit && projectsPlaceholder === 'loaded'"
+        class="d-flex align-self-center"
+      >
         <a class="d-flex align-self-end a_icon"
           ><i
             class="fa fa-plus"
@@ -14,87 +17,97 @@
       </div>
     </div>
     <div>
-      <ul
-        class="items-list d-flex flex-wrap justify-content-around"
-        id="projectList"
-      >
-        <li
-          *ngFor="let project of projects"
-          class="d-flex project_container mb-1"
+      <div *ngIf="projectsPlaceholder === 'loaded'; else projPlaceholder">
+        <ul
+          class="items-list d-flex flex-wrap justify-content-around"
+          id="projectList"
         >
-          <div class="flex-grow-1">
-            <div class="d-flex flex-column">
-              <div class="my-3 text-center">
-                <div *ngIf="routeEdit" class="position-absolute">
-                  <a class="a_icon"
-                    ><i
-                      class="fa-solid fa-camera"
-                      data-title="Editar imagen"
-                      data-bs-toggle="modal"
-                      data-bs-target="#editProjectImageModal"
-                      (click)="editableProject(project.id!)"
-                    ></i
-                  ></a>
-                </div>
-                <img
-                  *ngIf="!project.projectImg; else projectCustomImg"
-                  id="projectImg"
-                  class="project_image"
-                  src="../../../assets/images/default-project.jpg"
-                />
-                <ng-template #projectCustomImg>
-                  <img
-                    [src]="project.projectImg"
-                    alt=""
-                    class="project_image"
-                  />
-                </ng-template>
-              </div>
-              <div class="mx-3">
-                <div class="d-flex flex-column align-items-center">
-                  <h4 class="mx-2 my-2" id="project-name">
-                    {{ project.name }}
-                  </h4>
-                  <div class="d-flex mb-0 projects_techs">
-                    <span
-                      id="project-description"
-                      class="project_description"
-                      >{{ project.description }}</span
-                    >
+          <li
+            *ngFor="let project of projects"
+            class="d-flex project_container mb-1"
+          >
+            <div class="flex-grow-1">
+              <div class="d-flex flex-column">
+                <div class="my-3 text-center">
+                  <div *ngIf="routeEdit" class="position-absolute">
+                    <a class="a_icon"
+                      ><i
+                        class="fa-solid fa-camera"
+                        data-title="Editar imagen"
+                        data-bs-toggle="modal"
+                        data-bs-target="#editProjectImageModal"
+                        (click)="editableProject(project.id!)"
+                      ></i
+                    ></a>
                   </div>
-                  <p class="ms-2 text-secondary mb-0 mt-1">
-                    <span id="project-start">{{ project.startTime }}</span
-                    ><span> – </span
-                    ><span id="project-end">{{ project.endTime }}</span>
-                  </p>
+                  <img
+                    *ngIf="!project.projectImg; else projectCustomImg"
+                    id="projectImg"
+                    class="project_image"
+                    src="../../../assets/images/default-project.jpg"
+                  />
+                  <ng-template #projectCustomImg>
+                    <img
+                      [src]="project.projectImg"
+                      alt=""
+                      class="project_image"
+                    />
+                  </ng-template>
+                </div>
+                <div class="mx-3">
+                  <div class="d-flex flex-column align-items-center">
+                    <h4 class="mx-2 my-2" id="project-name">
+                      {{ project.name }}
+                    </h4>
+                    <div class="d-flex mb-0 projects_techs">
+                      <span
+                        id="project-description"
+                        class="project_description"
+                        >{{ project.description }}</span
+                      >
+                    </div>
+                    <p class="ms-2 text-secondary mb-0 mt-1">
+                      <span id="project-start">{{ project.startTime }}</span
+                      ><span> – </span
+                      ><span id="project-end">{{ project.endTime }}</span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div *ngIf="routeEdit" class="data-control edit_icons">
-            <div class="mt-3">
-              <a class="a_icon"
-                ><i
-                  class="fa-solid fa-pen-clip"
-                  data-title="Editar"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editProjectModal"
-                  (click)="editableProject(project.id!)"
-                ></i
-              ></a>
+            <div *ngIf="routeEdit" class="data-control edit_icons">
+              <div class="mt-3">
+                <a class="a_icon"
+                  ><i
+                    class="fa-solid fa-pen-clip"
+                    data-title="Editar"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editProjectModal"
+                    (click)="editableProject(project.id!)"
+                  ></i
+                ></a>
+              </div>
+              <div class="">
+                <a class="a_icon"
+                  ><i
+                    class="fa-solid fa-trash-can"
+                    data-title="Borrar"
+                    (click)="onDelete(project.id!, project.projectImg)"
+                  ></i
+                ></a>
+              </div>
             </div>
-            <div class="">
-              <a class="a_icon"
-                ><i
-                  class="fa-solid fa-trash-can"
-                  data-title="Borrar"
-                  (click)="onDelete(project.id!, project.projectImg)"
-                ></i
-              ></a>
-            </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- skill loading template -->
+      <ng-template #projPlaceholder>
+        <div class="d-flex justify-content-center align-content-center mx-auto">
+          <div class="spinner-border text-primary" role="status"></div>
+          <span class="ms-2">Cargando...</span>
+        </div>
+      </ng-template>
+      <!-- end skill loading template -->
     </div>
   </div>
 </div>
@@ -468,7 +481,9 @@
               *ngIf="editProject.projectImg"
               class="btn btn-outline-danger fw-bold rounded-pill"
               [disabled]="!editProject.projectImg"
-              (click)="deleteProjectImage(editProject.projectImg)"
+              (click)="
+                deleteProjectImage(editProject.id!, editProject.projectImg)
+              "
             >
               Borrar
             </button>

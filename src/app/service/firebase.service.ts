@@ -60,7 +60,7 @@ export class FirebaseService {
   //Update project image in database with a string url.
   updateProjectImgInDatabase(id: number, img: Object) {
     this.projectService.updateImg(id, img).subscribe({
-      next: res => {
+      next: res => {        
         window.location.reload();
       }
     });    

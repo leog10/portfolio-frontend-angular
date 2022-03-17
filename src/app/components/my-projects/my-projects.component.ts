@@ -37,6 +37,7 @@ export class MyProjectsComponent implements OnInit {
   ) { }
 
   loadProject(): void {
+    this.projects = [];    
     const _username = this.activatedRoute.snapshot.params['username'];
     this.projectService.detailsByUsername(_username).subscribe({
       next: project => {
@@ -54,6 +55,7 @@ export class MyProjectsComponent implements OnInit {
   }
 
   onCreate(): void {
+    this.projectsPlaceholder = 'loading'
     const _project = new Project(this.name, this.projectImg, this.description, this.startTime, this.endTime);
     this.projectService.create(_project).subscribe({
       next: () => {        
@@ -82,6 +84,7 @@ export class MyProjectsComponent implements OnInit {
       this.projects[this.indexOfEditProject].startTime,
       this.projects[this.indexOfEditProject].endTime      
       );
+      this.editProject.id = this.projects[this.indexOfEditProject].id;
   }
 
   editableProject(id: number): void {
@@ -90,6 +93,7 @@ export class MyProjectsComponent implements OnInit {
   }
 
   onUpdate(): void {    
+    this.projectsPlaceholder = 'loading'
     this.projectService.update(this.projects[this.indexOfEditProject].id!,this.editProject).subscribe({
       next: () => {
         this.ngOnInit();        
@@ -101,13 +105,14 @@ export class MyProjectsComponent implements OnInit {
   }
 
   onDelete(id: number, imgUrl: string) {
+    this.projectsPlaceholder = 'loading'
     this.projectService.delete(id).subscribe({
       next: () => {
         if (imgUrl === null) {          
           return this.ngOnInit();
         }
         if (imgUrl.length > 0) {          
-        this.deleteProjectImage(imgUrl);
+        this.firebaseService.deleteImgInStorage(imgUrl);
         }      
         this.ngOnInit();
       },
@@ -144,12 +149,12 @@ export class MyProjectsComponent implements OnInit {
   }
 
   //DELETE IMAGES
-  deleteProjectImage(imageUrl: string) {
+  deleteProjectImage(id: number, imageUrl: string) {
     if ((<HTMLInputElement> document.getElementById('deleteProjectImgButton'))) {
       (<HTMLInputElement> document.getElementById('deleteProjectImgButton')).disabled = true;
     }    
     const _imgObj = {"projectImg":""}
-    this.firebaseService.deleteImg(this.projects[this.indexOfEditProject].id!, imageUrl, _imgObj);
+    this.firebaseService.deleteImg(id, imageUrl, _imgObj);
   } 
   
   //END IMAGES
