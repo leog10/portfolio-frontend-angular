@@ -476,6 +476,7 @@
             class="modal-footer border-secondary mt-3 mb-0"
           >
             <button
+              #deleteProjectImgButton
               id="deleteProjectImgButton"
               type="button"
               *ngIf="editProject.projectImg"
@@ -485,14 +486,29 @@
                 deleteProjectImage(editProject.id!, editProject.projectImg)
               "
             >
+              <span
+                *ngIf="deleteProjectImgButton.disabled"
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
               Borrar
             </button>
             <button
+              #saveProjectImgButton
               id="saveProjectImgButton"
               class="btn btn-outline-primary fw-bold rounded-pill"
               [disabled]="!(projectImage.value.length > 0)"
               type="submit"
             >
+              <span
+                *ngIf="
+                  saveProjectImgButton.disabled && editProjectImageForm.valid
+                "
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
               Guardar
             </button>
           </div>
