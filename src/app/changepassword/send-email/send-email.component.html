@@ -54,17 +54,17 @@
   </form>
 </div>
 
-<div *ngIf="msgAwait" class="message alert alert-success d-flex">
+<div *ngIf="msgAwait" class="message alert alert-success d-flex mb-3">
   <div class="spinner-border text-success me-2" role="status"></div>
   <p class="mb-0">Aguarda un momento...</p>
 </div>
 
-<div *ngIf="msgSuccess" class="message alert alert-success">
+<div *ngIf="msgSuccess" class="message alert alert-success mb-3">
   <p class="mb-0">{{ msgSuccess }}</p>
   <p class="mb-0">Por favor, verifica tu correo electrónico.</p>
 </div>
 
-<div *ngIf="msgFail" class="message alert alert-danger">
+<div *ngIf="msgFail" class="message alert alert-danger mb-3">
   <p class="mb-0">Error:</p>
   <p class="mb-0">{{ msgFail }}</p>
 </div>

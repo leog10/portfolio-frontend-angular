@@ -31,6 +31,7 @@ export class SendEmailComponent implements OnInit {
   }
 
   onSendEmail(): void {
+    this.msgFail = '';
     this.dto = new EmailValuesDTO(this.mailTo);
     this.emailPasswordService.sendEmail(this.dto).subscribe({
       next: data => {
