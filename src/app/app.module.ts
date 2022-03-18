@@ -15,7 +15,6 @@ import { HeroComponent } from './components/hero/hero.component';
 import { SkillsComponent } from './components/skills/skills.component';
 import { MyProjectsComponent } from './components/my-projects/my-projects.component';
 import { AppRoutingModule } from './app-routing.module';
-import { interceptorProvider } from './interceptors/interceptor.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginRegisterComponent } from './auth/login/login.component';
