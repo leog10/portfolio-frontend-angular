@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
       if (error instanceof HttpErrorResponse && !authReq.url.includes('auth/signin') && error.status === 401) {
         return this.handle401Error(authReq, next);
       }
-      return throwError(error);
+      return throwError(() => (error.error.mensaje));
     }));
   }
 
@@ -45,7 +45,7 @@ export class AuthInterceptor implements HttpInterceptor {
             this.isRefreshing = false;
             
             this.tokenService.interceptorLogOut();
-            return throwError(err);
+            return throwError(() => (err.error.mensaje));
           })
         );
     }
