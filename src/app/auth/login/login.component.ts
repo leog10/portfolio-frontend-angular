@@ -32,8 +32,7 @@ export class LoginRegisterComponent implements OnInit {
   
   constructor(
     private tokenService: TokenService,
-    private authService: AuthService,
-    private router: Router,
+    private authService: AuthService,    
     private personaService: PersonaService
   ) { }
 
@@ -55,9 +54,9 @@ export class LoginRegisterComponent implements OnInit {
             this.personaService.existsByUsername(_username).subscribe({
               next: exists => {
                 if (exists) {
-                  this.router.navigate([`/edit/${_username}`]);
+                  window.location.href = `${window.location.origin}/edit/${_username}`;                  
                 } else {
-                  this.router.navigate([`/new/`]);
+                  window.location.href = `${window.location.origin}/new`;
                 }
               }
             });
