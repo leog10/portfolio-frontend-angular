@@ -12,9 +12,6 @@ export class PortfolioComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.loading = false;      
-    }, 250);
   }
 
 }
