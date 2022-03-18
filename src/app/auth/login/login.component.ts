@@ -48,7 +48,7 @@ export class LoginRegisterComponent implements OnInit {
     this.personaService.getUsernameByEmail(this.username).subscribe({
       next: username => {        
         _username = username[0];        
-        this.loginUser = new LoginUser(this.username,this.passwordLogin);    
+        this.loginUser = new LoginUser(this.username,this.passwordLogin);
         this.authService.login(this.loginUser).subscribe({
           next: data => {
             this.tokenService.setToken(data.token); 
@@ -60,22 +60,21 @@ export class LoginRegisterComponent implements OnInit {
                   this.router.navigate([`/new/`]);
                 }
               }
-            })        
+            });
           },
           error: err => {  
             this.errorMsg = "campos inválidos";
             (<HTMLInputElement> document.getElementById('loginButton')).disabled = false;
-            console.log(err)
+            console.log(err.error.error)
           }
         });
+      },
+      error: err => {
+        this.errorMsg = "campos inválidos";
+        (<HTMLInputElement> document.getElementById('loginButton')).disabled = false;
+        console.log(err.error.error)
       }
-    ,
-  error: err => {
-    this.errorMsg = "campos inválidos";
-    (<HTMLInputElement> document.getElementById('loginButton')).disabled = false;
-    console.log(err)
-  }})    
-    
+    });    
   }
 
   onRegister(): void {
@@ -85,7 +84,7 @@ export class LoginRegisterComponent implements OnInit {
         window.location.reload();
       },
       error: err => {        
-        alert(err);
+        alert(err.error.error);
       }
     });
   }
