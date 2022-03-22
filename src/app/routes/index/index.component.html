@@ -1,10 +1,10 @@
 <div class="container-md d-flex mt-5 flex-column align-items-center pt-4">
   <h1>
-    Bienvenido a "<span class="text-decoration-underline">Mi Portfolio</span>"
+    Bienvenid@ a "<span class="text-decoration-underline">Mi Portfolio</span>"
   </h1>
   <h4><a routerLink="/login">Registrate</a> para crear tu portfolio</h4>
   <hr class="bg-primary" />
-  <h5 class="align-self-start text-decoration-underline ms-4">
+  <h5 class="align-self-start text-decoration-none ms-4">
     O visita los perfiles destacados:
   </h5>
 
@@ -13,7 +13,7 @@
   <div
     *ngIf="username.length > 0; else loadingCarousel"
     id="carouselProfiles"
-    class="carousel slide mt-5 profiles_size"
+    class="carousel slide mt-3 profiles_size"
     data-bs-ride="carousel"
   >
     <div class="carousel-indicators">
@@ -61,10 +61,7 @@
           <div
             class="carousel-caption d-none d-md-block text-black bg-white bg-opacity-100 rounded-3"
           >
-            <a
-              class="text-decoration-none text-black text-decoration-underline"
-              [routerLink]="'/portfolio/' + username[i]"
-            >
+            <a class="username_link" [routerLink]="'/portfolio/' + username[i]">
               <h5>{{ persona.firstName }} {{ persona.lastName }}</h5></a
             >
             <p>

@@ -45,4 +45,27 @@
   left: 30% !important;
   bottom: 3rem !important;
   padding-bottom: 0 !important;
+  border-radius: 10px 50px 10px 50px !important;
+  -moz-border-radius: 10px 50px 10px 50px !important;
+  -webkit-border-radius: 10px 50px 10px 50px !important;
+  border: 1px solid #000;
+  //background: radial-gradient(circle farthest-side, #e6e5e5, #c5b6c4ad);
+}
+
+a {
+  color: #268f26;
+}
+
+a:hover {
+  color: #1dc91d;
+}
+
+.username_link:hover {
+  color: #3921a5cb;
+}
+
+.username_link {
+  color: #262d8f;
+  text-decoration: underline;
+  display: inline-block;
 }
