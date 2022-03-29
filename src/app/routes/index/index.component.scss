@@ -1,6 +1,6 @@
 .profiles_size {
   height: 450px;
-  width: 1400px;
+  width: inherit;
   top: 3%;
 }
 
@@ -12,7 +12,6 @@
   top: 3%;
   right: 44%;
   border: solid 5px white;
-  position: inherit;
 }
 
 .profile_image_container {
@@ -30,8 +29,6 @@
   border-radius: 50%;
   position: absolute;
   z-index: 100;
-  right: 44%;
-  top: 3%;
   height: 160px;
   width: 160px;
 }
@@ -41,8 +38,10 @@
 }
 
 .carousel-caption {
-  right: 30% !important;
-  left: 30% !important;
+  padding-right: 4% !important;
+  padding-left: 4% !important;
+  margin-right: 10%;
+  margin-left: 10%;
   bottom: 3rem !important;
   padding-bottom: 0 !important;
   border-radius: 10px 50px 10px 50px !important;
@@ -68,4 +67,12 @@ a:hover {
   color: #262d8f;
   text-decoration: underline;
   display: inline-block;
+}
+
+@media screen and (max-width: 760px) {
+  .profiles_size {
+    width: inherit;
+    top: 5%;
+    height: 220px;
+  }
 }

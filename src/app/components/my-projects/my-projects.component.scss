@@ -42,7 +42,6 @@ ul.items-list {
 
 .project_container {
   max-width: 550px;
-  min-width: 350px;
   margin: 0 10px;
   text-align: center;
   background-color: #fff;
@@ -121,4 +120,10 @@ ul.items-list {
   opacity: 1;
   transition: all 0.1s ease 0.5s;
   visibility: visible;
+}
+
+@media screen and (max-width: 575px) {
+  .icon_project {
+    background: #ffffffcc;
+  }
 }
