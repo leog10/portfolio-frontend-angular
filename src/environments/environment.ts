@@ -4,13 +4,13 @@
 
 export const environment = {
     production: false,  
-    authURL: 'localhost:8080/auth/',
-    changePasswordURL: 'localhost:8080/email-password/',
-    personaURL: 'localhost:8080/api/persona/',
-    educationURL: 'localhost:8080/api/education/',
-    experienceURL: 'localhost:8080/api/experience/',
-    projectURL: 'localhost:8080/api/project/',
-    skillURL: 'localhost:8080/api/skill/',
+    authURL: 'http://localhost:8080/auth/',
+    changePasswordURL: 'http://localhost:8080/email-password/',
+    personaURL: 'http://localhost:8080/api/persona/',
+    educationURL: 'http://localhost:8080/api/education/',
+    experienceURL: 'http://localhost:8080/api/experience/',
+    projectURL: 'http://localhost:8080/api/project/',
+    skillURL: 'http://localhost:8080/api/skill/',
     // Modify with your firebase storage api key data.
     firebase: {
       apiKey: "",
