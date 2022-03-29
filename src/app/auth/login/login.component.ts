@@ -82,8 +82,15 @@ export class LoginRegisterComponent implements OnInit {
       next: () => {
         window.location.reload();
       },
-      error: err => {        
-        alert(err.error.error);
+      error: err => {
+        console.log(err.error.mensaje);
+        if (err.error.mensaje === 'this username is already taken') {
+          alert("Ese usuario ya está registrado. Por favor utilice otro\no intente recuperar su contraseña")
+        } else if (err.error.mensaje === 'this email is already taken') {
+          alert("Ese email ya está registrado. Por favor utilice otro\no intente recuperar su contraseña")
+        } else {
+          console.log(err.error);
+        }
       }
     });
   }
