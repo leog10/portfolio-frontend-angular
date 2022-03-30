@@ -37,6 +37,7 @@ export class LoginRegisterComponent implements OnInit {
   ) { }
 
   errorMsg!: string;  
+  registerSuccess!: string;
 
   ngOnInit(): void {    
     }
@@ -77,17 +78,21 @@ export class LoginRegisterComponent implements OnInit {
   }
 
   onRegister(): void {
+    this.registerSuccess = '';
     this.newUser = new NewUser(this.usernameReg, this.emailReg, this.passwordRegister);
     this.authService.new(this.newUser).subscribe({
       next: () => {
-        window.location.reload();
+        let registerButtonClose = document.getElementById('registerButtonClose');
+        registerButtonClose?.click();
+        this.registerSuccess = 'success';
       },
-      error: err => {
-        console.log(err.error.mensaje);
+      error: err => {        
         if (err.error.mensaje === 'this username is already taken') {
           alert("Ese usuario ya está registrado. Por favor utilice otro\no intente recuperar su contraseña")
+          console.log(err.error.mensaje);
         } else if (err.error.mensaje === 'this email is already taken') {
           alert("Ese email ya está registrado. Por favor utilice otro\no intente recuperar su contraseña")
+          console.log(err.error.mensaje);
         } else {
           console.log(err.error);
         }

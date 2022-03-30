@@ -72,6 +72,20 @@
   >
     <p class="mt-2 py-1">Error: {{ errorMsg }}</p>
   </div>
+  <ng-container *ngIf="registerSuccess === 'success'">
+    <div
+      class="alert alert-success d-flex flex-row align-items-center container-sm mt-3"
+      style="max-width: 400px"
+    >
+      <div class="text-success me-2" role="status">
+        <i class="bi bi-check2-circle fs-2"></i>
+      </div>
+      <div>
+        <p class="mb-0">Registro Exitoso</p>
+        <p class="mb-0">Ahora puedes iniciar sesión...</p>
+      </div>
+    </div>
+  </ng-container>
 </div>
 
 <!-- Register Modal -->
@@ -89,6 +103,7 @@
       <div class="modal-header">
         <h4 class="modal-title" id="staticBackdropLabel">Registrarte</h4>
         <button
+          id="registerButtonClose"
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
